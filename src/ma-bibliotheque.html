@@ -304,7 +304,6 @@ footer button{margin-right:.45rem}
   <div class="onglets" role="tablist">
     <button class="onglet" role="tab" data-vue="livres" aria-selected="true">Livres</button>
     <button class="onglet" role="tab" data-vue="questions" aria-selected="false">Questions</button>
-    <button class="onglet" role="tab" data-vue="verifier" aria-selected="false">À vérifier</button>
   </div>
 </header>
 
@@ -699,16 +698,6 @@ function rendre(){
        </button>`).join("")
       :`<p class="vide">Aucune question ne correspond. Essaie un mot plus général : feedback, recruter, stratégie, changement…</p>`;
     majCompte(paires.length+" question"+(paires.length>1?"s":""));
-    return;
-  }
-
-  if(etat.vue==="verifier"){
-    const aVerif=res.filter(l=>!l.c&&!(perso[cle(l)]||{}).ok);
-    $liste.innerHTML=aVerif.length
-      ? `<p class="vide">Titres ou auteurs dont je ne suis pas sûr : je les ai lus sur une photo, et pour la plupart le nom de l'auteur n'était pas imprimé sur la tranche.<br><br>Le plus rapide : prends le livre, recopie l'ISBN au dos, appuie sur « Retrouver la fiche ». Titre, auteur, couverture et résumé se remplissent, et le livre sort de cette liste. Sinon, corrige à la main et marque-le vérifié.</p>`
-        +aVerif.map(carteLivre).join("")
-      : `<p class="vide">Plus rien à vérifier.</p>`;
-    majCompte(aVerif.length+" à vérifier");
     return;
   }
 

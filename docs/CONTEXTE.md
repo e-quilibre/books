@@ -59,8 +59,10 @@ Fonctions :
 - verdict anti-doublon (« Tu l'as déjà » + étagère) dès 3 caractères
 - bande de tranches colorées par thème, cliquable pour filtrer
 - onglet Questions : les 280 questions triées, chacune menant à son livre
-- onglet À vérifier : vide depuis la vérification complète ; accueillera
-  d'éventuels futurs ajouts douteux (`c` à 0)
+- l'onglet À vérifier a été retiré le 6 septembre 2026, la vérification
+  étant terminée. Le marquage par carte (`c:0` → mention « à vérifier »,
+  bouton « Marquer comme vérifié ») reste en place pour d'éventuels
+  ajouts douteux ; l'onglet se restaurerait depuis git si besoin
 - enrichissement en lot depuis Google Books (ISBN, couverture, résumé éditeur)
 - notes personnelles, corrections de titre/auteur, export et import JSON
 
