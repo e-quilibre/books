@@ -264,6 +264,22 @@ h1{
 }
 
 .vide{color:var(--encre-2);font-size:.9rem;padding:1.5rem 0;line-height:1.65}
+
+/* ── grands écrans : grille éditoriale (cf. maquette) ── */
+@media (min-width:768px){
+  .wrap{max-width:76rem;padding:0 2rem}
+  .champ,.verdict,.enrich{max-width:46rem}
+  #liste{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;align-items:stretch}
+  #liste .groupe,#liste .vide{grid-column:1/-1}
+  #liste .livre,#liste .qitem{margin-bottom:0;min-width:0}
+  .livre.ouvert{grid-column:1/-1} /* la carte ouverte prend toute la largeur */
+}
+@media (min-width:1024px){
+  h1{font-size:1.6rem}
+  #liste{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+  #liste[data-vue="questions"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .couv{flex-basis:48px;height:68px}
+}
 footer{
   margin-top:2.5rem;padding:1.1rem 1rem;background:var(--doux);border-radius:var(--r);
   font-size:.75rem;color:var(--encre-2);line-height:1.7;
@@ -664,6 +680,7 @@ function carteLivre(l){
 
 function rendre(){
   majVerdict();
+  $liste.dataset.vue=etat.vue; /* pilote la grille desktop (2 colonnes en vue questions) */
   const res=filtrer();
   document.getElementById("vider").style.display=etat.q?"block":"none";
 
