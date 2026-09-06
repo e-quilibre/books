@@ -297,7 +297,7 @@
    "t": "Bonne stratégie, mauvaise stratégie",
    "r": "Rumelt oppose la stratégie réelle — diagnostic, ligne directrice, actions cohérentes — aux listes d'objectifs et de valeurs qui en tiennent lieu. Le meilleur livre de la pile sur le sujet.",
    "a": "Richard Rumelt",
-   "isbn": "9788410490253",
+   "isbn": "9788410490239",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -305,8 +305,7 @@
     "Qu'est-ce qui distingue une vraie stratégie d'une liste d'ambitions ?",
     "Comment diagnostiquer le vrai obstacle avant de décider ?",
     "Pourquoi notre stratégie ne dit-elle rien de concret ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Escaping the Build Trap",
@@ -352,35 +351,33 @@
    "t": "Sense & Respond",
    "r": "Gothelf et Seiden décrivent le management d'une entreprise en boucles courtes : décider, observer, ajuster — plutôt que planifier à l'année.",
    "a": "Jeff Gothelf, Josh Seiden",
-   "isbn": "9788868962333",
+   "isbn": "9781633691889",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment diriger une organisation en apprentissage continu ?",
     "Comment remplacer les plans annuels par des boucles de feedback ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Making Ideas Happen",
    "r": "Belsky s'intéresse à ce qui manque aux créatifs : l'exécution. Organisation des projets, forces communautaires, gestion de la récompense.",
    "a": "Scott Belsky",
-   "isbn": "9781101404355",
+   "isbn": "9780670920600",
    "th": "prodv",
    "s": 1,
    "c": 1,
    "q": [
     "Comment faire aboutir un projet créatif au lieu d'accumuler des idées ?",
     "Comment organiser le travail d'une équipe créative ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Mesurez ce qui compte",
    "r": "Doerr raconte l'histoire des OKR d'Intel à Google, avec de nombreux cas d'entreprise. Fondateur mais parfois hagiographique.",
    "a": "John Doerr",
-   "isbn": "9782744068805",
+   "isbn": "9782744067327",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -388,35 +385,32 @@
     "Comment mettre en place des OKR ?",
     "Comment aligner des équipes sur des objectifs mesurables ?",
     "Comment distinguer un objectif d'un indicateur ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Radical Focus",
    "r": "Wodtke traite les OKR par la fiction : une startup les met en place, avec le rituel hebdomadaire du lundi et du vendredi. Beaucoup plus opérationnel que Doerr.",
    "a": "Christina Wodtke",
-   "isbn": "9782100877263",
+   "isbn": "9782100867820",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment faire vivre des OKR au rythme hebdomadaire ?",
     "Pourquoi nos OKR ne changent-ils rien au quotidien ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Manager avec les principes toltèques",
    "r": "Transposition managériale des quatre accords : parole impeccable, non-interprétation, non-personnalisation, effort juste.",
    "a": "Laurence Aubourg, Olivier Lecointre",
-   "isbn": "9782807346499",
+   "isbn": "9782807344396",
    "th": "mgr",
    "s": 1,
    "c": 1,
    "q": [
     "Comment poser une posture managériale plus sereine ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "En toute franchise (Radical Candor)",
@@ -430,28 +424,26 @@
     "Comment dire une chose difficile sans casser la relation ?",
     "Comment être exigeant et bienveillant en même temps ?",
     "Comment sortir de l'empathie ruineuse ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Feedback : le pouvoir des conversations",
    "r": "Moriou traite le feedback comme une compétence conversationnelle apprenable, avec une structure et beaucoup d'exemples francophones.",
    "a": "Stéphane Moriou",
-   "isbn": "9782100855292",
+   "isbn": "9782100837021",
    "th": "fb",
    "s": 1,
    "c": 1,
    "q": [
     "Comment structurer un feedback qui sera entendu ?",
     "Comment installer une culture du feedback dans une équipe ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Drive",
    "r": "Pink synthétise la recherche sur la motivation intrinsèque : autonomie, maîtrise, finalité — et montre où les récompenses cassent la performance.",
    "a": "Daniel H. Pink",
-   "isbn": "9781847678881",
+   "isbn": "9781594484803",
    "th": "appr",
    "s": 1,
    "c": 1,
@@ -459,8 +451,7 @@
     "Qu'est-ce qui motive vraiment les gens au travail ?",
     "Pourquoi les primes cassent-elles la motivation sur des tâches complexes ?",
     "Autonomie, maîtrise, sens : comment les installer ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Le job qui me convient",
@@ -473,22 +464,20 @@
    "q": [
     "Comment ne pas faire de son travail son identité ?",
     "Comment retrouver une place raisonnable pour le travail dans sa vie ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Recrutement sous influence",
    "r": "Zambeaux passe en revue les biais cognitifs du recrutement et les correctifs concrets : structuration des entretiens, grilles, décision collective.",
    "a": "Marie-Sophie Zambeaux",
-   "isbn": "9782100882304",
+   "isbn": "9782100874231",
    "th": "rh",
    "s": 1,
    "c": 1,
    "q": [
     "Quels biais faussent nos entretiens de recrutement ?",
     "Comment rendre un processus de recrutement plus équitable ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "La méthode pour recruter les meilleurs: Les start-up qui réussissent partagent un recette : elles recrutent les meilleurs. Inlassablement. Avec méthode.",
@@ -576,15 +565,14 @@
    "t": "Quit",
    "r": "Duke, ancienne joueuse de poker, plaide pour l'abandon comme compétence : quand persévérer coûte plus que renoncer.",
    "a": "Annie Duke",
-   "isbn": "9786232423725",
+   "isbn": "9782379353406",
    "th": "deci",
    "s": 1,
    "c": 1,
    "q": [
     "Quand faut-il arrêter un projet ?",
     "Comment lutter contre le biais des coûts irrécupérables ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Responsabilisez et autonomisez votre équipe avec Process Communication Model",
@@ -660,7 +648,7 @@
    "t": "Build",
    "r": "Fadell mêle mémoire (iPod, Nest) et conseils : produit, équipe, board, moments de rupture. Écrit en chapitres courts et indépendants.",
    "a": "Tony Fadell",
-   "isbn": "9782212913668",
+   "isbn": "9782416010620",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -874,43 +862,40 @@
    "t": "The Manager's Path",
    "r": "Fournier suit la trajectoire tech lead, manager, directeur, CTO, avec les responsabilités et les pièges de chaque étage.",
    "a": "Camille Fournier",
-   "isbn": "9781491973844",
+   "isbn": "9781491973899",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Comment évoluer de développeur à manager puis à directeur technique ?",
     "Que fait un engineering manager exactement ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Leading Effective Engineering Teams",
    "r": "Osmani traite la performance des équipes d'ingénierie : structures, mesure, pièges du 10x engineer.",
    "a": "Addy Osmani",
-   "isbn": "9781098148218",
+   "isbn": "9781098148249",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Comment faire performer une équipe d'ingénierie ?",
     "Comment mesurer la productivité d'une équipe technique ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Manager son équipe au quotidien",
    "r": "Manuel francophone des fondamentaux : délégation, entretiens, animation, situations difficiles.",
    "a": "Bernard Diridollou",
-   "isbn": "9782212348286",
+   "isbn": "9782212572193",
    "th": "mgr",
    "s": 2,
    "c": 1,
    "q": [
     "Quels réflexes managériaux de base au quotidien ?",
     "Comment déléguer et suivre sans micro-manager ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Collaborer, manager et réussir en télétravail",
@@ -1203,15 +1188,14 @@
    "t": "L'intention",
    "r": "Bailey (Hyperfocus) sur l'attention : alterner concentration intense et vagabondage délibéré, en réduisant la stimulation.",
    "a": "Chris Bailey",
-   "isbn": "9781596653429",
+   "isbn": "9782354568733",
    "th": "prodv",
    "s": 2,
    "c": 1,
    "q": [
     "Comment reprendre le contrôle de son attention ?",
     "Comment gérer la surcharge de stimulation numérique ?"
-   ],
-   "isbnAuto": 1
+   ]
   },
   {
    "t": "Pour une pensée systémique",
