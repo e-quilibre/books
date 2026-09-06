@@ -151,38 +151,81 @@ h1{
 .livre{
   background:var(--carte);border:0;border-radius:var(--r);
   margin-bottom:.6rem;overflow:hidden;box-shadow:var(--ombre);
-  transition:box-shadow .2s ease;
+  transition:box-shadow .2s ease;display:flex;flex-direction:column;
 }
 .livre.ouvert{box-shadow:var(--ombre-2)}
 .tete{
-  display:flex;gap:.75rem;align-items:flex-start;width:100%;
-  padding:.85rem .9rem;border:0;background:none;text-align:left;cursor:pointer;
+  display:flex;flex-direction:column;align-items:stretch;gap:.7rem;flex:1;width:100%;
+  padding:1rem;border:0;background:none;text-align:left;cursor:pointer;
   font:inherit;color:inherit;
 }
 .tete:focus-visible{outline:2px solid var(--vert);outline-offset:-2px;border-radius:var(--r)}
-.marque{flex:0 0 4px;align-self:stretch;border-radius:999px;min-height:2.2rem}
+/* rangée d'état */
+.entete{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.etat-pill{
+  display:inline-flex;align-items:center;gap:.4rem;min-width:0;
+  background:var(--doux);border-radius:999px;padding:.24rem .7rem;
+  font:500 .68rem/1.3 var(--sans);letter-spacing:.03em;color:var(--encre-2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.etat-pill .pastille{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.indic{
+  font:600 .64rem/1.3 var(--sans);letter-spacing:.05em;text-transform:uppercase;
+  color:var(--vert-2);white-space:nowrap;
+}
+.indic.doute{color:var(--alerte)}
+/* couverture + méta */
+.corps{display:flex;gap:.85rem;align-items:flex-start;min-width:0}
 .txt{flex:1 1 auto;min-width:0}
 .titre{
-  font:500 1.08rem/1.35 var(--serif);color:var(--vert);margin:0 0 .1rem;
+  font:500 1.12rem/1.35 var(--serif);color:var(--vert);margin:0 0 .12rem;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
 }
 .livre.ouvert .titre{display:block;-webkit-line-clamp:unset} /* carte ouverte : titre entier */
-.auteur{font:500 .78rem/1.4 var(--sans);color:var(--encre-2);margin:0}
-.meta{font-size:.7rem;color:var(--encre-3);margin-top:.3rem}
+.auteur{display:block;font:500 .78rem/1.4 var(--sans);color:var(--encre-2)}
+.tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.45rem}
+.tags span{
+  background:var(--creux);border-radius:999px;padding:.14rem .55rem;
+  font:500 .66rem/1.4 var(--sans);color:var(--encre-2);
+}
+.tags .tag-doute{background:#f3ecdd;color:var(--alerte)}
+/* encart question clé */
+.qcle{display:flex;flex-direction:column;gap:.2rem;background:var(--doux);border-radius:8px;padding:.55rem .75rem}
+.qcle-l{font:600 .62rem/1.3 var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--vert-2)}
+.qcle-q{
+  font:italic 400 .95rem/1.45 var(--serif);color:var(--encre);
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+}
+/* citation : le résumé rédigé */
+.citation{
+  border-left:2px solid rgba(70,101,88,.45);padding-left:.75rem;
+  font:italic 400 .92rem/1.55 var(--serif);color:var(--encre-2);
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;
+}
+/* pied de carte */
+.pied{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:auto;padding-top:.7rem;border-top:1px solid var(--creux);
+}
+.pied-a{font:600 .72rem/1.3 var(--sans);color:var(--vert)}
+.pied-a::before{content:"Consulter la fiche"}
+.livre.ouvert .pied-a::before{content:"Replier la fiche"}
+.chevron{color:var(--encre-3);font-size:.8rem;transition:transform .2s ease}
+.livre.ouvert .chevron{display:inline-block;transform:rotate(180deg)}
 .doute{color:var(--alerte)}
 /* couverture */
 .couv{
-  flex:0 0 42px;height:60px;border-radius:6px;overflow:hidden;
+  flex:0 0 64px;height:92px;border-radius:8px;overflow:hidden;
   background:var(--creux);box-shadow:var(--ombre);
   display:flex;align-items:center;justify-content:center;
   position:relative;
 }
 .couv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.couv span{font:500 1rem var(--serif);color:#fff;width:100%;height:100%;
+.couv span{font:500 1.35rem var(--serif);color:#fff;width:100%;height:100%;
   display:flex;align-items:center;justify-content:center}
 .couv.grande{flex:0 0 96px;height:140px;margin-bottom:.5rem}
 
-.detail{display:none;padding:0 .9rem 1rem 2rem;border-top:1px solid var(--creux)}
+.detail{display:none;padding:0 1rem 1rem;border-top:1px solid var(--creux)}
 .livre.ouvert .detail{display:block}
 .detail h3{
   font:600 .66rem/1.4 var(--sans);color:var(--vert-2);
@@ -645,18 +688,29 @@ function carteLivre(l){
   const resume=p.resume||l.r||l.re||"";
   const source=(!l.r&&(p.resume||l.re))?" editeur":"";
   const requete=encodeURIComponent(titreDe(l)+" "+auteurDe(l));
+  const indic=aVerifier?'<span class="indic doute">à vérifier</span>'
+    :(p.isbnAuto||(l.isbnAuto&&!p.isbn))?'<span class="indic doute">ISBN à confirmer</span>'
+    :p.note?'<span class="indic">annoté</span>'
+    :p.ok?'<span class="indic">vérifié</span>':"";
   return `<article class="livre" data-i="${l._i}">
     <button class="tete" aria-expanded="false">
-      <span class="marque" style="background:${th.couleur}"></span>
-      ${vignette(l,false)}
-      <span class="txt">
-        <span class="titre">${echap(titreDe(l))}</span>
-        <p class="auteur">${echap(auteurDe(l))}</p>
-        <p class="meta">${echap(th.nom)} · ${ETAGERES[l.s]}${
-          l.dbl?` · <span class="doute">${echap(l.dbl)}</span>`:""}${
-          aVerifier?' · <span class="doute">à vérifier</span>':(p.ok?" · vérifié":"")}${
-          corrige(l)?" · corrigé":""}</p>
+      <span class="entete">
+        <span class="etat-pill"><span class="pastille" style="background:${th.couleur}"></span>${echap(th.nom)}</span>
+        ${indic}
       </span>
+      <span class="corps">
+        ${vignette(l,false)}
+        <span class="txt">
+          <span class="titre">${echap(titreDe(l))}</span>
+          <span class="auteur">${echap(auteurDe(l))}</span>
+          <span class="tags"><span>${ETAGERES[l.s].split("—")[0].trim()}</span>${
+            l.dbl?`<span class="tag-doute">${echap(l.dbl)}</span>`:""}${
+            corrige(l)?"<span>corrigé</span>":""}</span>
+        </span>
+      </span>
+      ${l.q&&l.q.length?`<span class="qcle"><span class="qcle-l">Question clé</span><span class="qcle-q">${echap(l.q[0])}</span></span>`:""}
+      ${l.r?`<span class="citation">${echap(l.r)}</span>`:""}
+      <span class="pied"><span class="pied-a"></span><span class="chevron" aria-hidden="true">▾</span></span>
     </button>
     <div class="detail">
       ${resume?`<h3>En deux lignes</h3><p class="resume${source}">${echap(resume)}</p>`:
