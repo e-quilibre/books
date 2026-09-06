@@ -216,7 +216,23 @@ h1{
 .isbn a{color:var(--encre-3);font-size:.75rem}
 .actions{margin-top:.7rem;display:flex;gap:.45rem;flex-wrap:wrap}
 
-/* enrichissement */
+/* état de l'archive */
+.archive{
+  display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;
+  background:var(--doux);border-radius:var(--r);
+  padding:.8rem 1rem;margin-bottom:1.1rem;font-size:.85rem;
+}
+.archive .sceau{
+  flex:0 0 32px;height:32px;border-radius:999px;
+  background:var(--vert-pale);color:var(--oui);
+  display:flex;align-items:center;justify-content:center;
+}
+.archive .sceau svg{width:18px;height:18px}
+.archive p{flex:1 1 14rem;margin:0;color:var(--encre-2);line-height:1.55}
+.archive p b{color:var(--encre);font-weight:600}
+.archive p .accent{color:var(--vert);font-weight:600}
+
+/* champs */
 .champlong{
   width:100%;max-width:34rem;margin-bottom:.35rem;padding:.45rem .65rem;
   border:1.5px solid transparent;border-radius:8px;background:var(--creux);
@@ -232,14 +248,6 @@ h1{
 .lookup.ko{color:var(--alerte)}
 .lookup button{margin-top:.4rem}
 
-.enrich{
-  border:0;background:var(--doux);border-radius:var(--r);
-  padding:.85rem 1rem;margin-bottom:1.1rem;font-size:.85rem;
-}
-.enrich p{margin:0 0 .55rem;color:var(--encre-2);line-height:1.55}
-.jauge{height:4px;background:var(--creux-fort);border-radius:999px;overflow:hidden;margin:.5rem 0;display:none}
-.jauge.actif{display:block}
-.jauge i{display:block;height:100%;background:var(--vert-2);width:0}
 .mini{
   border:1px solid var(--contour);background:transparent;color:var(--encre-2);
   border-radius:999px;padding:.32rem .8rem;cursor:pointer;
@@ -268,7 +276,7 @@ h1{
 /* ── grands écrans : grille éditoriale (cf. maquette) ── */
 @media (min-width:768px){
   .wrap{max-width:76rem;padding:0 2rem}
-  .champ,.verdict,.enrich{max-width:46rem}
+  .champ,.verdict,.archive{max-width:46rem}
   #liste{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem;align-items:stretch}
   #liste .groupe,#liste .vide{grid-column:1/-1}
   #liste .livre,#liste .qitem{margin-bottom:0;min-width:0}
@@ -309,11 +317,10 @@ footer button{margin-right:.45rem}
 
 <div class="verdict" id="verdict"></div>
 
-<section class="enrich" id="enrich">
-  <p id="enrichEtat"></p>
-  <div class="jauge" id="jauge"><i></i></div>
-  <button class="mini" id="lancer">Compléter depuis Google Books</button>
-  <button class="mini" id="arreter" hidden>Arrêter</button>
+<section class="archive" id="archive">
+  <span class="sceau" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span>
+  <p id="archiveEtat"></p>
+  <button class="mini" id="archiveFiltre" hidden></button>
 </section>
 
 <main id="liste"></main>
@@ -570,12 +577,13 @@ function reindexer(l){
 }
 LIVRES.forEach(reindexer);
 
-let etat={q:"",theme:null,vue:"livres"};
+let etat={q:"",theme:null,vue:"livres",archive:false};
 
 function filtrer(){
   const mots=norm(etat.q).split(" ").filter(Boolean);
   return LIVRES.filter(l=>{
     if(etat.theme && l.th!==etat.theme) return false;
+    if(etat.archive && !incomplete(l)) return false;
     return mots.every(m=>l._idx.includes(m));
   });
 }
@@ -679,6 +687,7 @@ function carteLivre(l){
 
 function rendre(){
   majVerdict();
+  majArchive();
   $liste.dataset.vue=etat.vue; /* pilote la grille desktop (2 colonnes en vue questions) */
   const res=filtrer();
   document.getElementById("vider").style.display=etat.q?"block":"none";
@@ -897,7 +906,7 @@ $liste.addEventListener("click",async e=>{
     if(f.couv) p.couv=f.couv;
     if(f.resume && !l.r) p.resume=f.resume;
     p.ok=true; delete p.introuvable;
-    reindexer(l); sauver(); rendre(); majEnrich();
+    reindexer(l); sauver(); rendre();
     return;
   }
 
@@ -910,82 +919,38 @@ $liste.addEventListener("click",async e=>{
   }
 });
 
-/* ── enrichissement en ligne (ISBN, couverture, résumé) ── */
-let enCours=false;
-
-function resteAFaire(){
-  return LIVRES.filter(l=>{ const p=perso[cle(l)]||{}; return !p.isbn && !l.isbn && !p.couv && !p.introuvable; });
+/* ── état de l'archive ───────────────────────────────── */
+/* L'enrichissement en lot a quitté l'app : il vit dans scripts/ (clé
+   d'API requise). Ici, on rend compte de la complétude et on permet de
+   consulter les fiches auxquelles il manque un résumé ou un ISBN. */
+function incomplete(l){
+  const p=perso[cle(l)]||{};
+  return !(l.r||l.re||p.resume) || !(l.isbn||p.isbn);
 }
-function majEnrich(){
-  const reste=resteAFaire().length;
-  const faits=LIVRES.filter(l=>(perso[cle(l)]||{}).isbn||l.isbn).length;
-  const rates=LIVRES.filter(l=>(perso[cle(l)]||{}).introuvable).length;
-  document.getElementById("enrichEtat").innerHTML= reste===0
-    ? `Enrichissement terminé : ${faits} livres avec ISBN${rates?`, ${rates} introuvables — souvent le signe que le titre est mal orthographié dans la liste.`:"."}`
-    : `${faits} livres complétés, ${reste} à faire${rates?`, ${rates} introuvables`:""}. Une connexion est nécessaire ; l'opération prend environ ${Math.ceil(reste*0.6/60)} minute(s) et se reprend là où elle s'arrête.`;
-  document.getElementById("lancer").textContent = reste===0 ? "Relancer sur les introuvables" : "Compléter depuis Google Books";
+function majArchive(){
+  const sansR=LIVRES.filter(l=>{const p=perso[cle(l)]||{};return !(l.r||l.re||p.resume);}).length;
+  const sansI=LIVRES.filter(l=>{const p=perso[cle(l)]||{};return !(l.isbn||p.isbn);}).length;
+  const inc=LIVRES.filter(incomplete).length;
+  document.getElementById("archiveEtat").innerHTML=
+    `<b>État de l'archive :</b> ${LIVRES.length-inc} fiches complètes`+
+    (inc?` · <span class="accent">${sansR?sansR+" sans résumé":""}${sansR&&sansI?", ":""}${sansI?sansI+" sans ISBN":""}</span>`
+        :" — tout est en ordre");
+  const b=document.getElementById("archiveFiltre");
+  b.hidden=!inc&&!etat.archive;
+  b.textContent=etat.archive
+    ? "Revenir à toute la bibliothèque"
+    : `Consulter ${inc===1?"la fiche":"les "+inc+" fiches"}`;
+  b.setAttribute("aria-pressed",etat.archive?"true":"false");
 }
-
-async function chercherLivre(l){
-  const q=encodeURIComponent(`intitle:${titreDe(l).split("(")[0].trim()} inauthor:${auteurDe(l).split(",")[0].split("(")[0].trim()}`);
-  const url=`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=3&langRestrict=fr&country=FR`;
-  const r=await fetch(url);
-  if(!r.ok) throw new Error("HTTP "+r.status);
-  const d=await r.json();
-  if(!d.items||!d.items.length) return null;
-  const v=d.items[0].volumeInfo||{};
-  const ids=v.industryIdentifiers||[];
-  const isbn=(ids.find(i=>i.type==="ISBN_13")||ids.find(i=>i.type==="ISBN_10")||{}).identifier||"";
-  const couv=(v.imageLinks||{}).thumbnail||"";
-  return {
-    isbn,
-    couv: couv.replace(/^http:/,"https:"),
-    resume: (v.description||"").slice(0,400),
-    trouve: v.title||""
-  };
-}
-
-async function enrichir(){
-  if(enCours) return;
-  enCours=true;
-  const btn=document.getElementById("lancer"), stop=document.getElementById("arreter");
-  const jauge=document.getElementById("jauge");
-  btn.disabled=true; stop.hidden=false; jauge.classList.add("actif");
-  let liste=resteAFaire();
-  if(!liste.length) liste=LIVRES.filter(l=>(perso[cle(l)]||{}).introuvable);
-  const total=liste.length;
-  let panne=false;
-  for(let i=0;i<total;i++){
-    if(!enCours) break;
-    const l=liste[i];
-    const p=perso[cle(l)]=perso[cle(l)]||{};
-    try{
-      const res=await chercherLivre(l);
-      if(res){
-        if(res.isbn && !p.isbn){ p.isbn=res.isbn; p.isbnAuto=true; } /* recherche floue : à confirmer livre en main */
-        if(res.couv && !p.couv) p.couv=res.couv;
-        if(res.resume && !l.r && !p.resume) p.resume=res.resume;
-        delete p.introuvable;
-      }else{ p.introuvable=true; }
-    }catch(e){
-      /* erreur réseau ou quota : ce n'est pas un livre introuvable, on s'arrête */
-      panne=true; break;
-    }
-    sauver();
-    jauge.firstElementChild.style.width=Math.round((i+1)/total*100)+"%";
-    document.getElementById("enrichEtat").textContent=`${i+1} / ${total} — ${titreDe(l)}`;
-    await new Promise(r=>setTimeout(r,600));
+document.getElementById("archiveFiltre").addEventListener("click",()=>{
+  etat.archive=!etat.archive;
+  if(etat.archive){
+    etat.vue="livres";
+    document.querySelectorAll(".onglet").forEach(x=>
+      x.setAttribute("aria-selected",x.dataset.vue==="livres"?"true":"false"));
   }
-  enCours=false; btn.disabled=false; stop.hidden=true;
-  jauge.classList.remove("actif"); jauge.firstElementChild.style.width="0";
-  if(panne){
-    document.getElementById("enrichEtat").textContent=
-      "Google Books a refusé la requête — quota journalier épuisé (remis à zéro chaque jour vers 9h) ou connexion coupée. Rien n'a été marqué introuvable : relance plus tard, la reprise se fera ici.";
-  }else{ majEnrich(); }
   rendre();
-}
-document.getElementById("lancer").addEventListener("click",enrichir);
-document.getElementById("arreter").addEventListener("click",()=>{enCours=false;});
+});
 
 /* ── export / import ──────────────────────────────────── */
 document.getElementById("exporter").addEventListener("click",()=>{
@@ -1005,7 +970,7 @@ document.getElementById("fichier").addEventListener("change",e=>{
   r.readAsText(f);
 });
 
-rendreTranches(); rendre(); majEtat(); majEnrich();
+rendreTranches(); rendre(); majEtat();
 
 /* ── PWA : hors ligne + installation sur l'écran d'accueil ── */
 /* Le fichier reste ouvrable tel quel (file://) : on ne s'enregistre qu'en HTTP(S). */

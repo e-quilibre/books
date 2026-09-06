@@ -63,7 +63,12 @@ Fonctions :
   étant terminée. Le marquage par carte (`c:0` → mention « à vérifier »,
   bouton « Marquer comme vérifié ») reste en place pour d'éventuels
   ajouts douteux ; l'onglet se restaurerait depuis git si besoin
-- enrichissement en lot depuis Google Books (ISBN, couverture, résumé éditeur)
+- bloc « État de l'archive » : fiches complètes / sans résumé / sans ISBN,
+  avec un bouton qui filtre la liste sur les fiches incomplètes.
+  (L'enrichissement en lot a quitté l'app le 6 septembre 2026 : il vivait
+  mal sans clé d'API et fait doublon avec les scripts de `scripts/`, plus
+  sûrs — propositions relues avant application. « Retrouver la fiche » par
+  ISBN reste dans l'app.)
 - notes personnelles, corrections de titre/auteur, export et import JSON
 
 `livres.json` — **la source de vérité unique des données d'inventaire.**
