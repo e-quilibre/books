@@ -6,7 +6,7 @@ toute modification s'y fait, puis ce script la reporte dans l'app.
 """
 import json, re
 
-ORDRE = ["t", "r", "re", "a", "isbn", "th", "s", "c", "dbl", "q"]
+ORDRE = ["t", "r", "re", "a", "isbn", "isbnAuto", "th", "s", "c", "dbl", "q"]
 
 d = json.load(open("livres.json"))
 

@@ -97,45 +97,48 @@
    "t": "Event Design",
    "r": "Méthode canvas pour concevoir un événement à partir de l'expérience visée et des objectifs business, plutôt qu'à partir d'un programme.",
    "a": "Roel Frissen, Ruud Janssen, Dennis Luijer",
-   "isbn": "",
+   "isbn": "9789063694340",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment concevoir un événement comme une expérience et pas comme un programme ?",
     "Comment aligner un événement sur un objectif business ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Design Thinking for Business Growth",
    "r": "Lewrick relie le design thinking aux écosystèmes business : comment passer d'ateliers isolés à une capacité d'innovation qui produit de la croissance.",
    "a": "Michael Lewrick",
-   "isbn": "",
+   "isbn": "9781119815174",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment passer du design thinking à une stratégie de croissance ?",
     "Comment structurer une démarche d'innovation à l'échelle de l'entreprise ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Design Thinking & Croissance",
    "r": "Version francophone du même propos : déployer le design thinking à l'échelle de l'entreprise, avec les rôles et gouvernances associés.",
    "a": "Michael Lewrick",
-   "isbn": "",
+   "isbn": "9782744068324",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment industrialiser le design thinking dans une organisation ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
-   "t": "Le Kit du Design Thinking",
+   "t": "Kit pratique du design thinking : Comment utiliser les méthodes d'innovations les plus connues et les plus efficaces",
    "r": "Boîte à outils illustrée : une double page par outil, replacée dans l'étape du processus où elle sert. Livre à consulter, pas à lire.",
-   "a": "Lewrick, Link, Leifer",
-   "isbn": "",
+   "a": "Michael Lewrick, Patrick Link, Larry Leifer",
+   "isbn": "9782744067631",
    "th": "dt",
    "s": 1,
    "c": 1,
@@ -145,23 +148,24 @@
    ]
   },
   {
-   "t": "Le Guide du Design Thinking",
+   "t": "Le guide du Design Thinking: Activez la méthode",
    "r": "Le manuel de référence de la série : le processus complet, du cadrage du problème au prototype, avec exemples et pièges fréquents.",
    "a": "Lewrick, Link, Leifer",
-   "isbn": "",
+   "isbn": "9782744067174",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment mener un projet de design thinking de bout en bout ?",
     "Comment cadrer un problème avant de chercher des solutions ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La méthode Value Proposition Design",
    "r": "Le canvas proposition de valeur : décrire les tâches, douleurs et gains du client, puis construire l'offre en face. Suite du Business Model Generation.",
    "a": "Osterwalder, Pigneur, Bernarda, Smith",
-   "isbn": "",
+   "isbn": "9782744066894",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -170,58 +174,63 @@
     "Comment formuler une proposition de valeur qui tient ?",
     "Comment relier les besoins client à une offre ?",
     "Comment tester une promesse avant de construire ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Testez vos idées business",
    "r": "Bibliothèque de 44 expérimentations classées par coût, rapidité et solidité de la preuve. On y va pour choisir le bon test.",
    "a": "David Bland, Alex Osterwalder",
-   "isbn": "",
+   "isbn": "9782744067303",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Quelle expérimentation choisir pour tester une hypothèse ?",
     "Comment réduire le risque d'un nouveau produit avant de le développer ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La Gamification",
    "r": "Panorama des mécaniques de jeu appliquées au produit, à la formation et au management, avec les limites — quand les points démotivent.",
    "a": "Clément Muletier, Guilhem Bertholet, Thomas Lang",
-   "isbn": "",
+   "isbn": "9782212558449",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment introduire des mécaniques de jeu dans un produit ou un dispositif ?",
     "Quand la gamification est-elle contre-productive ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Visual Thinking",
    "r": "Brand enseigne un vocabulaire visuel minimal : quelques formes et personnages suffisent à rendre une idée abstraite discutable en réunion.",
    "a": "Willemien Brand",
-   "isbn": "",
+   "isbn": "9789063695118",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment dessiner pour clarifier une idée en réunion ?",
     "Comment construire un vocabulaire visuel simple ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Visual Doing",
    "r": "Le pendant pratique : comment appliquer ce vocabulaire dans des situations réelles d'atelier et de facilitation.",
    "a": "Willemien Brand",
-   "isbn": "",
+   "isbn": "9789063695002",
    "th": "dt",
    "s": 1,
    "c": 1,
    "q": [
     "Comment utiliser le dessin dans un atelier réel ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Collaboration visuelle",
@@ -288,7 +297,7 @@
    "t": "Bonne stratégie, mauvaise stratégie",
    "r": "Rumelt oppose la stratégie réelle — diagnostic, ligne directrice, actions cohérentes — aux listes d'objectifs et de valeurs qui en tiennent lieu. Le meilleur livre de la pile sur le sujet.",
    "a": "Richard Rumelt",
-   "isbn": "",
+   "isbn": "9788410490253",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -296,13 +305,14 @@
     "Qu'est-ce qui distingue une vraie stratégie d'une liste d'ambitions ?",
     "Comment diagnostiquer le vrai obstacle avant de décider ?",
     "Pourquoi notre stratégie ne dit-elle rien de concret ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Escaping the Build Trap",
    "r": "Perri décrit le piège de l'équipe qui mesure sa valeur au nombre de features livrées, et le chemin vers une organisation produit orientée résultats.",
    "a": "Melissa Perri",
-   "isbn": "",
+   "isbn": "9781491973745",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -310,20 +320,22 @@
     "Comment sortir d'une équipe qui livre des features sans impact ?",
     "Comment passer d'une roadmap de livrables à une roadmap d'outcomes ?",
     "Quel est le rôle réel d'un product manager ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "The Lean Product Playbook",
    "r": "Processus en six étapes vers le product-market fit, avec la pyramide besoins / proposition de valeur / fonctionnalités / UX.",
    "a": "Dan Olsen",
-   "isbn": "",
+   "isbn": "9781118961025",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment trouver le product-market fit étape par étape ?",
     "Comment prioriser des fonctionnalités par valeur perçue ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Guide du Product Management: La référence de tous les product managers",
@@ -340,33 +352,35 @@
    "t": "Sense & Respond",
    "r": "Gothelf et Seiden décrivent le management d'une entreprise en boucles courtes : décider, observer, ajuster — plutôt que planifier à l'année.",
    "a": "Jeff Gothelf, Josh Seiden",
-   "isbn": "",
+   "isbn": "9788868962333",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment diriger une organisation en apprentissage continu ?",
     "Comment remplacer les plans annuels par des boucles de feedback ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Making Ideas Happen",
    "r": "Belsky s'intéresse à ce qui manque aux créatifs : l'exécution. Organisation des projets, forces communautaires, gestion de la récompense.",
    "a": "Scott Belsky",
-   "isbn": "",
+   "isbn": "9781101404355",
    "th": "prodv",
    "s": 1,
    "c": 1,
    "q": [
     "Comment faire aboutir un projet créatif au lieu d'accumuler des idées ?",
     "Comment organiser le travail d'une équipe créative ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Mesurez ce qui compte",
    "r": "Doerr raconte l'histoire des OKR d'Intel à Google, avec de nombreux cas d'entreprise. Fondateur mais parfois hagiographique.",
    "a": "John Doerr",
-   "isbn": "",
+   "isbn": "9782744068805",
    "th": "prod",
    "s": 1,
    "c": 1,
@@ -374,38 +388,41 @@
     "Comment mettre en place des OKR ?",
     "Comment aligner des équipes sur des objectifs mesurables ?",
     "Comment distinguer un objectif d'un indicateur ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Radical Focus",
    "r": "Wodtke traite les OKR par la fiction : une startup les met en place, avec le rituel hebdomadaire du lundi et du vendredi. Beaucoup plus opérationnel que Doerr.",
    "a": "Christina Wodtke",
-   "isbn": "",
+   "isbn": "9782100877263",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment faire vivre des OKR au rythme hebdomadaire ?",
     "Pourquoi nos OKR ne changent-ils rien au quotidien ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Manager avec les principes toltèques",
    "r": "Transposition managériale des quatre accords : parole impeccable, non-interprétation, non-personnalisation, effort juste.",
    "a": "Laurence Aubourg, Olivier Lecointre",
-   "isbn": "",
+   "isbn": "9782807346499",
    "th": "mgr",
    "s": 1,
    "c": 1,
    "q": [
     "Comment poser une posture managériale plus sereine ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "En toute franchise (Radical Candor)",
    "r": "Scott formalise l'axe se soucier personnellement / défier directement, et nomme les échecs : empathie ruineuse, agressivité déplaisante, insincérité manipulatrice.",
    "a": "Kim Scott",
-   "isbn": "",
+   "isbn": "9782744067259",
    "th": "fb",
    "s": 1,
    "c": 1,
@@ -413,26 +430,28 @@
     "Comment dire une chose difficile sans casser la relation ?",
     "Comment être exigeant et bienveillant en même temps ?",
     "Comment sortir de l'empathie ruineuse ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Feedback : le pouvoir des conversations",
    "r": "Moriou traite le feedback comme une compétence conversationnelle apprenable, avec une structure et beaucoup d'exemples francophones.",
    "a": "Stéphane Moriou",
-   "isbn": "",
+   "isbn": "9782100855292",
    "th": "fb",
    "s": 1,
    "c": 1,
    "q": [
     "Comment structurer un feedback qui sera entendu ?",
     "Comment installer une culture du feedback dans une équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Drive",
    "r": "Pink synthétise la recherche sur la motivation intrinsèque : autonomie, maîtrise, finalité — et montre où les récompenses cassent la performance.",
    "a": "Daniel H. Pink",
-   "isbn": "",
+   "isbn": "9781847678881",
    "th": "appr",
    "s": 1,
    "c": 1,
@@ -440,33 +459,36 @@
     "Qu'est-ce qui motive vraiment les gens au travail ?",
     "Pourquoi les primes cassent-elles la motivation sur des tâches complexes ?",
     "Autonomie, maîtrise, sens : comment les installer ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le job qui me convient",
    "r": "Stolzoff enquête sur le workisme : quand le travail devient identité et religion. Portraits et pistes pour lui redonner sa place.",
    "a": "Simone Stolzoff",
-   "isbn": "",
+   "isbn": "9782744068836",
    "th": "sens",
    "s": 1,
    "c": 1,
    "q": [
     "Comment ne pas faire de son travail son identité ?",
     "Comment retrouver une place raisonnable pour le travail dans sa vie ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Recrutement sous influence",
    "r": "Zambeaux passe en revue les biais cognitifs du recrutement et les correctifs concrets : structuration des entretiens, grilles, décision collective.",
    "a": "Marie-Sophie Zambeaux",
-   "isbn": "",
+   "isbn": "9782100882304",
    "th": "rh",
    "s": 1,
    "c": 1,
    "q": [
     "Quels biais faussent nos entretiens de recrutement ?",
     "Comment rendre un processus de recrutement plus équitable ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La méthode pour recruter les meilleurs: Les start-up qui réussissent partagent un recette : elles recrutent les meilleurs. Inlassablement. Avec méthode.",
@@ -483,20 +505,21 @@
    "t": "L'équipe invincible",
    "r": "Gilkey diagnostique les équipes qui dysfonctionnent sans que personne ne sache pourquoi, et propose des réparations ciblées.",
    "a": "Charlie Gilkey",
-   "isbn": "",
+   "isbn": "9782744068560",
    "th": "cult",
    "s": 1,
    "c": 1,
    "q": [
     "Comment réparer une équipe qui ne fonctionne plus ensemble ?",
     "Comment repérer les dysfonctionnements invisibles d'un collectif ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Conduire le changement",
    "r": "Le modèle en huit étapes de Kotter, de l'urgence à l'ancrage. Le classique du domaine, daté mais toujours cité partout.",
    "a": "John Kotter",
-   "isbn": "",
+   "isbn": "9782744066382",
    "th": "org",
    "s": 1,
    "c": 1,
@@ -504,116 +527,125 @@
     "Quelles sont les étapes d'une conduite du changement ?",
     "Pourquoi les transformations échouent-elles ?",
     "Comment créer un sentiment d'urgence ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "The Staff Engineer's Path",
    "r": "Reilly décrit la voie technique senior sans management : périmètre, influence sans autorité, choix des batailles.",
    "a": "Tanya Reilly",
-   "isbn": "",
+   "isbn": "9781098118709",
    "th": "tech",
    "s": 1,
    "c": 1,
    "q": [
     "Comment progresser techniquement sans devenir manager ?",
     "Quel est le rôle d'un ingénieur senior sans équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Confessions d'un entrepreneur pas comme les autres",
    "r": "Le fondateur de Patagonia raconte comment il a bâti l'entreprise selon ses convictions, y compris quand cela coûtait cher.",
    "a": "Yvon Chouinard",
-   "isbn": "",
+   "isbn": "9782311404302",
    "th": "entr",
    "s": 1,
    "c": 1,
    "q": [
     "Comment diriger une entreprise selon ses valeurs ?",
     "Peut-on faire du business sans trahir ses convictions ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Comment leur dire… La Process Communication",
    "r": "Introduction au modèle PCM : six types de personnalité, leurs canaux de communication et leurs comportements sous stress.",
    "a": "Gérard Collignon",
-   "isbn": "",
+   "isbn": "9782729617981",
    "th": "fb",
    "s": 1,
    "c": 1,
    "q": [
     "Comment adapter ma communication au profil de mon interlocuteur ?",
     "Pourquoi la même phrase passe-t-elle bien avec l'un et mal avec l'autre ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Quit",
    "r": "Duke, ancienne joueuse de poker, plaide pour l'abandon comme compétence : quand persévérer coûte plus que renoncer.",
    "a": "Annie Duke",
-   "isbn": "",
+   "isbn": "9786232423725",
    "th": "deci",
    "s": 1,
    "c": 1,
    "q": [
     "Quand faut-il arrêter un projet ?",
     "Comment lutter contre le biais des coûts irrécupérables ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Responsabilisez et autonomisez votre équipe avec Process Communication Model",
    "r": "Application managériale de PCM : adapter sa délégation et son feedback au profil de chacun.",
    "a": "Vincent Favrie",
-   "isbn": "",
+   "isbn": "9782379351686",
    "th": "mgr",
    "s": 1,
    "c": 1,
    "q": [
     "Comment utiliser PCM en situation managériale ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Bill Campbell : le Trillion Dollar Coach",
    "r": "Portrait du coach d'Apple et Google, à travers ses principes : la confiance d'abord, l'équipe avant le problème, l'écoute totale.",
    "a": "Eric Schmidt, Jonathan Rosenberg, Alan Eagle",
-   "isbn": "",
+   "isbn": "9781473675995",
    "th": "lead",
    "s": 1,
    "c": 1,
    "q": [
     "Comment coacher des dirigeants ?",
     "Quel rôle joue la confiance dans une équipe de direction ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La carte des différences culturelles",
    "r": "Meyer propose huit échelles (communication, feedback, décision, confiance…) pour situer les cultures nationales les unes par rapport aux autres.",
    "a": "Erin Meyer",
-   "isbn": "",
+   "isbn": "9782354564827",
    "th": "cult",
    "s": 1,
    "c": 1,
    "q": [
     "Comment travailler avec des équipes de cultures différentes ?",
     "Pourquoi un feedback direct passe-t-il mal dans certains pays ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Discovery Discipline",
    "r": "Charvillat et Guyot proposent une méthode de discovery en six étapes, resserrée et datée, contre les discovery qui s'éternisent.",
    "a": "Tristan Charvillat, Rémi Guyot",
-   "isbn": "",
+   "isbn": "9782493193018",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment structurer une phase de discovery produit ?",
     "Comment éviter une discovery qui traîne sans décision ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Un rien peut tout changer",
    "r": "Clear décompose l'habitude en quatre lois et insiste sur les systèmes plutôt que les objectifs. Best-seller, très opérationnel.",
    "a": "James Clear",
-   "isbn": "",
+   "isbn": "9782035969217",
    "th": "prodv",
    "s": 1,
    "c": 1,
@@ -621,157 +653,170 @@
     "Comment installer une habitude durable ?",
     "Comment arrêter une habitude subie ?",
     "Pourquoi le système compte-t-il plus que l'objectif ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Build",
    "r": "Fadell mêle mémoire (iPod, Nest) et conseils : produit, équipe, board, moments de rupture. Écrit en chapitres courts et indépendants.",
    "a": "Tony Fadell",
-   "isbn": "",
+   "isbn": "9782212913668",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Comment construire un produit et une équipe qui durent ?",
     "Comment gérer la relation avec des investisseurs ou un board ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Creativity, Inc.",
    "r": "Catmull raconte Pixar du point de vue du dirigeant : comment protéger la fragilité créative dans une entreprise qui réussit.",
    "a": "Ed Catmull",
-   "isbn": "",
+   "isbn": "9780593594650",
    "th": "lead",
    "s": 1,
    "c": 1,
    "q": [
     "Comment protéger la créativité dans une organisation qui grandit ?",
     "Comment faire remonter les mauvaises nouvelles ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "The Art of Business Value",
    "r": "Schwartz interroge une notion que tout le monde emploie sans la définir, et ce que cela change pour la gouvernance IT.",
    "a": "Mark Schwartz",
-   "isbn": "",
+   "isbn": "9781942788058",
    "th": "prod",
    "s": 1,
    "c": 1,
    "q": [
     "Qu'est-ce que la valeur métier, concrètement ?",
     "Comment justifier des investissements IT sans ROI évident ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Les vrais leaders se servent en dernier",
    "r": "Sinek relie le leadership à la biologie du cercle de sécurité : protéger son équipe pour qu'elle prenne des risques.",
    "a": "Simon Sinek",
-   "isbn": "",
+   "isbn": "9782326057074",
    "th": "lead",
    "s": 1,
    "c": 1,
    "q": [
     "Comment créer un climat de sécurité dans une équipe ?",
     "Qu'est-ce qui fait qu'on suit un leader ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le jeu infini",
    "r": "Sinek oppose les jeux finis, avec vainqueur et fin, aux jeux infinis où l'objectif est de rester en jeu — et applique cela au business.",
    "a": "Simon Sinek",
-   "isbn": "",
+   "isbn": "9782744067440",
    "th": "lead",
    "s": 1,
    "c": 1,
    "q": [
     "Comment penser à long terme dans un environnement concurrentiel ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Trouver son pourquoi",
    "r": "Le cahier d'exercices qui accompagne Commencer par pourquoi : ateliers individuels et collectifs pour formuler sa raison d'être.",
    "a": "Simon Sinek",
-   "isbn": "",
+   "isbn": "9782744066924",
    "th": "lead",
    "s": 1,
    "c": 1,
    "q": [
     "Comment formuler son pourquoi, personnellement ou en équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Commencer par pourquoi",
    "r": "Le cercle d'or de Sinek : pourquoi, comment, quoi. Argumentaire répétitif mais idée durablement utile.",
    "a": "Simon Sinek",
-   "isbn": "",
+   "isbn": "9782924412688",
    "th": "lead",
    "s": 1,
    "c": 1,
    "q": [
     "Comment articuler la raison d'être avant le quoi et le comment ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La méthode Make Time",
    "r": "Knapp et Zeratsky proposent un système léger : un moment fort par jour, protégé de la distraction, avec des dizaines de tactiques à piocher.",
    "a": "Jake Knapp, John Zeratsky",
-   "isbn": "",
+   "isbn": "9782212571653",
    "th": "prodv",
    "s": 1,
    "c": 1,
    "q": [
     "Comment dégager du temps pour ce qui compte vraiment ?",
     "Comment se protéger des sollicitations permanentes ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Turn the Ship Around!",
    "r": "Le commandant d'un sous-marin nucléaire raconte comment il est passé de l'ordre à l'intention, et ce que cela a produit sur l'équipage.",
    "a": "L. David Marquet",
-   "isbn": "",
+   "isbn": "9781101623695",
    "th": "lead",
    "s": 2,
    "c": 1,
    "q": [
     "Comment donner du pouvoir de décision au plus près du terrain ?",
     "Comment passer d'un modèle « ordre-exécution » à « intention » ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Turn the Ship Around! Workbook",
    "r": "Cahier d'application du précédent : exercices de mise en œuvre du leadership par l'intention.",
    "a": "L. David Marquet",
-   "isbn": "",
+   "isbn": "9780525534693",
    "th": "lead",
    "s": 2,
    "c": 1,
    "q": [
     "Comment mettre en pratique le leadership par l'intention, exercice par exercice ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Renversez la vapeur !",
    "r": "Édition française du même propos, avec les mécanismes de contrôle, de compétence et de clarté.",
    "a": "L. David Marquet",
-   "isbn": "",
+   "isbn": "9782892259926",
    "th": "lead",
    "s": 2,
    "c": 1,
    "q": [
     "Comment transformer une organisation hiérarchique en organisation autonome ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Développer (vraiment) son leadership",
    "r": "Livre francophone sur la construction pratique de la posture de leader, à distance des discours inspirationnels.",
    "a": "Benjamin Pavageau",
-   "isbn": "",
+   "isbn": "9782311406344",
    "th": "lead",
    "s": 2,
    "c": 1,
    "q": [
     "Comment travailler sa posture de leader au quotidien ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Leadership experience: 17 pratiques pour donner envie d'agir à vos équipes !",
@@ -788,7 +833,7 @@
    "t": "On ne naît pas manager… on le devient",
    "r": "Zhuo, devenue manager très jeune chez Facebook, raconte les débuts, les 1:1, le recrutement, l'échelle. Honnête sur les erreurs.",
    "a": "Julie Zhuo",
-   "isbn": "",
+   "isbn": "9782744068102",
    "th": "mgr",
    "s": 2,
    "c": 1,
@@ -796,20 +841,22 @@
     "Je viens d'être nommé manager, par où commencer ?",
     "Comment mener mes premiers 1:1 ?",
     "Comment recruter et faire grandir mon équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Management 3.0",
    "r": "Appelo relie complexité, agilité et management : une soixantaine de pratiques concrètes pour l'autonomie et la motivation.",
    "a": "Jurgen Appelo",
-   "isbn": "",
+   "isbn": "9780321712479",
    "th": "mgr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment manager une équipe agile sans commander ?",
     "Quels outils concrets pour l'autonomie et la motivation ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Halte au manager bashing !: Réinventer l'expérience manager",
@@ -827,53 +874,57 @@
    "t": "The Manager's Path",
    "r": "Fournier suit la trajectoire tech lead, manager, directeur, CTO, avec les responsabilités et les pièges de chaque étage.",
    "a": "Camille Fournier",
-   "isbn": "",
+   "isbn": "9781491973844",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Comment évoluer de développeur à manager puis à directeur technique ?",
     "Que fait un engineering manager exactement ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Leading Effective Engineering Teams",
    "r": "Osmani traite la performance des équipes d'ingénierie : structures, mesure, pièges du 10x engineer.",
    "a": "Addy Osmani",
-   "isbn": "",
+   "isbn": "9781098148218",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Comment faire performer une équipe d'ingénierie ?",
     "Comment mesurer la productivité d'une équipe technique ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Manager son équipe au quotidien",
    "r": "Manuel francophone des fondamentaux : délégation, entretiens, animation, situations difficiles.",
    "a": "Bernard Diridollou",
-   "isbn": "",
+   "isbn": "9782212348286",
    "th": "mgr",
    "s": 2,
    "c": 1,
    "q": [
     "Quels réflexes managériaux de base au quotidien ?",
     "Comment déléguer et suivre sans micro-manager ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Collaborer, manager et réussir en télétravail",
    "r": "Écrit avant 2020 par des praticiens du travail distribué : rituels, communication asynchrone, confiance à distance.",
    "a": "L. Sutherland, K. Janene-Nelson",
-   "isbn": "",
+   "isbn": "9782501172547",
    "th": "mgr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment manager une équipe à distance ?",
     "Quels rituels pour une équipe distribuée ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Devenez manager de métier !",
@@ -890,65 +941,70 @@
    "t": "Managers intermédiaires : guide de survie",
    "r": "Demailly traite la position la plus inconfortable de l'organisation : prise entre stratégie descendante et réalité du terrain.",
    "a": "Cécile Demailly",
-   "isbn": "",
+   "isbn": "9782212731484",
    "th": "mgr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment tenir sa place entre la direction et le terrain ?",
     "Comment gérer les injonctions contradictoires ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le Guide de l'anti-manager",
    "r": "Bungay Stanier (The Coaching Habit) : sept questions qui remplacent les conseils, pour manager en posture de coach.",
    "a": "Michael Bungay Stanier",
-   "isbn": "",
+   "isbn": "9782354565190",
    "th": "mgr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment poser des questions au lieu de donner des réponses ?",
     "Comment coacher en sept minutes ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Guide de déconstruction du sexisme au travail",
    "r": "Soichot recense les manifestations ordinaires du sexisme professionnel et ce qu'on peut faire, victime ou témoin.",
    "a": "Marine-Pétronille Soichot",
-   "isbn": "",
+   "isbn": "9782326064348",
    "th": "sens",
    "s": 2,
    "c": 1,
    "q": [
     "Comment repérer et traiter le sexisme ordinaire au bureau ?",
     "Que faire quand je suis témoin ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Prenez soin de votre santé mentale au travail",
    "r": "Guide pratique sur les signaux, les leviers individuels et les recours institutionnels.",
    "a": "Noémie Guerrin",
-   "isbn": "",
+   "isbn": "9782311627565",
    "th": "sens",
    "s": 2,
    "c": 1,
    "q": [
     "Comment protéger sa santé mentale dans un contexte professionnel exigeant ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Osez réussir !",
    "r": "Dweck oppose état d'esprit fixe et de développement, avec les implications pour l'éducation, le sport et le management.",
    "a": "Carol S. Dweck",
-   "isbn": "",
+   "isbn": "9782804704308",
    "th": "appr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment développer un état d'esprit de développement ?",
     "Comment féliciter l'effort plutôt que le talent ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La vertu dangereuse",
@@ -966,26 +1022,28 @@
    "t": "Vous allez commettre une terrible erreur",
    "r": "Sibony recense les biais qui plombent les décisions stratégiques et propose une architecture de décision collective pour les contrer.",
    "a": "Olivier Sibony",
-   "isbn": "",
+   "isbn": "9782081477452",
    "th": "deci",
    "s": 2,
    "c": 1,
    "q": [
     "Quels biais faussent les décisions en entreprise ?",
     "Comment organiser une décision collective pour limiter les biais ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "J'arrête de râler au boulot !",
    "r": "Programme en 21 jours pour sortir de la plainte, dans la lignée de J'arrête de râler.",
    "a": "Christine Lewicki, Emmanuelle Nave",
-   "isbn": "",
+   "isbn": "9782212566406",
    "th": "sens",
    "s": 2,
    "c": 1,
    "q": [
     "Comment sortir d'une posture de plainte au travail ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Comment réussir à se planter (plus vite et plus efficacement)",
@@ -1003,7 +1061,7 @@
    "t": "The Culture Code",
    "r": "Coyle isole trois compétences des groupes performants : la sécurité, le partage de la vulnérabilité, la finalité commune. Beaucoup d'études de cas.",
    "a": "Daniel Coyle",
-   "isbn": "",
+   "isbn": "9781448185948",
    "th": "cult",
    "s": 2,
    "c": 1,
@@ -1011,32 +1069,35 @@
     "Qu'est-ce qui rend un groupe soudé ?",
     "Comment construire la sécurité psychologique concrètement ?",
     "Comment partager la vulnérabilité en équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Dream Team",
    "r": "Girodon a interrogé plus de cinq cents managers pour bâtir un guide francophone du recrutement à la fidélisation.",
    "a": "Ludovic Girodon",
-   "isbn": "",
+   "isbn": "9782501186766",
    "th": "cult",
    "s": 2,
    "c": 1,
    "q": [
     "Comment recruter, intégrer et faire grandir une équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le pouvoir de la pensée flexible",
    "r": "Grant (Think Again) plaide pour le plaisir de changer d'avis, contre les postures de prêcheur, procureur et politicien.",
    "a": "Adam Grant",
-   "isbn": "",
+   "isbn": "9782761959643",
    "th": "deci",
    "s": 2,
    "c": 1,
    "q": [
     "Comment accepter de changer d'avis ?",
     "Comment sortir du mode prêcheur / procureur / politicien ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Équipes gagnantes - S'inspirer du sport collectif français pour réinventer nos organisations",
@@ -1053,50 +1114,54 @@
    "t": "Cinq coups d'avance",
    "r": "Bet-David propose une méthode d'anticipation stratégique inspirée des échecs, appliquée à la croissance d'entreprise.",
    "a": "Patrick Bet-David, Greg Dinkin",
-   "isbn": "",
+   "isbn": "9782354564131",
    "th": "entr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment anticiper plusieurs coups d'avance dans une stratégie business ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Zéro effort (Effortless)",
    "r": "Suite d'Essentialisme : une fois l'essentiel identifié, comment le rendre plus simple au lieu de s'y épuiser.",
    "a": "Greg McKeown",
-   "isbn": "",
+   "isbn": "9782354565046",
    "th": "prodv",
    "s": 2,
    "c": 1,
    "q": [
     "Comment rendre plus simple ce qui compte le plus ?",
     "Comment arrêter de se sur-fatiguer sur l'essentiel ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Mettez de l'IA dans votre travail !",
    "r": "Guide francophone d'usages concrets de l'IA générative en contexte professionnel, cas par cas.",
    "a": "Pauline Ebel",
-   "isbn": "",
+   "isbn": "9782412105405",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Comment intégrer l'IA générative dans des tâches professionnelles concrètes ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Arrêtez de vous épuiser",
    "r": "Poirot, psychologue du travail, traite la prévention de l'épuisement au niveau individuel et organisationnel.",
    "a": "Matthieu Poirot",
-   "isbn": "",
+   "isbn": "9782416830433",
    "th": "sens",
    "s": 2,
    "c": 1,
    "q": [
     "Comment prévenir l'épuisement professionnel ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Partager, c'est gagner !: Les secrets d'un médaillé olympique de voile sur la force du collectif en entreprise",
@@ -1113,13 +1178,14 @@
    "t": "Feedback en action",
    "r": "Recueil de situations de feedback traitées une par une, en complément des ouvrages théoriques.",
    "a": "Raphaël Maisonnier",
-   "isbn": "",
+   "isbn": "9782100896943",
    "th": "fb",
    "s": 2,
    "c": 1,
    "q": [
     "Comment pratiquer le feedback au quotidien, cas par cas ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Numérique, comptez avec les femmes",
@@ -1137,20 +1203,21 @@
    "t": "L'intention",
    "r": "Bailey (Hyperfocus) sur l'attention : alterner concentration intense et vagabondage délibéré, en réduisant la stimulation.",
    "a": "Chris Bailey",
-   "isbn": "",
+   "isbn": "9781596653429",
    "th": "prodv",
    "s": 2,
    "c": 1,
    "q": [
     "Comment reprendre le contrôle de son attention ?",
     "Comment gérer la surcharge de stimulation numérique ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Pour une pensée systémique",
    "r": "Meadows, texte fondateur : stocks, flux, boucles de rétroaction, points de levier. Court, dense, transformateur.",
    "a": "Donella H. Meadows",
-   "isbn": "",
+   "isbn": "9782374253770",
    "th": "org",
    "s": 2,
    "c": 1,
@@ -1158,20 +1225,22 @@
     "Comment raisonner en système plutôt qu'en cause unique ?",
     "Où sont les points de levier dans un système ?",
     "Pourquoi une solution évidente aggrave-t-elle parfois le problème ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La Méthode",
    "r": "Godin (The Practice) sur la régularité créative : livrer son travail sans attendre l'inspiration ni la garantie du résultat.",
    "a": "Seth Godin",
-   "isbn": "",
+   "isbn": "9782603024935",
    "th": "entr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment produire un travail créatif de manière régulière ?",
     "Comment dépasser le blocage de la page blanche ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Apprendre sans limites",
@@ -1190,106 +1259,114 @@
    "t": "Les quatre accords toltèques",
    "r": "Quatre principes de sagesse toltèque devenus un classique du développement personnel.",
    "a": "Don Miguel Ruiz",
-   "isbn": "",
+   "isbn": "9782889114351",
    "th": "essai",
    "s": 2,
    "c": 1,
    "q": [
     "Quels principes simples pour moins souffrir des relations ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Steve Jobs",
    "r": "La biographie autorisée d'Isaacson, écrite à partir de dizaines d'entretiens. Ni hagiographie ni règlement de comptes.",
    "a": "Walter Isaacson",
-   "isbn": "",
+   "isbn": "9782709638821",
    "th": "entr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment Jobs a-t-il construit ses produits et ses équipes ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Quand la machine apprend",
    "r": "Le Cun explique l'apprentissage profond, son histoire et ses limites, par l'un de ses artisans.",
    "a": "Yann Le Cun",
-   "isbn": "",
+   "isbn": "9782415006563",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Comment fonctionne l'apprentissage profond ?",
     "D'où vient l'IA actuelle ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Ouvrir une voie",
    "r": "L'ancien PDG de Danone sur sa trajectoire, entre performance financière et responsabilité sociale.",
    "a": "Emmanuel Faber",
-   "isbn": "",
+   "isbn": "9782352213512",
    "th": "entr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment concilier direction d'entreprise et responsabilité sociale ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Quand la religion s'invite dans l'entreprise",
    "r": "Maillard analyse le fait religieux au travail comme symptôme de mutations plus larges de l'entreprise.",
    "a": "Denis Maillard",
-   "isbn": "",
+   "isbn": "9782383881377",
    "th": "sens",
    "s": 2,
    "c": 1,
    "q": [
     "Comment traiter le fait religieux au travail ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "De zéro à un",
    "r": "Thiel défend la création de valeur radicalement nouvelle et le monopole comme objectif, à rebours du discours sur la concurrence.",
    "a": "Peter Thiel",
-   "isbn": "",
+   "isbn": "9782709649735",
    "th": "entr",
    "s": 2,
    "c": 1,
    "q": [
     "Comment créer quelque chose de réellement nouveau ?",
     "Pourquoi viser un monopole plutôt que la concurrence ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Parler en public — TED",
    "r": "Le curateur de TED détaille la préparation d'une intervention : idée unique, structure narrative, présence.",
    "a": "Chris Anderson",
-   "isbn": "",
+   "isbn": "9782081407947",
    "th": "fb",
    "s": 2,
    "c": 1,
    "q": [
     "Comment préparer une prise de parole marquante ?",
     "Comment structurer une idée pour la transmettre ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Négocier",
    "r": "Corona, ancien négociateur du RAID, transpose la négociation de crise au monde professionnel.",
    "a": "David Corona",
-   "isbn": "",
+   "isbn": "9782246827122",
    "th": "nego",
    "s": 2,
    "c": 1,
    "q": [
     "Comment négocier sous pression ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Ne coupez jamais la poire en deux",
    "r": "Voss, ex-négociateur du FBI, oppose l'empathie tactique aux méthodes de compromis. Techniques d'écoute et de mise en miroir.",
    "a": "Chris Voss, Tahl Raz",
-   "isbn": "",
+   "isbn": "9782714479174",
    "th": "nego",
    "s": 2,
    "c": 1,
@@ -1297,13 +1374,14 @@
     "Comment négocier sans céder au compromis mou ?",
     "Comment utiliser l'empathie tactique ?",
     "Comment faire dire non pour avancer ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Noise",
    "r": "Kahneman, Sibony et Sunstein documentent la variabilité indésirable des jugements humains, distincte du biais, et proposent l'hygiène de décision.",
    "a": "Daniel Kahneman, Olivier Sibony, Cass R. Sunstein",
-   "isbn": "",
+   "isbn": "9782415006662",
    "th": "deci",
    "s": 2,
    "c": 1,
@@ -1311,44 +1389,48 @@
    "q": [
     "Pourquoi deux experts donnent-ils des avis différents sur le même dossier ?",
     "Comment réduire la variabilité des jugements ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Cessons d'être des moutons",
    "r": "Sunstein et Hastie sur les défaillances des décisions de groupe : cascades, polarisation, et les remèdes organisationnels.",
    "a": "Cass R. Sunstein, Reid Hastie",
-   "isbn": "",
+   "isbn": "9782080445698",
    "th": "deci",
    "s": 2,
    "c": 1,
    "q": [
     "Pourquoi les groupes décident-ils mal ?",
     "Comment éviter la cascade informationnelle en réunion ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La vérité sur ce qui nous motive",
    "r": "Édition française de Drive.",
    "a": "Daniel H. Pink",
-   "isbn": "",
+   "isbn": "9782081379527",
    "th": "appr",
    "s": 2,
    "c": 1,
    "q": [
     "Qu'est-ce qui motive au-delà de la récompense ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le code de la créativité",
    "r": "Du Sautoy, mathématicien, examine ce que les algorithmes peuvent et ne peuvent pas produire en art et en musique.",
    "a": "Marcus du Sautoy",
-   "isbn": "",
+   "isbn": "9782350877488",
    "th": "tech",
    "s": 2,
    "c": 1,
    "q": [
     "Une machine peut-elle être créative ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Être en accord avec soi-même: Pour mieux négocier avec les autres",
@@ -1389,71 +1471,76 @@
    "t": "Les Principes du succès",
    "r": "Dalio expose les principes de vie et de management qui ont fait Bridgewater : transparence radicale, méritocratie des idées. Dense et systématique.",
    "a": "Ray Dalio",
-   "isbn": "",
+   "isbn": "9782361170516",
    "th": "lead",
    "s": 3,
    "c": 1,
    "q": [
     "Comment formaliser ses propres principes de décision ?",
     "Comment installer une culture de transparence radicale ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Loved : les leçons du marketing de la tech",
    "r": "Lauchengco définit le product marketing par quatre fondamentaux : ambassadeur, stratège, storyteller, évangéliste.",
    "a": "Martina Lauchengco",
-   "isbn": "",
+   "isbn": "9781119704362",
    "th": "prod",
    "s": 3,
    "c": 1,
    "q": [
     "Comment positionner et lancer un produit tech ?",
     "Que fait un product marketing manager ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "The Creative Thinking Handbook",
    "r": "Griffiths propose une méthode structurée en quatre étapes pour rendre la créativité reproductible.",
    "a": "Chris Griffiths",
-   "isbn": "",
+   "isbn": "9781398607071",
    "th": "dt",
    "s": 3,
    "c": 1,
    "q": [
     "Comment structurer la pensée créative individuellement ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Créativité",
    "r": "Rick Rubin, producteur musical, écrit sur la disposition intérieure du créateur plutôt que sur la technique. Court, contemplatif.",
    "a": "Rick Rubin",
-   "isbn": "",
+   "isbn": "9782379353895",
    "th": "essai",
    "s": 3,
    "c": 1,
    "q": [
     "Comment entretenir une pratique créative sur la durée ?",
     "Comment se rapporter au goût et à l'intuition ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Data Mesh",
    "r": "Dehghani formule les quatre principes du data mesh : domaines propriétaires, données comme produit, plateforme self-service, gouvernance fédérée.",
    "a": "Zhamak Dehghani",
-   "isbn": "",
+   "isbn": "9781492092360",
    "th": "tech",
    "s": 3,
    "c": 1,
    "q": [
     "Comment décentraliser l'architecture de données d'une entreprise ?",
     "Qu'est-ce qu'un data product ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Les mots sont des fenêtres (ou bien ce sont des murs)",
    "r": "Le livre fondateur de la communication non violente : observation, sentiment, besoin, demande.",
    "a": "Marshall B. Rosenberg",
-   "isbn": "",
+   "isbn": "9782889054183",
    "th": "fb",
    "s": 3,
    "c": 1,
@@ -1461,57 +1548,62 @@
     "Comment pratiquer la communication non violente ?",
     "Comment exprimer un besoin sans reprocher ?",
     "Comment désamorcer un conflit relationnel ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Brown-out : quand le travail perd son sens",
    "r": "Distingue burn-out, bore-out et brown-out, et analyse la perte de sens comme pathologie propre du travail contemporain.",
    "a": "Étienne Desmet, Yohann Marcel",
-   "isbn": "",
+   "isbn": "9782416817342",
    "th": "sens",
    "s": 3,
    "c": 1,
    "q": [
     "Que faire quand le travail n'a plus de sens ?",
     "Quelle différence entre burn-out, bore-out et brown-out ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Organic AI",
    "r": "Maisonnier, fondateur d'Aldebaran, explore des approches d'intelligence artificielle inspirées du vivant.",
    "a": "Bruno Maisonnier",
-   "isbn": "",
+   "isbn": "9791037039606",
    "th": "tech",
    "s": 3,
    "c": 1,
    "q": [
     "Quelles approches alternatives à l'IA actuelle ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Pionniers",
    "r": "Grallet, journaliste au Point, dresse des portraits de figures qui façonnent la technologie contemporaine.",
    "a": "Guillaume Grallet",
-   "isbn": "",
+   "isbn": "9782246841074",
    "th": "tech",
    "s": 3,
    "c": 1,
    "q": [
     "Qui sont les figures qui façonnent la tech aujourd'hui ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Cyberpunk : le nouveau système totalitaire",
    "r": "Mhalla analyse la convergence entre puissance technologique et pouvoir politique, et ce qu'elle fait aux démocraties.",
    "a": "Asma Mhalla",
-   "isbn": "",
+   "isbn": "9782021587593",
    "th": "tech",
    "s": 3,
    "c": 1,
    "q": [
     "Quels sont les enjeux de pouvoir derrière les technologies ?",
     "Comment penser la géopolitique du numérique ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Noise (éd. anglaise)",
@@ -1530,20 +1622,21 @@
    "t": "Le talent est une fiction",
    "r": "Karaki, neuroscientifique, démonte l'idée de don inné et son rôle dans la justification des inégalités.",
    "a": "Samah Karaki",
-   "isbn": "",
+   "isbn": "9782709669146",
    "th": "appr",
    "s": 3,
    "c": 1,
    "q": [
     "Le talent existe-t-il vraiment ?",
     "Que dit la neuroscience sur le mérite ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Reinventing Organizations",
    "r": "Laloux décrit les organisations opale à travers des cas réels (Buurtzorg, Favi) : autogouvernance, plénitude, raison d'être évolutive.",
    "a": "Frédéric Laloux",
-   "isbn": "",
+   "isbn": "9782354567156",
    "th": "org",
    "s": 3,
    "c": 1,
@@ -1552,7 +1645,8 @@
     "À quoi ressemble une organisation sans hiérarchie classique ?",
     "Quels stades d'évolution pour une organisation ?",
     "Comment fonctionne l'auto-gouvernance en pratique ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'acteur et le système",
@@ -1571,114 +1665,123 @@
    "t": "Le coût de l'excellence",
    "r": "Aubert et de Gaulejac analysent le prix psychique de l'injonction à l'excellence dans les organisations managériales.",
    "a": "Nicole Aubert, Vincent de Gaulejac",
-   "isbn": "",
+   "isbn": "9782020133890",
    "th": "sens",
    "s": 3,
    "c": 1,
    "q": [
     "Quel prix humain pour la performance en entreprise ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Nine Lies About Work",
    "r": "Buckingham et Goodall contestent neuf croyances RH établies, dont le feedback permanent et l'évaluation par les compétences.",
    "a": "Marcus Buckingham, Ashley Goodall",
-   "isbn": "",
+   "isbn": "9781633698031",
    "th": "mgr",
    "s": 4,
    "c": 1,
    "q": [
     "Quelles croyances RH sont fausses ?",
     "Faut-il vraiment donner du feedback en continu ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "58 outils de design systémique",
    "r": "Daumal outille l'approche systémique appliquée au design : cartographies, boucles, modélisation des acteurs.",
    "a": "Sylvie Daumal",
-   "isbn": "",
+   "isbn": "9782212148176",
    "th": "dt",
    "s": 4,
    "c": 1,
    "q": [
     "Quel outil pour cartographier un système complexe ?",
     "Comment aborder un problème qui dépasse un seul service ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'innovation Jugaad",
    "r": "L'innovation frugale indienne : faire plus avec moins, à partir de la contrainte plutôt que du budget R&D.",
    "a": "Navi Radjou, Jaideep Prabhu, Simone Ahuja",
-   "isbn": "",
+   "isbn": "9782354566951",
    "th": "dt",
    "s": 4,
    "c": 1,
    "q": [
     "Comment innover avec très peu de moyens ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Extreme Programming Explained",
    "r": "Beck expose les valeurs et pratiques de XP : cycles courts, tests, programmation en binôme. Une des sources de l'agilité.",
    "a": "Kent Beck, Cynthia Andres",
-   "isbn": "",
+   "isbn": "9780201616415",
    "th": "tech",
    "s": 4,
    "c": 1,
    "q": [
     "Quelles pratiques d'ingénierie pour livrer en continu ?",
     "D'où viennent les principes agiles ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Les paradoxes de la coopération",
    "r": "Scharnitzky, psychosociologue, explique pourquoi la coopération résiste malgré la volonté affichée de coopérer.",
    "a": "Patrick Scharnitzky",
-   "isbn": "",
+   "isbn": "9782212570014",
    "th": "cult",
    "s": 4,
    "c": 1,
    "q": [
     "Pourquoi la coopération est-elle si difficile alors qu'on la souhaite ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Psychologie du manager",
    "r": "Amar applique la psychologie sociale et clinique aux situations managériales courantes.",
    "a": "Patrick Amar",
-   "isbn": "",
+   "isbn": "9782100878635",
    "th": "mgr",
    "s": 4,
    "c": 1,
    "q": [
     "Que dit la psychologie sur les situations managériales courantes ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Gamestorming",
    "r": "Catalogue d'une centaine de jeux d'atelier classés par intention : ouvrir, explorer, converger.",
    "a": "Dave Gray, Sunni Brown, James Macanufo",
-   "isbn": "",
+   "isbn": "9781449395988",
    "th": "dt",
    "s": 4,
    "c": 1,
    "q": [
     "Quel jeu d'atelier pour débloquer un groupe ?",
     "Comment animer un atelier d'idéation ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'effet micro-stress",
    "r": "Cross et Dillon identifient les micro-stress relationnels invisibles qui épuisent sans jamais être nommés.",
    "a": "Rob Cross, Karen Dillon",
-   "isbn": "",
+   "isbn": "9782744068591",
    "th": "sens",
    "s": 4,
    "c": 1,
    "q": [
     "Pourquoi je suis épuisé sans grand stress identifiable ?",
     "Comment repérer les micro-stress relationnels ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le guide de l'organisation apprenante: Plus de 100 outils et pratiques pour développer l'intelligence collective",
@@ -1720,25 +1823,27 @@
    "t": "Test & Learn",
    "r": "Borges, directeur innovation de Carrefour, plaide pour l'expérimentation systématique en grande organisation.",
    "a": "Adilson Borges",
-   "isbn": "",
+   "isbn": "9782311625196",
    "th": "prod",
    "s": 4,
    "c": 1,
    "q": [
     "Comment installer une culture d'expérimentation ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'entreprise du bonheur",
    "r": "Hsieh raconte Zappos : culture d'entreprise, service client extrême, et ce qu'il en a coûté.",
    "a": "Tony Hsieh",
-   "isbn": "",
+   "isbn": "9782848999579",
    "th": "entr",
    "s": 4,
    "c": 1,
    "q": [
     "Comment bâtir une entreprise autour de la culture et du service client ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'entrepreneuriat humaniste",
@@ -1755,13 +1860,14 @@
    "t": "Vivre de ce que l'on aime",
    "r": "Marc Allen sur la construction d'une activité économique à partir de ce qui a du sens pour soi.",
    "a": "Marc Allen",
-   "isbn": "",
+   "isbn": "9782845945685",
    "th": "entr",
    "s": 4,
    "c": 1,
    "q": [
     "Comment vivre d'une activité qui a du sens pour soi ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'avenir appartient aux PME: Environnement, IA, progrès, lien social... Pourquoi les PME sont la clé des enjeux de demain",
@@ -1791,52 +1897,56 @@
    "t": "L'art de choisir ses erreurs",
    "r": "Edmondson distingue les erreurs intelligentes des erreurs basiques et complexes, et ce que chacune demande.",
    "a": "Amy Edmondson",
-   "isbn": "",
+   "isbn": "9782744068607",
    "th": "appr",
    "s": 4,
    "c": 1,
    "q": [
     "Quelles erreurs sont utiles et lesquelles ne le sont pas ?",
     "Comment créer un droit à l'erreur intelligent ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Multipliers",
    "r": "Wiseman oppose les leaders qui démultiplient l'intelligence de leur équipe à ceux qui l'étouffent sans le vouloir.",
    "a": "Liz Wiseman",
-   "isbn": "",
+   "isbn": "9782804735043",
    "th": "lead",
    "s": 4,
    "c": 1,
    "q": [
     "Comment démultiplier l'intelligence de son équipe ?",
     "Suis-je un manager qui amplifie ou qui diminue ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Brèves de coach",
    "r": "Tonnelé rassemble des situations de coaching réelles, courtes, chacune traitée sur quelques pages.",
    "a": "Arnaud Tonnelé",
-   "isbn": "",
+   "isbn": "9782383133094",
    "th": "mgr",
    "s": 4,
    "c": 1,
    "q": [
     "Comment un coach traite-t-il une situation managériale concrète ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Slow Productivity",
    "r": "Newport propose trois principes : faire moins de choses, travailler à un rythme naturel, viser une qualité obsessionnelle.",
    "a": "Cal Newport",
-   "isbn": "",
+   "isbn": "9780593544860",
    "th": "prodv",
    "s": 4,
    "c": 1,
    "q": [
     "Comment produire un travail de qualité sans surcharge ?",
     "Comment faire moins de choses mais mieux ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Intelligence collective et performance d'équipe: Mieux communiquer - Mieux diriger",
@@ -1853,65 +1963,70 @@
    "t": "Clear Thinking",
    "r": "Parrish s'intéresse aux moments ordinaires où l'on réagit par défaut, et à la manière de créer un espace avant de décider.",
    "a": "Shane Parrish",
-   "isbn": "",
+   "isbn": "9780593086124",
    "th": "deci",
    "s": 4,
    "c": 1,
    "q": [
     "Comment mieux penser dans les moments ordinaires ?",
     "Comment créer de l'espace avant de réagir ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "When",
    "r": "Pink synthétise la recherche sur le timing : rythmes circadiens, effet des pauses, importance des débuts et des fins.",
    "a": "Daniel H. Pink",
-   "isbn": "",
+   "isbn": "9781782119906",
    "th": "prodv",
    "s": 4,
    "c": 1,
    "q": [
     "À quel moment de la journée faire quel type de tâche ?",
     "Comment utiliser le timing à son avantage ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La puissance de la confiance",
    "r": "Covey fils traite la confiance comme un actif économique mesurable, avec ses dividendes et ses taxes.",
    "a": "Stephen M. R. Covey",
-   "isbn": "",
+   "isbn": "9782804735029",
    "th": "cult",
    "s": 4,
    "c": 1,
    "q": [
     "Comment la confiance accélère-t-elle une organisation ?",
     "Comment reconstruire une confiance abîmée ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "TEAM : s'organiser pour réussir en équipe",
    "r": "Allen et Lamont transposent GTD à l'échelle collective : engagements partagés, revues d'équipe.",
    "a": "David Allen, Edward Lamont",
-   "isbn": "",
+   "isbn": "9782379355288",
    "th": "prodv",
    "s": 4,
    "c": 1,
    "q": [
     "Comment appliquer GTD à l'échelle d'une équipe ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "S'organiser pour réussir (GTD)",
    "r": "La méthode Getting Things Done : collecter, clarifier, organiser, revoir, agir. Le système de productivité le plus copié.",
    "a": "David Allen",
-   "isbn": "",
+   "isbn": "9782379352973",
    "th": "prodv",
    "s": 4,
    "c": 1,
    "q": [
     "Comment vider sa tête et suivre ses actions ?",
     "Quel système pour ne rien laisser tomber ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "L'avenir se joue… à loooooong terme !",
@@ -1929,25 +2044,27 @@
    "t": "Guider en premier de cordée",
    "r": "Agresti, ancien du PGHM, tire du secours en montagne des principes de conduite d'équipe en incertitude.",
    "a": "Blaise Agresti",
-   "isbn": "",
+   "isbn": "9782804723927",
    "th": "lead",
    "s": 4,
    "c": 1,
    "q": [
     "Que retenir de la montagne pour conduire une équipe en incertitude ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Un business responsable",
    "r": "Chouinard et Stanley détaillent les pratiques concrètes d'une entreprise responsable, chaîne de valeur comprise.",
    "a": "Yvon Chouinard, Vincent Stanley",
-   "isbn": "",
+   "isbn": "9782311012927",
    "th": "entr",
    "s": 4,
    "c": 1,
    "q": [
     "Comment rendre une entreprise responsable concrètement ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Optimiser le travail d'un groupe: \"Boostez\" vos formations, vos réunions, vos projets",
@@ -1965,14 +2082,15 @@
    "t": "65 outils pour accompagner le changement individuel et collectif",
    "r": "Tonnelé propose une boîte à outils classée par situation, du diagnostic à l'ancrage.",
    "a": "Arnaud Tonnelé",
-   "isbn": "",
+   "isbn": "9782416022463",
    "th": "org",
    "s": 4,
    "c": 1,
    "q": [
     "Quel outil pour telle situation de changement ?",
     "Comment animer un dispositif d'accompagnement ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Dynamiques des organisations: Les décrypter pour un monde plus durable et équitable",
@@ -1989,51 +2107,55 @@
    "t": "Comprendre les organisations… enfin !",
    "r": "Mintzberg synthétise cinquante ans de travaux sur les configurations organisationnelles, en version accessible.",
    "a": "Henry Mintzberg",
-   "isbn": "",
+   "isbn": "9782761961578",
    "th": "org",
    "s": 4,
    "c": 1,
    "q": [
     "Quelle est la structure réelle de mon organisation ?",
     "Quels sont les grands types de configurations organisationnelles ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Architecture for Flow",
    "r": "Kaiser combine Wardley mapping, domain-driven design et Team Topologies pour aligner architecture et organisation.",
    "a": "Susanne Kaiser",
-   "isbn": "",
+   "isbn": "9780137392940",
    "th": "tech",
    "s": 4,
    "c": 1,
    "q": [
     "Comment aligner architecture technique et organisation des équipes ?",
     "Comment appliquer Team Topologies et DDD ensemble ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Le Bouddha et le Badass",
    "r": "Lakhiani propose de concilier ambition entrepreneuriale et pratique intérieure. Ton très américain.",
    "a": "Vishen Lakhiani",
-   "isbn": "",
+   "isbn": "9782354568276",
    "th": "essai",
    "s": 4,
    "c": 1,
    "q": [
     "Comment concilier ambition et sérénité ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "La montagne, c'est toi",
    "r": "Wiest traite l'auto-sabotage comme un obstacle à comprendre plutôt qu'à combattre.",
    "a": "Brianna Wiest",
-   "isbn": "",
+   "isbn": "9782702927724",
    "th": "essai",
    "s": 4,
    "c": 1,
    "q": [
     "Comment sortir de l'auto-sabotage ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Les Passeurs de sens: Comment conjuguer conscience et performance",
@@ -2050,14 +2172,15 @@
    "t": "Comprendre l'Holacracy",
    "r": "Présentation du système de gouvernance holacratique : rôles, cercles, réunions de triage et de gouvernance.",
    "a": "Dennis Wittrock, Alioscha Urdanoff",
-   "isbn": "",
+   "isbn": "9791039711388",
    "th": "org",
    "s": 4,
    "c": 1,
    "q": [
     "Comment fonctionne l'holacratie concrètement ?",
     "Comment se prennent les décisions sans manager ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "50 prompts pour booster sa mémoire",
@@ -2075,38 +2198,41 @@
    "t": "50 prompts pour trouver l'emploi de vos rêves",
    "r": "Recueil de prompts appliqués à la recherche d'emploi.",
    "a": "Daniel Pigeon-Angelini",
-   "isbn": "",
+   "isbn": "9782100886449",
    "th": "appr",
    "s": 4,
    "c": 1,
    "q": [
     "Comment utiliser l'IA dans une recherche d'emploi ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "LEAN en ingénierie : guide de voyage",
    "r": "Roche et Delamotte appliquent le lean aux activités de conception et d'ingénierie, où le flux est moins visible qu'en production.",
    "a": "Cécile Roche, Luc Delamotte",
-   "isbn": "",
+   "isbn": "9782140075902",
    "th": "lean",
    "s": 4,
    "c": 1,
    "q": [
     "Comment appliquer le lean au travail d'ingénierie ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "The Lean Tech Manifesto",
    "r": "Bernhard et Ballé proposent le lean comme réponse au passage à l'échelle des entreprises tech, contre la bureaucratie.",
    "a": "Fabrice Bernhard, Michael Ballé",
-   "isbn": "",
+   "isbn": "9781260459036",
    "th": "lean",
    "s": 4,
    "c": 1,
    "q": [
     "Comment passer à l'échelle sans bureaucratie ?",
     "Comment appliquer le lean à une entreprise tech ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Réussir en équipes: De zéro à un milliard : comment coconstruire la croissance avec les équipes et les clients",
@@ -2156,27 +2282,29 @@
    "t": "Le Modèle Toyota",
    "r": "Liker formalise les quatorze principes du Toyota Way. La référence occidentale sur le sujet.",
    "a": "Jeffrey Liker",
-   "isbn": "",
+   "isbn": "9782744065545",
    "th": "lean",
    "s": 4,
    "c": 1,
    "q": [
     "Quels sont les 14 principes du management Toyota ?",
     "D'où vient le lean ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Apprendre à apprendre avec le LEAN",
    "r": "Les auteurs présentent le lean comme un système d'apprentissage des personnes plutôt qu'un système d'outils.",
    "a": "Michael Ballé, Jacques Chaize, Régis Medina, Anne-Lise Seltzer",
-   "isbn": "",
+   "isbn": "9782212802740",
    "th": "lean",
    "s": 4,
    "c": 1,
    "q": [
     "Comment le lean fait-il progresser les personnes ?",
     "Comment un dirigeant apprend-il par le terrain ?"
-   ]
+   ],
+   "isbnAuto": 1
   },
   {
    "t": "Perspectives LEAN, L'Alternative Lean Décryptée par 7 Auteurs de la Communauté Lean",

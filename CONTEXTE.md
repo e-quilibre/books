@@ -20,7 +20,11 @@ d'importance :
   Pour eux : rédiger après lecture, ou recopier la 4e de couverture.
 - **0 titre non vérifié** : les 27 titres douteux ont tous été confirmés
   livre en main le 5 septembre 2026, avec leurs titres complets d'éditeur
-- 30 ISBN renseignés (saisis livre en main, clés de contrôle validées)
+- 159 ISBN renseignés : 31 relevés livre en main, 128 par fiche
+  concordante (marqués `isbnAuto` — bon livre garanti, édition à
+  confirmer). 9 livres restent sans ISBN, à relever au dos : les 8 sans
+  fiche Google, plus *Noise (éd. anglaise)* — la recherche avait renvoyé
+  l'ISBN de l'édition française, retiré par le contrôle anti-doublon.
 - **7 livres personnels retirés de l'inventaire public** le 6 septembre
   (étagère 3 : développement personnel et spiritualité). Ils restent sur
   l'étagère physique : pour eux, le verdict anti-doublon dira à tort
