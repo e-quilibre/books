@@ -108,8 +108,7 @@ h1{
 .tranche.off{opacity:.15}
 
 /* ── filtres ───────────────────────────────────────── */
-.chips{display:flex;gap:.35rem;overflow-x:auto;padding:.1rem .1rem .8rem;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;padding:.9rem .1rem .2rem;margin-bottom:.9rem}
 .chip{
   flex:0 0 auto;border:0;background:var(--carte);
   color:var(--encre-2);border-radius:999px;padding:.34rem .75rem;
@@ -308,12 +307,14 @@ footer button{margin-right:.45rem}
     <button id="vider" aria-label="Effacer la recherche">×</button>
   </div>
   <div class="tranches" id="tranches" title="Chaque trait est un livre — touchez pour filtrer"></div>
-  <div class="chips" id="chips"></div>
   <div class="onglets" role="tablist">
     <button class="onglet" role="tab" data-vue="livres" aria-selected="true">Livres</button>
     <button class="onglet" role="tab" data-vue="questions" aria-selected="false">Questions</button>
   </div>
 </header>
+
+<!-- hors de l'en-tête sticky : les 17 thèmes s'affichent tous et défilent avec le contenu -->
+<div class="chips" id="chips"></div>
 
 <div class="verdict" id="verdict"></div>
 
