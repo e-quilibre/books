@@ -10,17 +10,21 @@ dépôt) pour ne pas être re-interrogées.
 Après coup : python3 generer-livres-html.py pour reporter dans l'app.
 """
 import json, os, time, urllib.request
+from pathlib import Path
+
+ICI = Path(__file__).resolve().parent        # scripts/ : clé et caches
+SRC = ICI.parent / "src"                     # données et app
 
 # Clé d'API : fichier cle-google-books.txt (dans .gitignore) ou variable
 # d'environnement GOOGLE_BOOKS_KEY. Sans clé, le quota anonyme partagé de
-# Google est presque toujours épuisé — voir CONTEXTE.md.
+# Google est presque toujours épuisé — voir docs/CONTEXTE.md.
 CLE = os.environ.get("GOOGLE_BOOKS_KEY", "")
-if not CLE and os.path.exists("cle-google-books.txt"):
-    CLE = open("cle-google-books.txt").read().strip()
+if not CLE and os.path.exists(ICI / "cle-google-books.txt"):
+    CLE = open(ICI / "cle-google-books.txt").read().strip()
 if not CLE:
     print("Aucune clé trouvée (cle-google-books.txt ou GOOGLE_BOOKS_KEY) — tentative sans clé, échec probable.")
 
-CACHE = "cache-resumes-introuvables.txt"
+CACHE = ICI / "cache-resumes-introuvables.txt"
 connus_vides = set()
 if os.path.exists(CACHE):
     connus_vides = set(open(CACHE).read().split())
@@ -47,7 +51,7 @@ def interroger(isbn):
             continue
     return None
 
-d = json.load(open("livres.json"))
+d = json.load(open(SRC / "livres.json"))
 faits = sans = erreurs = 0
 for l in d["livres"]:
     if not l.get("isbn") or l.get("r") or l.get("re") or l["isbn"] in connus_vides:
@@ -66,6 +70,6 @@ for l in d["livres"]:
         print("(pas de description)", l["t"][:60])
     time.sleep(0.7)
 
-open("livres.json", "w").write(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
+open(SRC / "livres.json", "w").write(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
 open(CACHE, "w").write("\n".join(sorted(connus_vides)) + "\n")
 print(f"{faits} résumés éditeur ajoutés · {sans} fiches sans description (mémorisées) · {erreurs} injoignables.")

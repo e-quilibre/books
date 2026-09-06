@@ -16,11 +16,16 @@ Après application : python3 generer-livres-html.py pour reporter dans l'app.
 """
 import json, os, re, sys, time, unicodedata, urllib.parse, urllib.request
 
-PROPOSITIONS = "propositions-isbn.json"
+from pathlib import Path
+
+ICI = Path(__file__).resolve().parent        # scripts/ : clé et propositions
+SRC = ICI.parent / "src"                     # données et app
+
+PROPOSITIONS = ICI / "propositions-isbn.json"
 
 CLE = os.environ.get("GOOGLE_BOOKS_KEY", "")
-if not CLE and os.path.exists("cle-google-books.txt"):
-    CLE = open("cle-google-books.txt").read().strip()
+if not CLE and os.path.exists(ICI / "cle-google-books.txt"):
+    CLE = open(ICI / "cle-google-books.txt").read().strip()
 
 
 def norm(s):
@@ -57,7 +62,7 @@ def interroger(url):
 
 
 def chercher():
-    d = json.load(open("livres.json"))
+    d = json.load(open(SRC / "livres.json"))
     props, sans, injoignables = [], 0, 0
     a_faire = [l for l in d["livres"] if not l.get("isbn")]
     print(f"{len(a_faire)} livres sans ISBN à chercher.\n")
@@ -109,7 +114,7 @@ def chercher():
 
 def appliquer():
     props = json.load(open(PROPOSITIONS))
-    d = json.load(open("livres.json"))
+    d = json.load(open(SRC / "livres.json"))
     par_cle = {(l["t"], l["a"]): l for l in d["livres"]}
     faits = 0
     for p in props:
@@ -121,7 +126,7 @@ def appliquer():
         l["isbn"] = p["trouve"]["isbn"]
         l["isbnAuto"] = 1  # provenance : fiche concordante, pas relevé sur le livre
         faits += 1
-    open("livres.json", "w").write(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
+    open(SRC / "livres.json", "w").write(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
     print(f"{faits} ISBN appliqués (marqués isbnAuto). Puis : python3 generer-livres-html.py")
 
 

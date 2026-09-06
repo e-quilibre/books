@@ -5,10 +5,13 @@ livres.json est la source de vérité unique des données d'inventaire :
 toute modification s'y fait, puis ce script la reporte dans l'app.
 """
 import json, re
+from pathlib import Path
+
+SRC = Path(__file__).resolve().parent.parent / "src"
 
 ORDRE = ["t", "r", "re", "a", "isbn", "isbnAuto", "th", "s", "c", "dbl", "q"]
 
-d = json.load(open("livres.json"))
+d = json.load(open(SRC / "livres.json"))
 
 def js_livre(l):
     parts = []
@@ -29,8 +32,8 @@ for l in d["livres"]:
     lignes.append(js_livre(l) + ",")
 bloc = "const LIVRES = [\n" + "\n".join(lignes) + "\n];"
 
-h = open("ma-bibliotheque.html").read()
+h = open(SRC / "ma-bibliotheque.html").read()
 h2, n = re.subn(r"const LIVRES = \[.*?\n\];", lambda m: bloc, h, count=1, flags=re.S)
 assert n == 1, "bloc LIVRES introuvable dans le HTML"
-open("ma-bibliotheque.html", "w").write(h2)
-print(f"{len(d['livres'])} livres écrits dans ma-bibliotheque.html")
+open(SRC / "ma-bibliotheque.html", "w").write(h2)
+print(f"{len(d['livres'])} livres écrits dans src/ma-bibliotheque.html")

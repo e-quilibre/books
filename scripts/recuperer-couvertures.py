@@ -10,14 +10,19 @@ Les images vivent dans le dépôt : c'est ce qui rend l'affichage possible
 hors ligne, via le cache du service worker.
 """
 import json, os, time, urllib.request
+from pathlib import Path
+
+ICI = Path(__file__).resolve().parent        # scripts/ : clé et caches
+SRC = ICI.parent / "src"                     # données et app
+COUV = SRC / "images" / "couvertures"
 
 CLE = os.environ.get("GOOGLE_BOOKS_KEY", "")
-if not CLE and os.path.exists("cle-google-books.txt"):
-    CLE = open("cle-google-books.txt").read().strip()
+if not CLE and os.path.exists(ICI / "cle-google-books.txt"):
+    CLE = open(ICI / "cle-google-books.txt").read().strip()
 
-CACHE = "cache-couvertures-introuvables.txt"
+CACHE = ICI / "cache-couvertures-introuvables.txt"
 connus = set(open(CACHE).read().split()) if os.path.exists(CACHE) else set()
-os.makedirs("couvertures", exist_ok=True)
+os.makedirs(COUV, exist_ok=True)
 
 
 def requete(url):
@@ -58,13 +63,13 @@ def enregistrer(url, chemin):
     return True
 
 
-d = json.load(open("livres.json"))
+d = json.load(open(SRC / "livres.json"))
 faits = sans = deja = 0
 for l in d["livres"]:
     isbn = l.get("isbn", "")
     if not isbn:
         continue
-    chemin = f"couvertures/{isbn}.jpg"
+    chemin = COUV / f"{isbn}.jpg"
     if os.path.exists(chemin):
         deja += 1
         continue

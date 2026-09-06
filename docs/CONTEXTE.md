@@ -33,10 +33,26 @@ d'importance :
   l'étagère physique : pour eux, le verdict anti-doublon dira à tort
   « Rien à ce titre » — limite acceptée, le dépôt étant public.
 
+## Structure du projet (depuis le 6 septembre 2026)
+
+- `src/` — l'app et ses données : `ma-bibliotheque.html`, `livres.json`,
+  `manifest.webmanifest`, `sw.js`, `images/couvertures/<isbn>.jpg`,
+  `images/placeholders/` (icônes PWA)
+- `docs/` — documents de travail (ce fichier, INSTRUCTIONS-PROJET.md, design)
+- `scripts/` — les scripts Python, la clé d'API et les caches (exclus du
+  dépôt). Les chemins sont calculés depuis le script : lançables de n'importe où.
+- à la racine : `ma-bibliotheque.html` et `sw.js` de **migration** — ils
+  redirigent l'ancienne URL vers `src/` et désinstallent l'ancien service
+  worker. À conserver tant qu'une installation PWA de l'ancienne URL peut
+  exister.
+
+**URL de l'app : https://e-quilibre.github.io/books/src/ma-bibliotheque.html**
+
 ## L'outil
 
-`ma-bibliotheque.html` — un fichier unique, sans dépendance réseau au chargement,
-ouvrable depuis un téléphone. Il contient les données en dur et l'interface.
+`src/ma-bibliotheque.html` — un fichier unique, sans dépendance réseau au
+chargement, ouvrable depuis un téléphone. Il contient les données en dur et
+l'interface.
 
 Fonctions :
 - recherche insensible aux accents et à la casse, sur titre, auteur et questions
@@ -61,8 +77,8 @@ d'accueil (cible : iPhone). Fichiers associés :
 - `sw.js` — service worker : le HTML passe d'abord par le réseau (les mises à
   jour arrivent seules), le cache prend le relais hors ligne ; les appels
   Google Books ne sont pas interceptés
-- `icone-180.png`, `icone-192.png`, `icone-512.png` — générées par script
-  (tranches de livres aux couleurs des thèmes)
+- `images/placeholders/icone-*.png` — générées par script (tranches de
+  livres aux couleurs des thèmes)
 
 Le fichier HTML reste ouvrable tel quel en local : le service worker ne
 s'enregistre qu'en HTTP(S).
@@ -188,7 +204,7 @@ notes.
   comme les 147 d'origine : à relire.
 - **Les questions sont écrites d'après une connaissance générale de ces livres,
   pas d'après ma lecture.** Elles sont un point de départ à réécrire.
-- **Couvertures : 85 images locales dans `couvertures/<isbn>.jpg`**
+- **Couvertures : 85 images locales dans `src/images/couvertures/<isbn>.jpg`**
   (récupérées le 6 septembre par `recuperer-couvertures.py` — fiche Google
   Books puis Open Library), affichées hors ligne via le service worker
   après une première visite connectée. 74 ISBN n'ont de couverture nulle
