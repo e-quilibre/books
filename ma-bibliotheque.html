@@ -522,14 +522,21 @@ const echap=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;
 function vignette(l,grande){
   const th=themeParId[l.th], p=perso[cle(l)]||{};
   const cls="couv"+(grande?" grande":"");
-  /* couverture Google Books si trouvée, sinon Open Library par ISBN
-     (default=false → 404 si absente, et l'initiale réapparaît) */
+  /* en cascade : image locale du dépôt (hors ligne), puis URL mémorisée,
+     puis Open Library (default=false → 404 si absente) ; à la fin,
+     l'initiale colorée réapparaît */
   const isbn=p.isbn||l.isbn||"";
-  const src=p.couv||(isbn
-    ?`https://covers.openlibrary.org/b/isbn/${encodeURIComponent(isbn)}-M.jpg?default=false`
-    :"");
-  const img=src?`<img src="${echap(src)}" alt="" loading="lazy" onerror="this.remove()">`:"";
+  const sources=[];
+  if(isbn) sources.push("couvertures/"+isbn+".jpg");
+  if(p.couv) sources.push(p.couv);
+  if(isbn) sources.push(`https://covers.openlibrary.org/b/isbn/${encodeURIComponent(isbn)}-M.jpg?default=false`);
+  const img=sources.length?`<img src="${echap(sources[0])}" data-srcs="${echap(sources.join("|"))}" alt="" loading="lazy" onerror="couvSuivante(this)">`:"";
   return `<span class="${cls}" style="background:${th.couleur}"><span>${echap(titreDe(l)[0])}</span>${img}</span>`;
+}
+function couvSuivante(img){
+  const s=(img.dataset.srcs||"").split("|"), i=(+img.dataset.n||0)+1;
+  if(i<s.length){ img.dataset.n=i; img.src=s[i]; }
+  else img.remove();
 }
 
 function carteLivre(l){

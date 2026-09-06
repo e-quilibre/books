@@ -188,8 +188,12 @@ notes.
   comme les 147 d'origine : à relire.
 - **Les questions sont écrites d'après une connaissance générale de ces livres,
   pas d'après ma lecture.** Elles sont un point de départ à réécrire.
-- **Les couvertures sont des URL**, pas des images stockées : elles ne
-  s'affichent qu'avec une connexion.
+- **Couvertures : 85 images locales dans `couvertures/<isbn>.jpg`**
+  (récupérées le 6 septembre par `recuperer-couvertures.py` — fiche Google
+  Books puis Open Library), affichées hors ligne via le service worker
+  après une première visite connectée. 74 ISBN n'ont de couverture nulle
+  part (fonds français peu couvert) : initiale colorée. L'affichage tente
+  en cascade : image locale → URL mémorisée → Open Library → initiale.
 - **La PWA n'est pas encore hébergée ni testée sur iPhone.** Les fichiers sont
   prêts, mais l'installation réelle (Safari → Partager → Sur l'écran
   d'accueil) reste à valider une fois l'outil publié en HTTPS.
