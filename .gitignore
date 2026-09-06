@@ -1,0 +1,5 @@
+.DS_Store
+
+# Fichier d'échange : export « Exporter mes notes » de l'outil (ISBN, notes,
+# corrections). Données personnelles + étape de travail — jamais dans le dépôt.
+biblio-notes.json

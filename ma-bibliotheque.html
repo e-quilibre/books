@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ma bibliothèque</title>
+<meta name="theme-color" content="#F1F3EF">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bibliothèque">
+<link rel="apple-touch-icon" href="icone-180.png">
+<style>
+:root{
+  --papier:#F1F3EF;
+  --carte:#FBFCFA;
+  --encre:#171A18;
+  --gris:#6C716C;
+  --ligne:#DEE1DA;
+  --oui:#1E6B4A;
+  --alerte:#9A5B12;
+  --r:3px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--papier);color:var(--encre);
+  font:400 16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding-bottom:4rem;
+}
+.wrap{max-width:52rem;margin:0 auto;padding:0 1rem}
+
+/* ── en-tête + recherche ───────────────────────────── */
+header{
+  position:sticky;top:0;z-index:20;background:var(--papier);
+  border-bottom:1px solid var(--ligne);padding-top:.9rem;
+}
+h1{
+  font:400 1.05rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;
+  margin:0 0 .1rem;letter-spacing:.01em;
+}
+.compte{font-size:.78rem;color:var(--gris);margin:0 0 .7rem}
+.champ{position:relative;margin-bottom:.55rem}
+#q{
+  width:100%;padding:.72rem 2.2rem .72rem .8rem;
+  border:1px solid var(--encre);border-radius:var(--r);
+  background:var(--carte);color:var(--encre);
+  font:400 1.05rem/1.3 Georgia,"Iowan Old Style",serif;
+}
+#q::placeholder{color:#9CA19B;font-style:italic}
+#q:focus{outline:2px solid var(--encre);outline-offset:1px}
+#vider{
+  position:absolute;right:.35rem;top:50%;transform:translateY(-50%);
+  border:0;background:none;color:var(--gris);font-size:1.3rem;
+  cursor:pointer;padding:.2rem .4rem;line-height:1;display:none;
+}
+
+/* ── tranche de bibliothèque ───────────────────────── */
+.tranches{
+  display:flex;gap:1px;height:26px;margin-bottom:.55rem;
+  border-radius:2px;overflow:hidden;cursor:pointer;
+}
+.tranche{flex:1 1 auto;min-width:1px;opacity:.85;transition:opacity .12s}
+.tranche.off{opacity:.16}
+
+/* ── filtres ───────────────────────────────────────── */
+.chips{display:flex;gap:.3rem;overflow-x:auto;padding-bottom:.7rem;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{
+  flex:0 0 auto;border:1px solid var(--ligne);background:var(--carte);
+  color:var(--gris);border-radius:99px;padding:.28rem .6rem;
+  font-size:.76rem;cursor:pointer;white-space:nowrap;
+}
+.chip[aria-pressed="true"]{background:var(--encre);color:var(--papier);border-color:var(--encre)}
+.chip .pastille{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.35rem;vertical-align:1px}
+
+/* ── onglets ───────────────────────────────────────── */
+.onglets{display:flex;gap:1.1rem;border-bottom:1px solid var(--ligne);margin:.2rem 0 1rem}
+.onglet{
+  border:0;background:none;padding:.5rem 0;cursor:pointer;
+  font-size:.85rem;color:var(--gris);border-bottom:2px solid transparent;margin-bottom:-1px;
+}
+.onglet[aria-selected="true"]{color:var(--encre);border-bottom-color:var(--encre)}
+
+/* ── verdict anti-doublon ──────────────────────────── */
+.verdict{
+  display:none;align-items:baseline;gap:.5rem;
+  padding:.65rem .8rem;border-radius:var(--r);margin-bottom:1rem;
+  font-size:.9rem;border-left:3px solid;
+}
+.verdict.oui{display:flex;background:#E7F0E9;border-color:var(--oui);color:var(--oui)}
+.verdict.non{display:flex;background:#F6EEE2;border-color:var(--alerte);color:var(--alerte)}
+.verdict b{font-weight:600}
+
+/* ── liste ─────────────────────────────────────────── */
+.groupe{font-size:.72rem;color:var(--gris);margin:1.4rem 0 .5rem;
+  padding-bottom:.25rem;border-bottom:1px solid var(--ligne)}
+.groupe:first-child{margin-top:0}
+.livre{
+  background:var(--carte);border:1px solid var(--ligne);border-radius:var(--r);
+  margin-bottom:.4rem;overflow:hidden;
+}
+.tete{
+  display:flex;gap:.65rem;align-items:flex-start;width:100%;
+  padding:.7rem .8rem;border:0;background:none;text-align:left;cursor:pointer;
+  font:inherit;color:inherit;
+}
+.tete:focus-visible{outline:2px solid var(--encre);outline-offset:-2px}
+.marque{flex:0 0 4px;align-self:stretch;border-radius:2px;min-height:2.2rem}
+.txt{flex:1 1 auto;min-width:0}
+.titre{
+  font:400 1rem/1.3 Georgia,"Iowan Old Style",serif;margin:0 0 .1rem;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
+}
+.livre.ouvert .titre{display:block;-webkit-line-clamp:unset} /* carte ouverte : titre entier */
+.auteur{font-size:.8rem;color:var(--gris);margin:0}
+.meta{font-size:.72rem;color:var(--gris);margin-top:.3rem}
+.doute{color:var(--alerte)}
+/* couverture */
+.couv{
+  flex:0 0 40px;height:58px;border-radius:2px;overflow:hidden;
+  background:var(--papier);border:1px solid var(--ligne);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.couv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.couv span{font:400 .95rem Georgia,serif;color:#fff;width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center}
+.couv.grande{flex:0 0 96px;height:140px;margin-bottom:.5rem}
+
+.detail{display:none;padding:0 .8rem .85rem 1.9rem;border-top:1px solid var(--ligne)}
+.livre.ouvert .detail{display:block}
+.detail h3{font-size:.72rem;color:var(--gris);font-weight:500;margin:.75rem 0 .35rem}
+.detail ul{margin:0;padding-left:1rem}
+.detail li{font-size:.88rem;margin-bottom:.25rem}
+.note{
+  width:100%;margin-top:.3rem;padding:.45rem .55rem;border:1px solid var(--ligne);
+  border-radius:var(--r);background:var(--papier);font:inherit;font-size:.85rem;
+  resize:vertical;min-height:2.6rem;color:inherit;
+}
+.resume{font-size:.88rem;line-height:1.55;margin:.15rem 0 0;max-width:62ch}
+.resume.editeur{color:var(--gris)}
+.isbn{
+  display:flex;gap:.4rem;align-items:center;margin-top:.3rem;flex-wrap:wrap;
+}
+.isbn input{
+  flex:0 1 15ch;padding:.35rem .5rem;border:1px solid var(--ligne);
+  border-radius:var(--r);background:var(--papier);color:inherit;
+  font:inherit;font-size:.85rem;font-variant-numeric:tabular-nums;
+}
+.isbn a{color:var(--gris);font-size:.75rem}
+.actions{margin-top:.6rem;display:flex;gap:.4rem;flex-wrap:wrap}
+
+/* enrichissement */
+.champlong{
+  width:100%;max-width:34rem;margin-bottom:.3rem;padding:.42rem .55rem;
+  border:1px solid var(--ligne);border-radius:var(--r);background:var(--papier);
+  color:inherit;font:inherit;font-size:.88rem;
+}
+.champlong:focus,.isbn input:focus,.note:focus{outline:2px solid var(--encre);outline-offset:1px}
+.lookup{font-size:.82rem;margin:.4rem 0 0;line-height:1.5;display:none}
+.lookup.actif{display:block}
+.lookup.ok{color:var(--oui)}
+.lookup.ko{color:var(--alerte)}
+.lookup button{margin-top:.35rem}
+
+.enrich{
+  border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);
+  padding:.7rem .8rem;margin-bottom:1rem;font-size:.85rem;
+}
+.enrich p{margin:0 0 .5rem;color:var(--gris);line-height:1.5}
+.jauge{height:4px;background:var(--ligne);border-radius:2px;overflow:hidden;margin:.5rem 0;display:none}
+.jauge.actif{display:block}
+.jauge i{display:block;height:100%;background:var(--oui);width:0}
+.mini{
+  border:1px solid var(--ligne);background:var(--papier);color:var(--gris);
+  border-radius:99px;padding:.25rem .6rem;font-size:.74rem;cursor:pointer;
+}
+.mini[aria-pressed="true"]{background:var(--oui);border-color:var(--oui);color:#fff}
+
+/* ── questions ─────────────────────────────────────── */
+.qitem{
+  display:block;width:100%;text-align:left;background:var(--carte);
+  border:1px solid var(--ligne);border-radius:var(--r);
+  padding:.6rem .75rem;margin-bottom:.35rem;cursor:pointer;font:inherit;color:inherit;
+}
+.qtexte{font:400 .95rem/1.35 Georgia,"Iowan Old Style",serif}
+.qsource{
+  font-size:.75rem;color:var(--gris);margin-top:.2rem;
+  display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+.vide{color:var(--gris);font-size:.9rem;padding:1.5rem 0;line-height:1.6}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--ligne);
+  font-size:.75rem;color:var(--gris);line-height:1.7}
+footer button{margin-right:.4rem}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Ma bibliothèque</h1>
+  <p class="compte" id="compte"></p>
+  <div class="champ">
+    <input id="q" type="search" autocomplete="off" placeholder="Un titre, un auteur, ou une question…">
+    <button id="vider" aria-label="Effacer la recherche">×</button>
+  </div>
+  <div class="tranches" id="tranches" title="Chaque trait est un livre — touchez pour filtrer"></div>
+  <div class="chips" id="chips"></div>
+  <div class="onglets" role="tablist">
+    <button class="onglet" role="tab" data-vue="livres" aria-selected="true">Livres</button>
+    <button class="onglet" role="tab" data-vue="questions" aria-selected="false">Questions</button>
+    <button class="onglet" role="tab" data-vue="verifier" aria-selected="false">À vérifier</button>
+  </div>
+</header>
+
+<div class="verdict" id="verdict"></div>
+
+<section class="enrich" id="enrich">
+  <p id="enrichEtat"></p>
+  <div class="jauge" id="jauge"><i></i></div>
+  <button class="mini" id="lancer">Compléter depuis Google Books</button>
+  <button class="mini" id="arreter" hidden>Arrêter</button>
+</section>
+
+<main id="liste"></main>
+
+<footer>
+  <p id="etat"></p>
+  <p>
+    <button class="mini" id="exporter">Exporter mes notes</button>
+    <button class="mini" id="importer">Importer des notes</button>
+    <input type="file" id="fichier" accept="application/json" hidden>
+  </p>
+</footer>
+
+</div>
+<script>
+const THEMES = [
+  {id:"dt",  nom:"Design thinking & facilitation", couleur:"#C86B3C"},
+  {id:"prod",nom:"Product & stratégie",            couleur:"#1F5C7A"},
+  {id:"tech",nom:"Tech, data & IA",                couleur:"#2E6B5E"},
+  {id:"lead",nom:"Leadership",                     couleur:"#6B3A5B"},
+  {id:"mgr", nom:"Manager au quotidien",           couleur:"#3A5FA8"},
+  {id:"rh",  nom:"Recrutement & talents",          couleur:"#7A5C2E"},
+  {id:"cult",nom:"Culture & collaboration",        couleur:"#A8452F"},
+  {id:"org", nom:"Organisations & changement",     couleur:"#4A4A7A"},
+  {id:"lean",nom:"Lean & amélioration continue",   couleur:"#8A6A1F"},
+  {id:"fb",  nom:"Feedback & communication",       couleur:"#B03A48"},
+  {id:"nego",nom:"Négociation & influence",        couleur:"#8C2F4A"},
+  {id:"appr",nom:"Apprentissage & motivation",     couleur:"#2F7A4F"},
+  {id:"deci",nom:"Décision & biais",               couleur:"#3E6E8C"},
+  {id:"prodv",nom:"Productivité & attention",      couleur:"#5C6B2E"},
+  {id:"entr",nom:"Entrepreneuriat",                couleur:"#B0762A"},
+  {id:"sens",nom:"Travail, sens & santé",          couleur:"#2E7A7A"},
+  {id:"essai",nom:"Essais & sagesse",              couleur:"#5A5A5A"}
+];
+
+const ETAGERES = {
+  1:"Étagère 1 — design & product",
+  2:"Étagère 2 — management",
+  3:"Étagère 3 — tech & essais",
+  4:"Étagère 4 — lean & organisations"
+};
+
+// c: 1 = titre/auteur fiables, 0 = à vérifier sur l'étagère
+const LIVRES = [
+
+/* ─── ÉTAGÈRE 1 ─────────────────────────────────────────────── */
+{t:"Event Design", r:"Méthode canvas pour concevoir un événement à partir de l'expérience visée et des objectifs business, plutôt qu'à partir d'un programme.", a:"Roel Frissen, Ruud Janssen, Dennis Luijer", th:"dt", s:1, c:1, q:["Comment concevoir un événement comme une expérience et pas comme un programme ?", "Comment aligner un événement sur un objectif business ?"]},
+{t:"Design Thinking for Business Growth", r:"Lewrick relie le design thinking aux écosystèmes business : comment passer d'ateliers isolés à une capacité d'innovation qui produit de la croissance.", a:"Michael Lewrick", th:"dt", s:1, c:1, q:["Comment passer du design thinking à une stratégie de croissance ?", "Comment structurer une démarche d'innovation à l'échelle de l'entreprise ?"]},
+{t:"Design Thinking & Croissance", r:"Version francophone du même propos : déployer le design thinking à l'échelle de l'entreprise, avec les rôles et gouvernances associés.", a:"Michael Lewrick", th:"dt", s:1, c:1, q:["Comment industrialiser le design thinking dans une organisation ?"]},
+{t:"Le Kit du Design Thinking", r:"Boîte à outils illustrée : une double page par outil, replacée dans l'étape du processus où elle sert. Livre à consulter, pas à lire.", a:"Lewrick, Link, Leifer", th:"dt", s:1, c:1, q:["Quel outil utiliser à quelle étape d'un atelier ?", "Comment animer une phase d'idéation ?"]},
+{t:"Le Guide du Design Thinking", r:"Le manuel de référence de la série : le processus complet, du cadrage du problème au prototype, avec exemples et pièges fréquents.", a:"Lewrick, Link, Leifer", th:"dt", s:1, c:1, q:["Comment mener un projet de design thinking de bout en bout ?", "Comment cadrer un problème avant de chercher des solutions ?"]},
+{t:"La méthode Value Proposition Design", r:"Le canvas proposition de valeur : décrire les tâches, douleurs et gains du client, puis construire l'offre en face. Suite du Business Model Generation.", a:"Osterwalder, Pigneur, Bernarda, Smith", th:"prod", s:1, c:1, dbl:"2 exemplaires", q:["Comment formuler une proposition de valeur qui tient ?", "Comment relier les besoins client à une offre ?", "Comment tester une promesse avant de construire ?"]},
+{t:"Testez vos idées business", r:"Bibliothèque de 44 expérimentations classées par coût, rapidité et solidité de la preuve. On y va pour choisir le bon test.", a:"David Bland, Alex Osterwalder", th:"prod", s:1, c:1, q:["Quelle expérimentation choisir pour tester une hypothèse ?", "Comment réduire le risque d'un nouveau produit avant de le développer ?"]},
+{t:"La Gamification", r:"Panorama des mécaniques de jeu appliquées au produit, à la formation et au management, avec les limites — quand les points démotivent.", a:"Clément Muletier, Guilhem Bertholet, Thomas Lang", th:"dt", s:1, c:1, q:["Comment introduire des mécaniques de jeu dans un produit ou un dispositif ?", "Quand la gamification est-elle contre-productive ?"]},
+{t:"Visual Thinking", r:"Brand enseigne un vocabulaire visuel minimal : quelques formes et personnages suffisent à rendre une idée abstraite discutable en réunion.", a:"Willemien Brand", th:"dt", s:1, c:1, q:["Comment dessiner pour clarifier une idée en réunion ?", "Comment construire un vocabulaire visuel simple ?"]},
+{t:"Visual Doing", r:"Le pendant pratique : comment appliquer ce vocabulaire dans des situations réelles d'atelier et de facilitation.", a:"Willemien Brand", th:"dt", s:1, c:1, q:["Comment utiliser le dessin dans un atelier réel ?"]},
+{t:"Collaboration visuelle", r:"Les auteurs de Bigger Picture montrent comment un support visuel partagé fait penser un groupe — templates de murs et de conversations.", a:"Ole Qvist-Sørensen, Loa Baastrup", th:"dt", s:1, c:1, q:["Comment faire penser un groupe avec un support visuel ?", "Comment structurer un mur d'atelier ?"]},
+{t:"Encyclopédie visuelle : 1400 dessins, croquis, pictos, crobards... au service de vos idées: 1400 dessins, croquis, pictos, crobards... au service de vos idées !", r:"Catalogue de 1 400 dessins, pictos et personnages à recopier pour se constituer un vocabulaire graphique. À feuilleter avant un atelier, pas à lire.", a:"Bernard Lebelle, Guillaume Lagane, Nicolas Gros", isbn:"9782212562163", th:"dt", s:1, c:1, q:["Quelle représentation graphique choisir pour tel type d'information ?"]},
+{t:"Travailler avec le sketchnoting: Comment gagner en efficacité et en sérénité grâce à la pensée visuelle", a:"Audrey Akoun, Philippe Boukobza, Isabelle Pailleau", isbn:"9782212565997", th:"dt", s:1, c:1, q:["Comment prendre des notes visuelles en réunion ?"]},
+{t:"Bâtir une organisation collaborative - 2e édition: Activez les leviers de transformation !", a:"Robert Collart, Michal Benedick", isbn:"9782744068041", th:"org", s:1, c:1, q:["Comment installer des pratiques collaboratives durables ?"]},
+{t:"Les 5 outils pour réussir en équipe", a:"Stefano MASTROGIACOMO, Alexander OSTERWALDER", isbn:"9782744067792", th:"cult", s:1, c:1, q:["Quels rituels de base pour une équipe qui démarre ?"]},
+{t:"Bonne stratégie, mauvaise stratégie", r:"Rumelt oppose la stratégie réelle — diagnostic, ligne directrice, actions cohérentes — aux listes d'objectifs et de valeurs qui en tiennent lieu. Le meilleur livre de la pile sur le sujet.", a:"Richard Rumelt", th:"prod", s:1, c:1, q:["Qu'est-ce qui distingue une vraie stratégie d'une liste d'ambitions ?", "Comment diagnostiquer le vrai obstacle avant de décider ?", "Pourquoi notre stratégie ne dit-elle rien de concret ?"]},
+{t:"Escaping the Build Trap", r:"Perri décrit le piège de l'équipe qui mesure sa valeur au nombre de features livrées, et le chemin vers une organisation produit orientée résultats.", a:"Melissa Perri", th:"prod", s:1, c:1, q:["Comment sortir d'une équipe qui livre des features sans impact ?", "Comment passer d'une roadmap de livrables à une roadmap d'outcomes ?", "Quel est le rôle réel d'un product manager ?"]},
+{t:"The Lean Product Playbook", r:"Processus en six étapes vers le product-market fit, avec la pyramide besoins / proposition de valeur / fonctionnalités / UX.", a:"Dan Olsen", th:"prod", s:1, c:1, q:["Comment trouver le product-market fit étape par étape ?", "Comment prioriser des fonctionnalités par valeur perçue ?"]},
+{t:"Guide du Product Management: La référence de tous les product managers", a:"Marcel Venturino", isbn:"9782416008276", th:"prod", s:1, c:1, q:["Quelles sont les pratiques de base du product management ?"]},
+{t:"Sense & Respond", r:"Gothelf et Seiden décrivent le management d'une entreprise en boucles courtes : décider, observer, ajuster — plutôt que planifier à l'année.", a:"Jeff Gothelf, Josh Seiden", th:"prod", s:1, c:1, q:["Comment diriger une organisation en apprentissage continu ?", "Comment remplacer les plans annuels par des boucles de feedback ?"]},
+{t:"Making Ideas Happen", r:"Belsky s'intéresse à ce qui manque aux créatifs : l'exécution. Organisation des projets, forces communautaires, gestion de la récompense.", a:"Scott Belsky", th:"prodv", s:1, c:1, q:["Comment faire aboutir un projet créatif au lieu d'accumuler des idées ?", "Comment organiser le travail d'une équipe créative ?"]},
+{t:"Mesurez ce qui compte", r:"Doerr raconte l'histoire des OKR d'Intel à Google, avec de nombreux cas d'entreprise. Fondateur mais parfois hagiographique.", a:"John Doerr", th:"prod", s:1, c:1, q:["Comment mettre en place des OKR ?", "Comment aligner des équipes sur des objectifs mesurables ?", "Comment distinguer un objectif d'un indicateur ?"]},
+{t:"Radical Focus", r:"Wodtke traite les OKR par la fiction : une startup les met en place, avec le rituel hebdomadaire du lundi et du vendredi. Beaucoup plus opérationnel que Doerr.", a:"Christina Wodtke", th:"prod", s:1, c:1, q:["Comment faire vivre des OKR au rythme hebdomadaire ?", "Pourquoi nos OKR ne changent-ils rien au quotidien ?"]},
+{t:"Manager avec les principes toltèques", r:"Transposition managériale des quatre accords : parole impeccable, non-interprétation, non-personnalisation, effort juste.", a:"Laurence Aubourg, Olivier Lecointre", th:"mgr", s:1, c:1, q:["Comment poser une posture managériale plus sereine ?"]},
+{t:"En toute franchise (Radical Candor)", r:"Scott formalise l'axe se soucier personnellement / défier directement, et nomme les échecs : empathie ruineuse, agressivité déplaisante, insincérité manipulatrice.", a:"Kim Scott", th:"fb", s:1, c:1, q:["Comment dire une chose difficile sans casser la relation ?", "Comment être exigeant et bienveillant en même temps ?", "Comment sortir de l'empathie ruineuse ?"]},
+{t:"Feedback : le pouvoir des conversations", r:"Moriou traite le feedback comme une compétence conversationnelle apprenable, avec une structure et beaucoup d'exemples francophones.", a:"Stéphane Moriou", th:"fb", s:1, c:1, q:["Comment structurer un feedback qui sera entendu ?", "Comment installer une culture du feedback dans une équipe ?"]},
+{t:"Drive", r:"Pink synthétise la recherche sur la motivation intrinsèque : autonomie, maîtrise, finalité — et montre où les récompenses cassent la performance.", a:"Daniel H. Pink", th:"appr", s:1, c:1, q:["Qu'est-ce qui motive vraiment les gens au travail ?", "Pourquoi les primes cassent-elles la motivation sur des tâches complexes ?", "Autonomie, maîtrise, sens : comment les installer ?"]},
+{t:"Le job qui me convient", r:"Stolzoff enquête sur le workisme : quand le travail devient identité et religion. Portraits et pistes pour lui redonner sa place.", a:"Simone Stolzoff", th:"sens", s:1, c:1, q:["Comment ne pas faire de son travail son identité ?", "Comment retrouver une place raisonnable pour le travail dans sa vie ?"]},
+{t:"Recrutement sous influence", r:"Zambeaux passe en revue les biais cognitifs du recrutement et les correctifs concrets : structuration des entretiens, grilles, décision collective.", a:"Marie-Sophie Zambeaux", th:"rh", s:1, c:1, q:["Quels biais faussent nos entretiens de recrutement ?", "Comment rendre un processus de recrutement plus équitable ?"]},
+{t:"La méthode pour recruter les meilleurs: Les start-up qui réussissent partagent un recette : elles recrutent les meilleurs. Inlassablement. Avec méthode.", a:"Antoine Freysz", isbn:"9782416009297", th:"rh", s:1, c:1, q:["Comment structurer un processus de recrutement complet ?"]},
+{t:"L'équipe invincible", r:"Gilkey diagnostique les équipes qui dysfonctionnent sans que personne ne sache pourquoi, et propose des réparations ciblées.", a:"Charlie Gilkey", th:"cult", s:1, c:1, q:["Comment réparer une équipe qui ne fonctionne plus ensemble ?", "Comment repérer les dysfonctionnements invisibles d'un collectif ?"]},
+{t:"Conduire le changement", r:"Le modèle en huit étapes de Kotter, de l'urgence à l'ancrage. Le classique du domaine, daté mais toujours cité partout.", a:"John Kotter", th:"org", s:1, c:1, q:["Quelles sont les étapes d'une conduite du changement ?", "Pourquoi les transformations échouent-elles ?", "Comment créer un sentiment d'urgence ?"]},
+{t:"The Staff Engineer's Path", r:"Reilly décrit la voie technique senior sans management : périmètre, influence sans autorité, choix des batailles.", a:"Tanya Reilly", th:"tech", s:1, c:1, q:["Comment progresser techniquement sans devenir manager ?", "Quel est le rôle d'un ingénieur senior sans équipe ?"]},
+{t:"Confessions d'un entrepreneur pas comme les autres", r:"Le fondateur de Patagonia raconte comment il a bâti l'entreprise selon ses convictions, y compris quand cela coûtait cher.", a:"Yvon Chouinard", th:"entr", s:1, c:1, q:["Comment diriger une entreprise selon ses valeurs ?", "Peut-on faire du business sans trahir ses convictions ?"]},
+{t:"Comment leur dire… La Process Communication", r:"Introduction au modèle PCM : six types de personnalité, leurs canaux de communication et leurs comportements sous stress.", a:"Gérard Collignon", th:"fb", s:1, c:1, q:["Comment adapter ma communication au profil de mon interlocuteur ?", "Pourquoi la même phrase passe-t-elle bien avec l'un et mal avec l'autre ?"]},
+{t:"Quit", r:"Duke, ancienne joueuse de poker, plaide pour l'abandon comme compétence : quand persévérer coûte plus que renoncer.", a:"Annie Duke", th:"deci", s:1, c:1, q:["Quand faut-il arrêter un projet ?", "Comment lutter contre le biais des coûts irrécupérables ?"]},
+{t:"Responsabilisez et autonomisez votre équipe avec Process Communication Model", r:"Application managériale de PCM : adapter sa délégation et son feedback au profil de chacun.", a:"Vincent Favrie", th:"mgr", s:1, c:1, q:["Comment utiliser PCM en situation managériale ?"]},
+{t:"Bill Campbell : le Trillion Dollar Coach", r:"Portrait du coach d'Apple et Google, à travers ses principes : la confiance d'abord, l'équipe avant le problème, l'écoute totale.", a:"Eric Schmidt, Jonathan Rosenberg, Alan Eagle", th:"lead", s:1, c:1, q:["Comment coacher des dirigeants ?", "Quel rôle joue la confiance dans une équipe de direction ?"]},
+{t:"La carte des différences culturelles", r:"Meyer propose huit échelles (communication, feedback, décision, confiance…) pour situer les cultures nationales les unes par rapport aux autres.", a:"Erin Meyer", th:"cult", s:1, c:1, q:["Comment travailler avec des équipes de cultures différentes ?", "Pourquoi un feedback direct passe-t-il mal dans certains pays ?"]},
+{t:"Discovery Discipline", r:"Charvillat et Guyot proposent une méthode de discovery en six étapes, resserrée et datée, contre les discovery qui s'éternisent.", a:"Tristan Charvillat, Rémi Guyot", th:"prod", s:1, c:1, q:["Comment structurer une phase de discovery produit ?", "Comment éviter une discovery qui traîne sans décision ?"]},
+{t:"Un rien peut tout changer", r:"Clear décompose l'habitude en quatre lois et insiste sur les systèmes plutôt que les objectifs. Best-seller, très opérationnel.", a:"James Clear", th:"prodv", s:1, c:1, q:["Comment installer une habitude durable ?", "Comment arrêter une habitude subie ?", "Pourquoi le système compte-t-il plus que l'objectif ?"]},
+{t:"Build", r:"Fadell mêle mémoire (iPod, Nest) et conseils : produit, équipe, board, moments de rupture. Écrit en chapitres courts et indépendants.", a:"Tony Fadell", th:"prod", s:1, c:1, q:["Comment construire un produit et une équipe qui durent ?", "Comment gérer la relation avec des investisseurs ou un board ?"]},
+{t:"Creativity, Inc.", r:"Catmull raconte Pixar du point de vue du dirigeant : comment protéger la fragilité créative dans une entreprise qui réussit.", a:"Ed Catmull", th:"lead", s:1, c:1, q:["Comment protéger la créativité dans une organisation qui grandit ?", "Comment faire remonter les mauvaises nouvelles ?"]},
+{t:"The Art of Business Value", r:"Schwartz interroge une notion que tout le monde emploie sans la définir, et ce que cela change pour la gouvernance IT.", a:"Mark Schwartz", th:"prod", s:1, c:1, q:["Qu'est-ce que la valeur métier, concrètement ?", "Comment justifier des investissements IT sans ROI évident ?"]},
+{t:"Les vrais leaders se servent en dernier", r:"Sinek relie le leadership à la biologie du cercle de sécurité : protéger son équipe pour qu'elle prenne des risques.", a:"Simon Sinek", th:"lead", s:1, c:1, q:["Comment créer un climat de sécurité dans une équipe ?", "Qu'est-ce qui fait qu'on suit un leader ?"]},
+{t:"Le jeu infini", r:"Sinek oppose les jeux finis, avec vainqueur et fin, aux jeux infinis où l'objectif est de rester en jeu — et applique cela au business.", a:"Simon Sinek", th:"lead", s:1, c:1, q:["Comment penser à long terme dans un environnement concurrentiel ?"]},
+{t:"Trouver son pourquoi", r:"Le cahier d'exercices qui accompagne Commencer par pourquoi : ateliers individuels et collectifs pour formuler sa raison d'être.", a:"Simon Sinek", th:"lead", s:1, c:1, q:["Comment formuler son pourquoi, personnellement ou en équipe ?"]},
+{t:"Commencer par pourquoi", r:"Le cercle d'or de Sinek : pourquoi, comment, quoi. Argumentaire répétitif mais idée durablement utile.", a:"Simon Sinek", th:"lead", s:1, c:1, q:["Comment articuler la raison d'être avant le quoi et le comment ?"]},
+{t:"La méthode Make Time", r:"Knapp et Zeratsky proposent un système léger : un moment fort par jour, protégé de la distraction, avec des dizaines de tactiques à piocher.", a:"Jake Knapp, John Zeratsky", th:"prodv", s:1, c:1, q:["Comment dégager du temps pour ce qui compte vraiment ?", "Comment se protéger des sollicitations permanentes ?"]},
+
+/* ─── ÉTAGÈRE 2 ─────────────────────────────────────────────── */
+{t:"Turn the Ship Around!", r:"Le commandant d'un sous-marin nucléaire raconte comment il est passé de l'ordre à l'intention, et ce que cela a produit sur l'équipage.", a:"L. David Marquet", th:"lead", s:2, c:1, q:["Comment donner du pouvoir de décision au plus près du terrain ?", "Comment passer d'un modèle « ordre-exécution » à « intention » ?"]},
+{t:"Turn the Ship Around! Workbook", r:"Cahier d'application du précédent : exercices de mise en œuvre du leadership par l'intention.", a:"L. David Marquet", th:"lead", s:2, c:1, q:["Comment mettre en pratique le leadership par l'intention, exercice par exercice ?"]},
+{t:"Renversez la vapeur !", r:"Édition française du même propos, avec les mécanismes de contrôle, de compétence et de clarté.", a:"L. David Marquet", th:"lead", s:2, c:1, q:["Comment transformer une organisation hiérarchique en organisation autonome ?"]},
+{t:"Développer (vraiment) son leadership", r:"Livre francophone sur la construction pratique de la posture de leader, à distance des discours inspirationnels.", a:"Benjamin Pavageau", th:"lead", s:2, c:1, q:["Comment travailler sa posture de leader au quotidien ?"]},
+{t:"Leadership experience: 17 pratiques pour donner envie d'agir à vos équipes !", a:"Thierry Nadisic, Thomas Misslin", isbn:"9782100872831", th:"lead", s:2, c:1, q:["Comment développer son leadership par l'expérimentation ?"]},
+{t:"On ne naît pas manager… on le devient", r:"Zhuo, devenue manager très jeune chez Facebook, raconte les débuts, les 1:1, le recrutement, l'échelle. Honnête sur les erreurs.", a:"Julie Zhuo", th:"mgr", s:2, c:1, q:["Je viens d'être nommé manager, par où commencer ?", "Comment mener mes premiers 1:1 ?", "Comment recruter et faire grandir mon équipe ?"]},
+{t:"Management 3.0", r:"Appelo relie complexité, agilité et management : une soixantaine de pratiques concrètes pour l'autonomie et la motivation.", a:"Jurgen Appelo", th:"mgr", s:2, c:1, q:["Comment manager une équipe agile sans commander ?", "Quels outils concrets pour l'autonomie et la motivation ?"]},
+{t:"Halte au manager bashing !: Réinventer l'expérience manager", a:"Mahé Bossu", isbn:"9782744068430", th:"mgr", s:2, c:1, q:["Comment défendre le rôle de manager intermédiaire ?"]},
+{t:"The Manager's Path", r:"Fournier suit la trajectoire tech lead, manager, directeur, CTO, avec les responsabilités et les pièges de chaque étage.", a:"Camille Fournier", th:"tech", s:2, c:1, q:["Comment évoluer de développeur à manager puis à directeur technique ?", "Que fait un engineering manager exactement ?"]},
+{t:"Leading Effective Engineering Teams", r:"Osmani traite la performance des équipes d'ingénierie : structures, mesure, pièges du 10x engineer.", a:"Addy Osmani", th:"tech", s:2, c:1, q:["Comment faire performer une équipe d'ingénierie ?", "Comment mesurer la productivité d'une équipe technique ?"]},
+{t:"Manager son équipe au quotidien", r:"Manuel francophone des fondamentaux : délégation, entretiens, animation, situations difficiles.", a:"Bernard Diridollou", th:"mgr", s:2, c:1, q:["Quels réflexes managériaux de base au quotidien ?", "Comment déléguer et suivre sans micro-manager ?"]},
+{t:"Collaborer, manager et réussir en télétravail", r:"Écrit avant 2020 par des praticiens du travail distribué : rituels, communication asynchrone, confiance à distance.", a:"L. Sutherland, K. Janene-Nelson", th:"mgr", s:2, c:1, q:["Comment manager une équipe à distance ?", "Quels rituels pour une équipe distribuée ?"]},
+{t:"Devenez manager de métier !", a:"Laurent Baley", isbn:"9782494780125", th:"mgr", s:2, c:1, q:["Comment considérer le management comme un métier à part entière ?"]},
+{t:"Managers intermédiaires : guide de survie", r:"Demailly traite la position la plus inconfortable de l'organisation : prise entre stratégie descendante et réalité du terrain.", a:"Cécile Demailly", th:"mgr", s:2, c:1, q:["Comment tenir sa place entre la direction et le terrain ?", "Comment gérer les injonctions contradictoires ?"]},
+{t:"Le Guide de l'anti-manager", r:"Bungay Stanier (The Coaching Habit) : sept questions qui remplacent les conseils, pour manager en posture de coach.", a:"Michael Bungay Stanier", th:"mgr", s:2, c:1, q:["Comment poser des questions au lieu de donner des réponses ?", "Comment coacher en sept minutes ?"]},
+{t:"Guide de déconstruction du sexisme au travail", r:"Soichot recense les manifestations ordinaires du sexisme professionnel et ce qu'on peut faire, victime ou témoin.", a:"Marine-Pétronille Soichot", th:"sens", s:2, c:1, q:["Comment repérer et traiter le sexisme ordinaire au bureau ?", "Que faire quand je suis témoin ?"]},
+{t:"Prenez soin de votre santé mentale au travail", r:"Guide pratique sur les signaux, les leviers individuels et les recours institutionnels.", a:"Noémie Guerrin", th:"sens", s:2, c:1, q:["Comment protéger sa santé mentale dans un contexte professionnel exigeant ?"]},
+{t:"Osez réussir !", r:"Dweck oppose état d'esprit fixe et de développement, avec les implications pour l'éducation, le sport et le management.", a:"Carol S. Dweck", th:"appr", s:2, c:1, q:["Comment développer un état d'esprit de développement ?", "Comment féliciter l'effort plutôt que le talent ?"]},
+{t:"La vertu dangereuse", r:"Essai critique de de Funès sur l'inflation des valeurs affichées en entreprise et sa confusion avec l'éthique réelle.", a:"Julia de Funès", th:"essai", s:2, c:1, q:["Que critiquer dans le discours managérial sur les valeurs ?"]},
+{t:"Vous allez commettre une terrible erreur", r:"Sibony recense les biais qui plombent les décisions stratégiques et propose une architecture de décision collective pour les contrer.", a:"Olivier Sibony", th:"deci", s:2, c:1, q:["Quels biais faussent les décisions en entreprise ?", "Comment organiser une décision collective pour limiter les biais ?"]},
+{t:"J'arrête de râler au boulot !", r:"Programme en 21 jours pour sortir de la plainte, dans la lignée de J'arrête de râler.", a:"Christine Lewicki, Emmanuelle Nave", th:"sens", s:2, c:1, q:["Comment sortir d'une posture de plainte au travail ?"]},
+{t:"Comment réussir à se planter (plus vite et plus efficacement)", r:"Tonnelé énumère par l'absurde les erreurs classiques des projets de transformation. Drôle et utile en diagnostic.", a:"Arnaud Tonnelé", th:"org", s:2, c:1, q:["Quels sont les pièges classiques d'un projet de transformation ?"]},
+{t:"The Culture Code", r:"Coyle isole trois compétences des groupes performants : la sécurité, le partage de la vulnérabilité, la finalité commune. Beaucoup d'études de cas.", a:"Daniel Coyle", th:"cult", s:2, c:1, q:["Qu'est-ce qui rend un groupe soudé ?", "Comment construire la sécurité psychologique concrètement ?", "Comment partager la vulnérabilité en équipe ?"]},
+{t:"Dream Team", r:"Girodon a interrogé plus de cinq cents managers pour bâtir un guide francophone du recrutement à la fidélisation.", a:"Ludovic Girodon", th:"cult", s:2, c:1, q:["Comment recruter, intégrer et faire grandir une équipe ?"]},
+{t:"Le pouvoir de la pensée flexible", r:"Grant (Think Again) plaide pour le plaisir de changer d'avis, contre les postures de prêcheur, procureur et politicien.", a:"Adam Grant", th:"deci", s:2, c:1, q:["Comment accepter de changer d'avis ?", "Comment sortir du mode prêcheur / procureur / politicien ?"]},
+{t:"Équipes gagnantes - S'inspirer du sport collectif français pour réinventer nos organisations", a:"Bérenger Briteau, Laurent Tillie", isbn:"9782354567460", th:"cult", s:2, c:1, q:["Comment construire la performance collective d'une équipe ?"]},
+{t:"Cinq coups d'avance", r:"Bet-David propose une méthode d'anticipation stratégique inspirée des échecs, appliquée à la croissance d'entreprise.", a:"Patrick Bet-David, Greg Dinkin", th:"entr", s:2, c:1, q:["Comment anticiper plusieurs coups d'avance dans une stratégie business ?"]},
+{t:"Zéro effort (Effortless)", r:"Suite d'Essentialisme : une fois l'essentiel identifié, comment le rendre plus simple au lieu de s'y épuiser.", a:"Greg McKeown", th:"prodv", s:2, c:1, q:["Comment rendre plus simple ce qui compte le plus ?", "Comment arrêter de se sur-fatiguer sur l'essentiel ?"]},
+{t:"Mettez de l'IA dans votre travail !", r:"Guide francophone d'usages concrets de l'IA générative en contexte professionnel, cas par cas.", a:"Pauline Ebel", th:"tech", s:2, c:1, q:["Comment intégrer l'IA générative dans des tâches professionnelles concrètes ?"]},
+{t:"Arrêtez de vous épuiser", r:"Poirot, psychologue du travail, traite la prévention de l'épuisement au niveau individuel et organisationnel.", a:"Matthieu Poirot", th:"sens", s:2, c:1, q:["Comment prévenir l'épuisement professionnel ?"]},
+{t:"Partager, c'est gagner !: Les secrets d'un médaillé olympique de voile sur la force du collectif en entreprise", a:"Jonathan Lobert", isbn:"9782416024689", th:"cult", s:2, c:1, q:["Que retenir du sport de haut niveau pour la performance collective ?"]},
+{t:"Feedback en action", r:"Recueil de situations de feedback traitées une par une, en complément des ouvrages théoriques.", a:"Raphaël Maisonnier", th:"fb", s:2, c:1, q:["Comment pratiquer le feedback au quotidien, cas par cas ?"]},
+{t:"Numérique, comptez avec les femmes", r:"Kermarrec, chercheuse en informatique, documente la sous-représentation des femmes dans la tech et ce qui la produit.", a:"Anne-Marie Kermarrec", th:"sens", s:2, c:1, q:["Pourquoi si peu de femmes dans la tech, et comment y remédier ?"]},
+{t:"L'intention", r:"Bailey (Hyperfocus) sur l'attention : alterner concentration intense et vagabondage délibéré, en réduisant la stimulation.", a:"Chris Bailey", th:"prodv", s:2, c:1, q:["Comment reprendre le contrôle de son attention ?", "Comment gérer la surcharge de stimulation numérique ?"]},
+{t:"Pour une pensée systémique", r:"Meadows, texte fondateur : stocks, flux, boucles de rétroaction, points de levier. Court, dense, transformateur.", a:"Donella H. Meadows", th:"org", s:2, c:1, q:["Comment raisonner en système plutôt qu'en cause unique ?", "Où sont les points de levier dans un système ?", "Pourquoi une solution évidente aggrave-t-elle parfois le problème ?"]},
+{t:"La Méthode", r:"Godin (The Practice) sur la régularité créative : livrer son travail sans attendre l'inspiration ni la garantie du résultat.", a:"Seth Godin", th:"entr", s:2, c:1, q:["Comment produire un travail créatif de manière régulière ?", "Comment dépasser le blocage de la page blanche ?"]},
+{t:"Apprendre sans limites", r:"Boaler, sur la plasticité cérébrale et les croyances limitantes en apprentissage, notamment en mathématiques.", a:"Jo Boaler", th:"appr", s:2, c:1, q:["Comment apprendre à tout âge ?", "Comment dépasser l'idée qu'on n'est « pas fait pour » une matière ?"]},
+{t:"Les quatre accords toltèques", r:"Quatre principes de sagesse toltèque devenus un classique du développement personnel.", a:"Don Miguel Ruiz", th:"essai", s:2, c:1, q:["Quels principes simples pour moins souffrir des relations ?"]},
+{t:"Steve Jobs", r:"La biographie autorisée d'Isaacson, écrite à partir de dizaines d'entretiens. Ni hagiographie ni règlement de comptes.", a:"Walter Isaacson", th:"entr", s:2, c:1, q:["Comment Jobs a-t-il construit ses produits et ses équipes ?"]},
+{t:"Quand la machine apprend", r:"Le Cun explique l'apprentissage profond, son histoire et ses limites, par l'un de ses artisans.", a:"Yann Le Cun", th:"tech", s:2, c:1, q:["Comment fonctionne l'apprentissage profond ?", "D'où vient l'IA actuelle ?"]},
+{t:"Ouvrir une voie", r:"L'ancien PDG de Danone sur sa trajectoire, entre performance financière et responsabilité sociale.", a:"Emmanuel Faber", th:"entr", s:2, c:1, q:["Comment concilier direction d'entreprise et responsabilité sociale ?"]},
+{t:"Quand la religion s'invite dans l'entreprise", r:"Maillard analyse le fait religieux au travail comme symptôme de mutations plus larges de l'entreprise.", a:"Denis Maillard", th:"sens", s:2, c:1, q:["Comment traiter le fait religieux au travail ?"]},
+{t:"De zéro à un", r:"Thiel défend la création de valeur radicalement nouvelle et le monopole comme objectif, à rebours du discours sur la concurrence.", a:"Peter Thiel", th:"entr", s:2, c:1, q:["Comment créer quelque chose de réellement nouveau ?", "Pourquoi viser un monopole plutôt que la concurrence ?"]},
+{t:"Parler en public — TED", r:"Le curateur de TED détaille la préparation d'une intervention : idée unique, structure narrative, présence.", a:"Chris Anderson", th:"fb", s:2, c:1, q:["Comment préparer une prise de parole marquante ?", "Comment structurer une idée pour la transmettre ?"]},
+{t:"Négocier", r:"Corona, ancien négociateur du RAID, transpose la négociation de crise au monde professionnel.", a:"David Corona", th:"nego", s:2, c:1, q:["Comment négocier sous pression ?"]},
+{t:"Ne coupez jamais la poire en deux", r:"Voss, ex-négociateur du FBI, oppose l'empathie tactique aux méthodes de compromis. Techniques d'écoute et de mise en miroir.", a:"Chris Voss, Tahl Raz", th:"nego", s:2, c:1, q:["Comment négocier sans céder au compromis mou ?", "Comment utiliser l'empathie tactique ?", "Comment faire dire non pour avancer ?"]},
+{t:"Noise", r:"Kahneman, Sibony et Sunstein documentent la variabilité indésirable des jugements humains, distincte du biais, et proposent l'hygiène de décision.", a:"Daniel Kahneman, Olivier Sibony, Cass R. Sunstein", th:"deci", s:2, c:1, dbl:"aussi en anglais étagère 3", q:["Pourquoi deux experts donnent-ils des avis différents sur le même dossier ?", "Comment réduire la variabilité des jugements ?"]},
+{t:"Cessons d'être des moutons", r:"Sunstein et Hastie sur les défaillances des décisions de groupe : cascades, polarisation, et les remèdes organisationnels.", a:"Cass R. Sunstein, Reid Hastie", th:"deci", s:2, c:1, q:["Pourquoi les groupes décident-ils mal ?", "Comment éviter la cascade informationnelle en réunion ?"]},
+{t:"La vérité sur ce qui nous motive", r:"Édition française de Drive.", a:"Daniel H. Pink", th:"appr", s:2, c:1, q:["Qu'est-ce qui motive au-delà de la récompense ?"]},
+{t:"Le code de la créativité", r:"Du Sautoy, mathématicien, examine ce que les algorithmes peuvent et ne peuvent pas produire en art et en musique.", a:"Marcus du Sautoy", th:"tech", s:2, c:1, q:["Une machine peut-elle être créative ?"]},
+{t:"Être en accord avec soi-même: Pour mieux négocier avec les autres", r:"Ury retourne sa négociation raisonnée vers l'intérieur : le plus difficile des interlocuteurs est soi-même, et l'accord avec soi précède tout accord avec l'autre.", a:"William Ury", isbn:"9791041416820", th:"nego", s:2, c:1, q:["Comment préparer une négociation en commençant par soi ?"]},
+{t:"Leading Product: The Hard Trade-offs", a:"François de Bodinat", isbn:"9798245036519", th:"prod", s:2, c:1, q:["Comment arbitrer entre des priorités produit contradictoires ?"]},
+{t:"Réussir l'entretien professionnel et l'entretien de performance: Préparer, conduire les échanges, assurer le suivi", a:"Didier Noyé", isbn:"9782212566420", th:"rh", s:2, c:1, q:["Comment préparer et mener un entretien annuel ?"]},
+
+/* ─── ÉTAGÈRE 3 ─────────────────────────────────────────────── */
+{t:"Les Principes du succès", r:"Dalio expose les principes de vie et de management qui ont fait Bridgewater : transparence radicale, méritocratie des idées. Dense et systématique.", a:"Ray Dalio", th:"lead", s:3, c:1, q:["Comment formaliser ses propres principes de décision ?", "Comment installer une culture de transparence radicale ?"]},
+{t:"Loved : les leçons du marketing de la tech", r:"Lauchengco définit le product marketing par quatre fondamentaux : ambassadeur, stratège, storyteller, évangéliste.", a:"Martina Lauchengco", th:"prod", s:3, c:1, q:["Comment positionner et lancer un produit tech ?", "Que fait un product marketing manager ?"]},
+{t:"The Creative Thinking Handbook", r:"Griffiths propose une méthode structurée en quatre étapes pour rendre la créativité reproductible.", a:"Chris Griffiths", th:"dt", s:3, c:1, q:["Comment structurer la pensée créative individuellement ?"]},
+{t:"Créativité", r:"Rick Rubin, producteur musical, écrit sur la disposition intérieure du créateur plutôt que sur la technique. Court, contemplatif.", a:"Rick Rubin", th:"essai", s:3, c:1, q:["Comment entretenir une pratique créative sur la durée ?", "Comment se rapporter au goût et à l'intuition ?"]},
+{t:"Data Mesh", r:"Dehghani formule les quatre principes du data mesh : domaines propriétaires, données comme produit, plateforme self-service, gouvernance fédérée.", a:"Zhamak Dehghani", th:"tech", s:3, c:1, q:["Comment décentraliser l'architecture de données d'une entreprise ?", "Qu'est-ce qu'un data product ?"]},
+{t:"Les mots sont des fenêtres (ou bien ce sont des murs)", r:"Le livre fondateur de la communication non violente : observation, sentiment, besoin, demande.", a:"Marshall B. Rosenberg", th:"fb", s:3, c:1, q:["Comment pratiquer la communication non violente ?", "Comment exprimer un besoin sans reprocher ?", "Comment désamorcer un conflit relationnel ?"]},
+{t:"Brown-out : quand le travail perd son sens", r:"Distingue burn-out, bore-out et brown-out, et analyse la perte de sens comme pathologie propre du travail contemporain.", a:"Étienne Desmet, Yohann Marcel", th:"sens", s:3, c:1, q:["Que faire quand le travail n'a plus de sens ?", "Quelle différence entre burn-out, bore-out et brown-out ?"]},
+{t:"Organic AI", r:"Maisonnier, fondateur d'Aldebaran, explore des approches d'intelligence artificielle inspirées du vivant.", a:"Bruno Maisonnier", th:"tech", s:3, c:1, q:["Quelles approches alternatives à l'IA actuelle ?"]},
+{t:"Pionniers", r:"Grallet, journaliste au Point, dresse des portraits de figures qui façonnent la technologie contemporaine.", a:"Guillaume Grallet", th:"tech", s:3, c:1, q:["Qui sont les figures qui façonnent la tech aujourd'hui ?"]},
+{t:"Cyberpunk : le nouveau système totalitaire", r:"Mhalla analyse la convergence entre puissance technologique et pouvoir politique, et ce qu'elle fait aux démocraties.", a:"Asma Mhalla", th:"tech", s:3, c:1, q:["Quels sont les enjeux de pouvoir derrière les technologies ?", "Comment penser la géopolitique du numérique ?"]},
+{t:"Noise (éd. anglaise)", r:"Édition originale du même ouvrage.", a:"Daniel Kahneman, Olivier Sibony, Cass R. Sunstein", th:"deci", s:3, c:1, dbl:"aussi en français étagère 2", q:["Comment auditer le bruit dans un processus de décision ?"]},
+{t:"Le talent est une fiction", r:"Karaki, neuroscientifique, démonte l'idée de don inné et son rôle dans la justification des inégalités.", a:"Samah Karaki", th:"appr", s:3, c:1, q:["Le talent existe-t-il vraiment ?", "Que dit la neuroscience sur le mérite ?"]},
+{t:"Reinventing Organizations", r:"Laloux décrit les organisations opale à travers des cas réels (Buurtzorg, Favi) : autogouvernance, plénitude, raison d'être évolutive.", a:"Frédéric Laloux", th:"org", s:3, c:1, dbl:"2 exemplaires (étagères 1 et 3)", q:["À quoi ressemble une organisation sans hiérarchie classique ?", "Quels stades d'évolution pour une organisation ?", "Comment fonctionne l'auto-gouvernance en pratique ?"]},
+{t:"L'acteur et le système", r:"Crozier et Friedberg fondent l'analyse stratégique des organisations : les acteurs disposent toujours d'une marge de liberté qu'ils utilisent rationnellement.", a:"Michel Crozier, Erhard Friedberg", th:"org", s:3, c:1, q:["Comment analyser les jeux de pouvoir dans une organisation ?", "Pourquoi les acteurs résistent-ils rationnellement au changement ?"]},
+{t:"Le coût de l'excellence", r:"Aubert et de Gaulejac analysent le prix psychique de l'injonction à l'excellence dans les organisations managériales.", a:"Nicole Aubert, Vincent de Gaulejac", th:"sens", s:3, c:1, q:["Quel prix humain pour la performance en entreprise ?"]},
+
+/* ─── ÉTAGÈRE 4 ─────────────────────────────────────────────── */
+{t:"Nine Lies About Work", r:"Buckingham et Goodall contestent neuf croyances RH établies, dont le feedback permanent et l'évaluation par les compétences.", a:"Marcus Buckingham, Ashley Goodall", th:"mgr", s:4, c:1, q:["Quelles croyances RH sont fausses ?", "Faut-il vraiment donner du feedback en continu ?"]},
+{t:"58 outils de design systémique", r:"Daumal outille l'approche systémique appliquée au design : cartographies, boucles, modélisation des acteurs.", a:"Sylvie Daumal", th:"dt", s:4, c:1, q:["Quel outil pour cartographier un système complexe ?", "Comment aborder un problème qui dépasse un seul service ?"]},
+{t:"L'innovation Jugaad", r:"L'innovation frugale indienne : faire plus avec moins, à partir de la contrainte plutôt que du budget R&D.", a:"Navi Radjou, Jaideep Prabhu, Simone Ahuja", th:"dt", s:4, c:1, q:["Comment innover avec très peu de moyens ?"]},
+{t:"Extreme Programming Explained", r:"Beck expose les valeurs et pratiques de XP : cycles courts, tests, programmation en binôme. Une des sources de l'agilité.", a:"Kent Beck, Cynthia Andres", th:"tech", s:4, c:1, q:["Quelles pratiques d'ingénierie pour livrer en continu ?", "D'où viennent les principes agiles ?"]},
+{t:"Les paradoxes de la coopération", r:"Scharnitzky, psychosociologue, explique pourquoi la coopération résiste malgré la volonté affichée de coopérer.", a:"Patrick Scharnitzky", th:"cult", s:4, c:1, q:["Pourquoi la coopération est-elle si difficile alors qu'on la souhaite ?"]},
+{t:"Psychologie du manager", r:"Amar applique la psychologie sociale et clinique aux situations managériales courantes.", a:"Patrick Amar", th:"mgr", s:4, c:1, q:["Que dit la psychologie sur les situations managériales courantes ?"]},
+{t:"Gamestorming", r:"Catalogue d'une centaine de jeux d'atelier classés par intention : ouvrir, explorer, converger.", a:"Dave Gray, Sunni Brown, James Macanufo", th:"dt", s:4, c:1, q:["Quel jeu d'atelier pour débloquer un groupe ?", "Comment animer un atelier d'idéation ?"]},
+{t:"L'effet micro-stress", r:"Cross et Dillon identifient les micro-stress relationnels invisibles qui épuisent sans jamais être nommés.", a:"Rob Cross, Karen Dillon", th:"sens", s:4, c:1, q:["Pourquoi je suis épuisé sans grand stress identifiable ?", "Comment repérer les micro-stress relationnels ?"]},
+{t:"Le guide de l'organisation apprenante: Plus de 100 outils et pratiques pour développer l'intelligence collective", a:"Béatrice Arnaud, Corinne Ejeil", isbn:"9782212568714", th:"org", s:4, c:1, q:["Comment faire apprendre une organisation entière ?"]},
+{t:"La Cinquième Discipline", r:"Senge fonde l'organisation apprenante sur cinq disciplines, dont la pensée systémique. Un classique de 1990 toujours structurant.", a:"Peter Senge", isbn:"9782212559378", th:"org", s:4, c:1, q:["Comment construire une organisation apprenante ?", "Comment voir les structures qui produisent les comportements ?"]},
+{t:"La rémunération n'est pas qu'une question d'argent", a:"Sandrine Bordes", isbn:"9782100872848", th:"rh", s:4, c:1, q:["Comment penser la rémunération au-delà du salaire ?"]},
+{t:"Test & Learn", r:"Borges, directeur innovation de Carrefour, plaide pour l'expérimentation systématique en grande organisation.", a:"Adilson Borges", th:"prod", s:4, c:1, q:["Comment installer une culture d'expérimentation ?"]},
+{t:"L'entreprise du bonheur", r:"Hsieh raconte Zappos : culture d'entreprise, service client extrême, et ce qu'il en a coûté.", a:"Tony Hsieh", th:"entr", s:4, c:1, q:["Comment bâtir une entreprise autour de la culture et du service client ?"]},
+{t:"L'entrepreneuriat humaniste", a:"Annabelle Jaouen", isbn:"9782376878179", th:"entr", s:4, c:1, q:["Comment entreprendre en plaçant l'humain au centre ?"]},
+{t:"Vivre de ce que l'on aime", r:"Marc Allen sur la construction d'une activité économique à partir de ce qui a du sens pour soi.", a:"Marc Allen", th:"entr", s:4, c:1, q:["Comment vivre d'une activité qui a du sens pour soi ?"]},
+{t:"L'avenir appartient aux PME: Environnement, IA, progrès, lien social... Pourquoi les PME sont la clé des enjeux de demain", a:"Bernard Cohen-Hadad", isbn:"9782100866977", th:"entr", s:4, c:1, q:["Quel rôle pour les PME dans l'économie ?"]},
+{t:"One: Pourquoi rester petit est la prochaine grande révolution du monde de l'entreprise", r:"Jarvis défend l'entreprise volontairement petite : rentable, autonome, sans obsession de croissance.", a:"Paul Jarvis", isbn:"9782416015953", th:"entr", s:4, c:1, q:["Comment construire une activité rentable sans grandir ?", "Faut-il vraiment vouloir croître ?"]},
+{t:"L'art de choisir ses erreurs", r:"Edmondson distingue les erreurs intelligentes des erreurs basiques et complexes, et ce que chacune demande.", a:"Amy Edmondson", th:"appr", s:4, c:1, q:["Quelles erreurs sont utiles et lesquelles ne le sont pas ?", "Comment créer un droit à l'erreur intelligent ?"]},
+{t:"Multipliers", r:"Wiseman oppose les leaders qui démultiplient l'intelligence de leur équipe à ceux qui l'étouffent sans le vouloir.", a:"Liz Wiseman", th:"lead", s:4, c:1, q:["Comment démultiplier l'intelligence de son équipe ?", "Suis-je un manager qui amplifie ou qui diminue ?"]},
+{t:"Brèves de coach", r:"Tonnelé rassemble des situations de coaching réelles, courtes, chacune traitée sur quelques pages.", a:"Arnaud Tonnelé", th:"mgr", s:4, c:1, q:["Comment un coach traite-t-il une situation managériale concrète ?"]},
+{t:"Slow Productivity", r:"Newport propose trois principes : faire moins de choses, travailler à un rythme naturel, viser une qualité obsessionnelle.", a:"Cal Newport", th:"prodv", s:4, c:1, q:["Comment produire un travail de qualité sans surcharge ?", "Comment faire moins de choses mais mieux ?"]},
+{t:"Intelligence collective et performance d'équipe: Mieux communiquer - Mieux diriger", a:"Yves Chapleau", isbn:"9782896038626", th:"cult", s:4, c:1, q:["Comment faire émerger l'intelligence collective ?"]},
+{t:"Clear Thinking", r:"Parrish s'intéresse aux moments ordinaires où l'on réagit par défaut, et à la manière de créer un espace avant de décider.", a:"Shane Parrish", th:"deci", s:4, c:1, q:["Comment mieux penser dans les moments ordinaires ?", "Comment créer de l'espace avant de réagir ?"]},
+{t:"When", r:"Pink synthétise la recherche sur le timing : rythmes circadiens, effet des pauses, importance des débuts et des fins.", a:"Daniel H. Pink", th:"prodv", s:4, c:1, q:["À quel moment de la journée faire quel type de tâche ?", "Comment utiliser le timing à son avantage ?"]},
+{t:"La puissance de la confiance", r:"Covey fils traite la confiance comme un actif économique mesurable, avec ses dividendes et ses taxes.", a:"Stephen M. R. Covey", th:"cult", s:4, c:1, q:["Comment la confiance accélère-t-elle une organisation ?", "Comment reconstruire une confiance abîmée ?"]},
+{t:"TEAM : s'organiser pour réussir en équipe", r:"Allen et Lamont transposent GTD à l'échelle collective : engagements partagés, revues d'équipe.", a:"David Allen, Edward Lamont", th:"prodv", s:4, c:1, q:["Comment appliquer GTD à l'échelle d'une équipe ?"]},
+{t:"S'organiser pour réussir (GTD)", r:"La méthode Getting Things Done : collecter, clarifier, organiser, revoir, agir. Le système de productivité le plus copié.", a:"David Allen", th:"prodv", s:4, c:1, q:["Comment vider sa tête et suivre ses actions ?", "Quel système pour ne rien laisser tomber ?"]},
+{t:"L'avenir se joue… à loooooong terme !", r:"Clark plaide pour les paris de carrière à horizon long, contre l'optimisation du trimestre.", a:"Dorie Clark", th:"prodv", s:4, c:1, q:["Comment investir sur du long terme dans sa carrière ?"]},
+{t:"Guider en premier de cordée", r:"Agresti, ancien du PGHM, tire du secours en montagne des principes de conduite d'équipe en incertitude.", a:"Blaise Agresti", th:"lead", s:4, c:1, q:["Que retenir de la montagne pour conduire une équipe en incertitude ?"]},
+{t:"Un business responsable", r:"Chouinard et Stanley détaillent les pratiques concrètes d'une entreprise responsable, chaîne de valeur comprise.", a:"Yvon Chouinard, Vincent Stanley", th:"entr", s:4, c:1, q:["Comment rendre une entreprise responsable concrètement ?"]},
+{t:"Optimiser le travail d'un groupe: \"Boostez\" vos formations, vos réunions, vos projets", a:"Jean-Luc Zimmermann", isbn:"9782367179056", th:"cult", s:4, c:1, q:["Comment améliorer le fonctionnement d'un groupe de travail ?"]},
+{t:"65 outils pour accompagner le changement individuel et collectif", r:"Tonnelé propose une boîte à outils classée par situation, du diagnostic à l'ancrage.", a:"Arnaud Tonnelé", th:"org", s:4, c:1, q:["Quel outil pour telle situation de changement ?", "Comment animer un dispositif d'accompagnement ?"]},
+{t:"Dynamiques des organisations: Les décrypter pour un monde plus durable et équitable", a:"Anna Glaser, Véronique Steyer", isbn:"9782100863938", th:"org", s:4, c:1, q:["Comment analyser la dynamique d'une organisation ?"]},
+{t:"Comprendre les organisations… enfin !", r:"Mintzberg synthétise cinquante ans de travaux sur les configurations organisationnelles, en version accessible.", a:"Henry Mintzberg", th:"org", s:4, c:1, q:["Quelle est la structure réelle de mon organisation ?", "Quels sont les grands types de configurations organisationnelles ?"]},
+{t:"Architecture for Flow", r:"Kaiser combine Wardley mapping, domain-driven design et Team Topologies pour aligner architecture et organisation.", a:"Susanne Kaiser", th:"tech", s:4, c:1, q:["Comment aligner architecture technique et organisation des équipes ?", "Comment appliquer Team Topologies et DDD ensemble ?"]},
+{t:"Le Bouddha et le Badass", r:"Lakhiani propose de concilier ambition entrepreneuriale et pratique intérieure. Ton très américain.", a:"Vishen Lakhiani", th:"essai", s:4, c:1, q:["Comment concilier ambition et sérénité ?"]},
+{t:"La montagne, c'est toi", r:"Wiest traite l'auto-sabotage comme un obstacle à comprendre plutôt qu'à combattre.", a:"Brianna Wiest", th:"essai", s:4, c:1, q:["Comment sortir de l'auto-sabotage ?"]},
+{t:"Les Passeurs de sens: Comment conjuguer conscience et performance", a:"Laurent Chouraqui", isbn:"9782379356681", th:"sens", s:4, c:1, q:["Comment transmettre du sens dans une organisation ?"]},
+{t:"Comprendre l'Holacracy", r:"Présentation du système de gouvernance holacratique : rôles, cercles, réunions de triage et de gouvernance.", a:"Dennis Wittrock, Alioscha Urdanoff", th:"org", s:4, c:1, q:["Comment fonctionne l'holacratie concrètement ?", "Comment se prennent les décisions sans manager ?"]},
+{t:"50 prompts pour booster sa mémoire", r:"Recueil d'exercices courts de travail de la mémoire.", a:"Daniel Pigeon-Angelini, Vincent Delourmel", th:"appr", s:4, c:1, q:["Quels exercices pour travailler sa mémoire ?"]},
+{t:"50 prompts pour trouver l'emploi de vos rêves", r:"Recueil de prompts appliqués à la recherche d'emploi.", a:"Daniel Pigeon-Angelini", th:"appr", s:4, c:1, q:["Comment utiliser l'IA dans une recherche d'emploi ?"]},
+{t:"LEAN en ingénierie : guide de voyage", r:"Roche et Delamotte appliquent le lean aux activités de conception et d'ingénierie, où le flux est moins visible qu'en production.", a:"Cécile Roche, Luc Delamotte", th:"lean", s:4, c:1, q:["Comment appliquer le lean au travail d'ingénierie ?"]},
+{t:"The Lean Tech Manifesto", r:"Bernhard et Ballé proposent le lean comme réponse au passage à l'échelle des entreprises tech, contre la bureaucratie.", a:"Fabrice Bernhard, Michael Ballé", th:"lean", s:4, c:1, q:["Comment passer à l'échelle sans bureaucratie ?", "Comment appliquer le lean à une entreprise tech ?"]},
+{t:"Réussir en équipes: De zéro à un milliard : comment coconstruire la croissance avec les équipes et les clients", a:"Michael Ballé, Régis Medina, Nicolas Chartier, Guillaume Paoli", isbn:"9782212680980", th:"lean", s:4, c:1, q:["Comment organiser le travail en équipes lean ?"]},
+{t:"Le système économique de Toyota: Tome 1 – éléments philosophiques. Aligner le profit avec une prospérité durable", a:"Olivier Larue", isbn:"9782336520605", th:"lean", s:4, c:1, q:["Comment Toyota relie-t-il son système de production à son économie ?"]},
+{t:"Le système économique de Toyota.: Tome 2 - Éléments techniques - Réconcilier les résultats financiers", a:"Olivier Larue", isbn:"9782336571843", th:"lean", s:4, c:1, q:["Suite de l'analyse économique du système Toyota"]},
+{t:"Le Lean de l'intérieur: Ce qui n'est jamais écrit dans les livres standards, ni expliqué par les consultants. Le témoignage essentiel de Senseis (Freddy Ballé, Isao Yoshino et Masamoto Amezawa)", a:"Jean Claude Birh", isbn:"9782124659258", th:"lean", s:4, c:1, q:["À quoi ressemble une transformation lean vécue de l'intérieur ?"]},
+{t:"Le Modèle Toyota", r:"Liker formalise les quatorze principes du Toyota Way. La référence occidentale sur le sujet.", a:"Jeffrey Liker", th:"lean", s:4, c:1, q:["Quels sont les 14 principes du management Toyota ?", "D'où vient le lean ?"]},
+{t:"Apprendre à apprendre avec le LEAN", r:"Les auteurs présentent le lean comme un système d'apprentissage des personnes plutôt qu'un système d'outils.", a:"Michael Ballé, Jacques Chaize, Régis Medina, Anne-Lise Seltzer", th:"lean", s:4, c:1, q:["Comment le lean fait-il progresser les personnes ?", "Comment un dirigeant apprend-il par le terrain ?"]},
+{t:"Perspectives LEAN, L'Alternative Lean Décryptée par 7 Auteurs de la Communauté Lean", a:"Anne-Lise Seltzer, Régis Medina", isbn:"9791098386749", th:"lean", s:4, c:1, q:["Quelles lectures actuelles du lean ?"]},
+
+/* ─── ÉTAGÈRE 2 ─────────────────────────────────────────────── */
+{t:"Antidote au culte de la performance: La robustesse du vivant", r:"Hamant, biologiste, oppose la robustesse du vivant — redondances, lenteurs, sous-optimalité — au culte de la performance et de l'optimisation. Court et percutant, à hauteur d'organisation comme de société.", a:"Olivier Hamant", isbn:"9782073047366", th:"cult", s:2, c:1, q:["La frugalité peut-elle réellement mobiliser ?"]},
+];
+
+
+/* ── mémoire locale (notes + vérifications) ───────────── */
+const CLE="biblio-notes-v1";
+let perso={};
+let stockageOK=true;
+try{ perso=JSON.parse(localStorage.getItem(CLE)||"{}"); }
+catch(e){ stockageOK=false; perso={}; }
+function sauver(){
+  if(!stockageOK) return;
+  try{ localStorage.setItem(CLE,JSON.stringify(perso)); }
+  catch(e){ stockageOK=false; majEtat(); }
+}
+function cle(l){ return l.t+"|"+l.a; }
+/* la clé reste celle d'origine : corriger un titre ne perd pas les notes */
+function titreDe(l){ const p=perso[cle(l)]||{}; return p.t||l.t; }
+function auteurDe(l){ const p=perso[cle(l)]||{}; return p.a||l.a; }
+function corrige(l){ const p=perso[cle(l)]||{}; return !!(p.t||p.a); }
+
+const themeParId=Object.fromEntries(THEMES.map(t=>[t.id,t]));
+LIVRES.forEach((l,i)=>l._i=i);
+
+/* ── recherche ────────────────────────────────────────── */
+const norm=s=>(s||"").toLowerCase()
+  .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+  .replace(/['’\-–—.,:;!?()«»"]/g," ").replace(/\s+/g," ").trim();
+
+function reindexer(l){
+  l._idx=norm([titreDe(l),auteurDe(l),themeParId[l.th].nom,(l.q||[]).join(" ")].join(" "));
+  l._idxCourt=norm(titreDe(l)+" "+auteurDe(l));
+}
+LIVRES.forEach(reindexer);
+
+let etat={q:"",theme:null,vue:"livres"};
+
+function filtrer(){
+  const mots=norm(etat.q).split(" ").filter(Boolean);
+  return LIVRES.filter(l=>{
+    if(etat.theme && l.th!==etat.theme) return false;
+    return mots.every(m=>l._idx.includes(m));
+  });
+}
+/* correspondance stricte titre/auteur : sert au verdict anti-doublon */
+function correspondancesTitre(){
+  const mots=norm(etat.q).split(" ").filter(Boolean);
+  if(!mots.length) return [];
+  return LIVRES.filter(l=>mots.every(m=>l._idxCourt.includes(m)));
+}
+
+/* ── rendu ────────────────────────────────────────────── */
+const $liste=document.getElementById("liste");
+const $verdict=document.getElementById("verdict");
+
+function majVerdict(){
+  const q=etat.q.trim();
+  if(q.length<3 || etat.vue!=="livres"){ $verdict.className="verdict"; return; }
+  const exacts=correspondancesTitre();
+  if(exacts.length){
+    const l=exacts[0];
+    $verdict.className="verdict oui";
+    $verdict.innerHTML="<b>Tu l'as déjà.</b><span>"+echap(titreDe(l))+" — "+ETAGERES[l.s]+
+      (exacts.length>1?" (+"+(exacts.length-1)+" autre"+(exacts.length>2?"s":"")+")":"")+"</span>";
+  }else if(filtrer().length===0){
+    $verdict.className="verdict non";
+    $verdict.innerHTML="<b>Rien à ce titre.</b><span>Vérifie l'orthographe avant d'acheter — l'inventaire n'est pas garanti complet.</span>";
+  }else{
+    $verdict.className="verdict";
+  }
+}
+
+const echap=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function vignette(l,grande){
+  const th=themeParId[l.th], p=perso[cle(l)]||{};
+  const cls="couv"+(grande?" grande":"");
+  /* couverture Google Books si trouvée, sinon Open Library par ISBN
+     (default=false → 404 si absente, et l'initiale réapparaît) */
+  const isbn=p.isbn||l.isbn||"";
+  const src=p.couv||(isbn
+    ?`https://covers.openlibrary.org/b/isbn/${encodeURIComponent(isbn)}-M.jpg?default=false`
+    :"");
+  const img=src?`<img src="${echap(src)}" alt="" loading="lazy" onerror="this.remove()">`:"";
+  return `<span class="${cls}" style="background:${th.couleur}"><span>${echap(titreDe(l)[0])}</span>${img}</span>`;
+}
+
+function carteLivre(l){
+  const th=themeParId[l.th], p=perso[cle(l)]||{};
+  const aVerifier=!l.c&&!p.ok;
+  /* r = résumé rédigé (noir) ; p.resume / l.re = résumé éditeur (gris) */
+  const resume=p.resume||l.r||l.re||"";
+  const source=(!l.r&&(p.resume||l.re))?" editeur":"";
+  const requete=encodeURIComponent(titreDe(l)+" "+auteurDe(l));
+  return `<article class="livre" data-i="${l._i}">
+    <button class="tete" aria-expanded="false">
+      <span class="marque" style="background:${th.couleur}"></span>
+      ${vignette(l,false)}
+      <span class="txt">
+        <span class="titre">${echap(titreDe(l))}</span>
+        <p class="auteur">${echap(auteurDe(l))}</p>
+        <p class="meta">${echap(th.nom)} · ${ETAGERES[l.s]}${
+          l.dbl?` · <span class="doute">${echap(l.dbl)}</span>`:""}${
+          aVerifier?' · <span class="doute">à vérifier</span>':(p.ok?" · vérifié":"")}${
+          corrige(l)?" · corrigé":""}</p>
+      </span>
+    </button>
+    <div class="detail">
+      ${resume?`<h3>En deux lignes</h3><p class="resume${source}">${echap(resume)}</p>`:
+        `<h3>En deux lignes</h3><p class="resume editeur">Pas encore de résumé — saisis l'ISBN ci-dessous pour le récupérer, ou écris le tien dans la note.</p>`}
+      <h3>À consulter quand tu te demandes</h3>
+      <ul>${(l.q||[]).map(q=>`<li>${echap(q)}</li>`).join("")}</ul>
+
+      <h3>ISBN au dos du livre${p.isbnAuto?' — <span class="doute">trouvé par la recherche, à confirmer sur le livre</span>':""}</h3>
+      <div class="isbn">
+        <input class="cisbn" inputmode="numeric" placeholder="978…" value="${echap(p.isbn||l.isbn||"")}">
+        <button class="mini blookup">Retrouver la fiche</button>
+        <a href="https://www.google.com/search?q=${requete}+isbn" target="_blank" rel="noopener">chercher par titre</a>
+      </div>
+      <p class="lookup" data-r></p>
+
+      <h3>Titre et auteur${aVerifier?" — à confirmer sur la couverture":""}</h3>
+      <input class="ctitre champlong" value="${echap(titreDe(l))}" aria-label="Titre">
+      <input class="cauteur champlong" value="${echap(auteurDe(l))}" aria-label="Auteur">
+
+      <h3>Ma note</h3>
+      <textarea class="note" placeholder="Ce que j'en ai retenu, à qui le prêter…">${echap(p.note||"")}</textarea>
+      <div class="actions">
+        <button class="mini bok" aria-pressed="${p.ok?"true":"false"}">${p.ok?"Vérifié":"Marquer comme vérifié"}</button>
+        ${corrige(l)?`<button class="mini bannuler">Rétablir ma lecture d'origine</button>`:""}
+      </div>
+    </div>
+  </article>`;
+}
+
+function rendre(){
+  majVerdict();
+  const res=filtrer();
+  document.getElementById("vider").style.display=etat.q?"block":"none";
+
+  if(etat.vue==="questions"){
+    const mots=norm(etat.q).split(" ").filter(Boolean);
+    let paires=[];
+    res.forEach(l=>(l.q||[]).forEach(q=>{
+      if(!mots.length||mots.every(m=>norm(q).includes(m))||mots.every(m=>l._idxCourt.includes(m)))
+        paires.push([q,l]);
+    }));
+    paires.sort((a,b)=>a[0].localeCompare(b[0],"fr"));
+    $liste.innerHTML=paires.length?paires.map(([q,l])=>
+      `<button class="qitem" data-i="${l._i}">
+         <span class="qtexte">${echap(q)}</span>
+         <span class="qsource">${echap(titreDe(l))} — ${echap(auteurDe(l))}</span>
+       </button>`).join("")
+      :`<p class="vide">Aucune question ne correspond. Essaie un mot plus général : feedback, recruter, stratégie, changement…</p>`;
+    majCompte(paires.length+" question"+(paires.length>1?"s":""));
+    return;
+  }
+
+  if(etat.vue==="verifier"){
+    const aVerif=res.filter(l=>!l.c&&!(perso[cle(l)]||{}).ok);
+    $liste.innerHTML=aVerif.length
+      ? `<p class="vide">Titres ou auteurs dont je ne suis pas sûr : je les ai lus sur une photo, et pour la plupart le nom de l'auteur n'était pas imprimé sur la tranche.<br><br>Le plus rapide : prends le livre, recopie l'ISBN au dos, appuie sur « Retrouver la fiche ». Titre, auteur, couverture et résumé se remplissent, et le livre sort de cette liste. Sinon, corrige à la main et marque-le vérifié.</p>`
+        +aVerif.map(carteLivre).join("")
+      : `<p class="vide">Plus rien à vérifier.</p>`;
+    majCompte(aVerif.length+" à vérifier");
+    return;
+  }
+
+  if(!res.length){
+    $liste.innerHTML=`<p class="vide">Aucun livre ne correspond.</p>`;
+    majCompte("0 livre");
+    return;
+  }
+  const parEtagere={};
+  res.forEach(l=>(parEtagere[l.s]=parEtagere[l.s]||[]).push(l));
+  $liste.innerHTML=Object.keys(parEtagere).sort().map(s=>
+    `<h2 class="groupe">${ETAGERES[s]} · ${parEtagere[s].length}</h2>`+
+    parEtagere[s].sort((a,b)=>titreDe(a).localeCompare(titreDe(b),"fr")).map(carteLivre).join("")
+  ).join("");
+  majCompte(res.length+" livre"+(res.length>1?"s":""));
+}
+
+function majCompte(txt){
+  document.getElementById("compte").textContent=
+    txt+(etat.theme?" · "+themeParId[etat.theme].nom:"")+" · "+LIVRES.length+" au total";
+}
+function majEtat(){
+  document.getElementById("etat").textContent=stockageOK
+    ? "Tes notes sont enregistrées dans ce navigateur. Exporte-les avant de changer d'appareil."
+    : "Ce navigateur bloque l'enregistrement local : tes notes disparaîtront en fermant l'onglet. Exporte-les avant de partir.";
+}
+
+/* ── tranche de bibliothèque ──────────────────────────── */
+function rendreTranches(){
+  document.getElementById("tranches").innerHTML=
+    LIVRES.slice().sort((a,b)=>a.s-b.s||a.th.localeCompare(b.th)).map(l=>
+      `<span class="tranche${etat.theme&&l.th!==etat.theme?" off":""}"
+        style="background:${themeParId[l.th].couleur}" data-th="${l.th}"
+        title="${echap(titreDe(l))}"></span>`).join("");
+}
+
+/* ── filtres ──────────────────────────────────────────── */
+document.getElementById("chips").innerHTML=THEMES.map(t=>{
+  const n=LIVRES.filter(l=>l.th===t.id).length;
+  return `<button class="chip" data-th="${t.id}" aria-pressed="false">
+    <span class="pastille" style="background:${t.couleur}"></span>${t.nom} ${n}</button>`;
+}).join("");
+
+function basculerTheme(id){
+  etat.theme = etat.theme===id ? null : id;
+  document.querySelectorAll(".chip").forEach(c=>
+    c.setAttribute("aria-pressed", c.dataset.th===etat.theme ? "true":"false"));
+  rendreTranches(); rendre();
+}
+
+/* ── événements ───────────────────────────────────────── */
+document.getElementById("chips").addEventListener("click",e=>{
+  const c=e.target.closest(".chip"); if(c) basculerTheme(c.dataset.th);
+});
+document.getElementById("tranches").addEventListener("click",e=>{
+  const t=e.target.closest(".tranche"); if(t) basculerTheme(t.dataset.th);
+});
+document.getElementById("q").addEventListener("input",e=>{etat.q=e.target.value;rendre();});
+document.getElementById("vider").addEventListener("click",()=>{
+  etat.q="";document.getElementById("q").value="";rendre();document.getElementById("q").focus();
+});
+document.querySelectorAll(".onglet").forEach(o=>o.addEventListener("click",()=>{
+  etat.vue=o.dataset.vue;
+  document.querySelectorAll(".onglet").forEach(x=>x.setAttribute("aria-selected",x===o?"true":"false"));
+  rendre();
+}));
+
+$liste.addEventListener("click",e=>{
+  const q=e.target.closest(".qitem");
+  if(q){
+    etat.vue="livres";
+    document.querySelectorAll(".onglet").forEach(x=>
+      x.setAttribute("aria-selected",x.dataset.vue==="livres"?"true":"false"));
+    const l=LIVRES[+q.dataset.i];
+    etat.q=titreDe(l); etat.theme=null;
+    document.getElementById("q").value=titreDe(l);
+    document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed","false"));
+    rendreTranches(); rendre();
+    const art=$liste.querySelector('.livre[data-i="'+l._i+'"]');
+    if(art){art.classList.add("ouvert");art.querySelector(".tete").setAttribute("aria-expanded","true");}
+    return;
+  }
+  const tete=e.target.closest(".tete");
+  if(tete){
+    const art=tete.closest(".livre");
+    const ouvert=art.classList.toggle("ouvert");
+    tete.setAttribute("aria-expanded",ouvert?"true":"false");
+    return;
+  }
+  const bok=e.target.closest(".bok");
+  if(bok){
+    const l=LIVRES[+bok.closest(".livre").dataset.i];
+    const p=perso[cle(l)]=perso[cle(l)]||{};
+    p.ok=!p.ok; sauver(); rendre();
+  }
+});
+$liste.addEventListener("input",e=>{
+  const art=e.target.closest(".livre"); if(!art) return;
+  const l=LIVRES[+art.dataset.i];
+  const p=perso[cle(l)]=perso[cle(l)]||{};
+  const t=e.target;
+  if(t.classList.contains("note")) p.note=t.value;
+  else if(t.classList.contains("cisbn")){
+    /* saisi livre en main : provenance fiable */
+    p.isbn=t.value.replace(/[^0-9Xx]/g,""); delete p.isbnAuto;
+  }
+  else if(t.classList.contains("ctitre")){
+    p.t = t.value.trim()===l.t ? undefined : t.value.trim();
+    art.querySelector(".titre").textContent=titreDe(l); reindexer(l);
+  }
+  else if(t.classList.contains("cauteur")){
+    p.a = t.value.trim()===l.a ? undefined : t.value.trim();
+    art.querySelector(".auteur").textContent=auteurDe(l); reindexer(l);
+  }
+  else return;
+  sauver();
+});
+
+/* ── retrouver une fiche à partir de l'ISBN ─────────────── */
+/* Google Books d'abord (fiches plus complètes), Open Library en repli —
+   notamment quand le quota journalier de Google est épuisé. L'ISBN étant
+   une clé exacte, le repli ne risque pas de renvoyer un autre livre. */
+async function parISBN(isbn){
+  try{
+    const r=await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${encodeURIComponent(isbn)}&country=FR`);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const d=await r.json();
+    if(d.items&&d.items.length){
+      const v=d.items[0].volumeInfo||{};
+      return {
+        t:v.title+(v.subtitle?" : "+v.subtitle:""),
+        a:(v.authors||[]).join(", "),
+        an:v.publishedDate||"",
+        couv:((v.imageLinks||{}).thumbnail||"").replace(/^http:/,"https:"),
+        resume:(v.description||"").slice(0,400)
+      };
+    }
+  }catch(e){ /* quota ou réseau : on tente Open Library */ }
+  return parISBNOpenLibrary(isbn);
+}
+
+async function parISBNOpenLibrary(isbn){
+  const r=await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${encodeURIComponent(isbn)}&format=json&jscmd=data`);
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  const d=await r.json();
+  const v=d["ISBN:"+isbn];
+  if(!v) return null;
+  return {
+    t:v.title||"",
+    a:(v.authors||[]).map(x=>x.name).join(", "),
+    an:v.publish_date||"",
+    couv:(((v.cover||{}).medium)||"").replace(/^http:/,"https:"),
+    resume:"",
+    source:"fiche Open Library"
+  };
+}
+
+let propositions={};
+
+$liste.addEventListener("click",async e=>{
+  const bl=e.target.closest(".blookup");
+  if(bl){
+    const art=bl.closest(".livre"), l=LIVRES[+art.dataset.i];
+    const isbn=(art.querySelector(".cisbn").value||"").replace(/[^0-9Xx]/g,"");
+    const zone=art.querySelector(".lookup");
+    if(isbn.length!==10&&isbn.length!==13){
+      zone.className="lookup actif ko";
+      zone.textContent="Un ISBN fait 10 ou 13 chiffres. Recopie celui du code-barres au dos.";
+      return;
+    }
+    zone.className="lookup actif"; zone.textContent="Recherche…";
+    try{
+      const f=await parISBN(isbn);
+      if(!f){
+        zone.className="lookup actif ko";
+        zone.textContent="Aucune fiche pour cet ISBN. Vérifie le chiffre à chiffre, ou corrige le titre à la main ci-dessous.";
+        return;
+      }
+      propositions[l._i]=f;
+      zone.className="lookup actif ok";
+      zone.innerHTML=`Trouvé : <strong>${echap(f.t)}</strong>${f.a?" — "+echap(f.a):""}${f.an?" ("+echap(f.an.slice(0,4))+")":""}${f.source?" · "+echap(f.source):""}
+        <br><button class="mini bappliquer">Remplacer par cette fiche</button>`;
+    }catch(err){
+      zone.className="lookup actif ko";
+      zone.textContent="Recherche impossible — ni Google Books ni Open Library n'ont répondu. Vérifie ta connexion. L'ISBN saisi reste enregistré : tu peux corriger le titre à la main et réessayer plus tard.";
+    }
+    return;
+  }
+
+  const ba=e.target.closest(".bappliquer");
+  if(ba){
+    const art=ba.closest(".livre"), l=LIVRES[+art.dataset.i], f=propositions[l._i];
+    if(!f) return;
+    const p=perso[cle(l)]=perso[cle(l)]||{};
+    if(f.t) p.t=f.t;
+    if(f.a) p.a=f.a;
+    if(f.couv) p.couv=f.couv;
+    if(f.resume && !l.r) p.resume=f.resume;
+    p.ok=true; delete p.introuvable;
+    reindexer(l); sauver(); rendre(); majEnrich();
+    return;
+  }
+
+  const ban=e.target.closest(".bannuler");
+  if(ban){
+    const l=LIVRES[+ban.closest(".livre").dataset.i];
+    const p=perso[cle(l)]||{};
+    delete p.t; delete p.a; reindexer(l); sauver(); rendre();
+    return;
+  }
+});
+
+/* ── enrichissement en ligne (ISBN, couverture, résumé) ── */
+let enCours=false;
+
+function resteAFaire(){
+  return LIVRES.filter(l=>{ const p=perso[cle(l)]||{}; return !p.isbn && !l.isbn && !p.couv && !p.introuvable; });
+}
+function majEnrich(){
+  const reste=resteAFaire().length;
+  const faits=LIVRES.filter(l=>(perso[cle(l)]||{}).isbn||l.isbn).length;
+  const rates=LIVRES.filter(l=>(perso[cle(l)]||{}).introuvable).length;
+  document.getElementById("enrichEtat").innerHTML= reste===0
+    ? `Enrichissement terminé : ${faits} livres avec ISBN${rates?`, ${rates} introuvables — souvent le signe que le titre est mal orthographié dans la liste.`:"."}`
+    : `${faits} livres complétés, ${reste} à faire${rates?`, ${rates} introuvables`:""}. Une connexion est nécessaire ; l'opération prend environ ${Math.ceil(reste*0.6/60)} minute(s) et se reprend là où elle s'arrête.`;
+  document.getElementById("lancer").textContent = reste===0 ? "Relancer sur les introuvables" : "Compléter depuis Google Books";
+}
+
+async function chercherLivre(l){
+  const q=encodeURIComponent(`intitle:${titreDe(l).split("(")[0].trim()} inauthor:${auteurDe(l).split(",")[0].split("(")[0].trim()}`);
+  const url=`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=3&langRestrict=fr&country=FR`;
+  const r=await fetch(url);
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  const d=await r.json();
+  if(!d.items||!d.items.length) return null;
+  const v=d.items[0].volumeInfo||{};
+  const ids=v.industryIdentifiers||[];
+  const isbn=(ids.find(i=>i.type==="ISBN_13")||ids.find(i=>i.type==="ISBN_10")||{}).identifier||"";
+  const couv=(v.imageLinks||{}).thumbnail||"";
+  return {
+    isbn,
+    couv: couv.replace(/^http:/,"https:"),
+    resume: (v.description||"").slice(0,400),
+    trouve: v.title||""
+  };
+}
+
+async function enrichir(){
+  if(enCours) return;
+  enCours=true;
+  const btn=document.getElementById("lancer"), stop=document.getElementById("arreter");
+  const jauge=document.getElementById("jauge");
+  btn.disabled=true; stop.hidden=false; jauge.classList.add("actif");
+  let liste=resteAFaire();
+  if(!liste.length) liste=LIVRES.filter(l=>(perso[cle(l)]||{}).introuvable);
+  const total=liste.length;
+  let panne=false;
+  for(let i=0;i<total;i++){
+    if(!enCours) break;
+    const l=liste[i];
+    const p=perso[cle(l)]=perso[cle(l)]||{};
+    try{
+      const res=await chercherLivre(l);
+      if(res){
+        if(res.isbn && !p.isbn){ p.isbn=res.isbn; p.isbnAuto=true; } /* recherche floue : à confirmer livre en main */
+        if(res.couv && !p.couv) p.couv=res.couv;
+        if(res.resume && !l.r && !p.resume) p.resume=res.resume;
+        delete p.introuvable;
+      }else{ p.introuvable=true; }
+    }catch(e){
+      /* erreur réseau ou quota : ce n'est pas un livre introuvable, on s'arrête */
+      panne=true; break;
+    }
+    sauver();
+    jauge.firstElementChild.style.width=Math.round((i+1)/total*100)+"%";
+    document.getElementById("enrichEtat").textContent=`${i+1} / ${total} — ${titreDe(l)}`;
+    await new Promise(r=>setTimeout(r,600));
+  }
+  enCours=false; btn.disabled=false; stop.hidden=true;
+  jauge.classList.remove("actif"); jauge.firstElementChild.style.width="0";
+  if(panne){
+    document.getElementById("enrichEtat").textContent=
+      "Google Books a refusé la requête — quota journalier épuisé (remis à zéro chaque jour vers 9h) ou connexion coupée. Rien n'a été marqué introuvable : relance plus tard, la reprise se fera ici.";
+  }else{ majEnrich(); }
+  rendre();
+}
+document.getElementById("lancer").addEventListener("click",enrichir);
+document.getElementById("arreter").addEventListener("click",()=>{enCours=false;});
+
+/* ── export / import ──────────────────────────────────── */
+document.getElementById("exporter").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(perso,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="biblio-notes.json";a.click();URL.revokeObjectURL(a.href);
+});
+document.getElementById("importer").addEventListener("click",()=>document.getElementById("fichier").click());
+document.getElementById("fichier").addEventListener("change",e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{ perso=Object.assign(perso,JSON.parse(r.result)); sauver(); rendre(); }
+    catch(err){ alert("Ce fichier n'est pas un export de notes valide."); }
+  };
+  r.readAsText(f);
+});
+
+rendreTranches(); rendre(); majEtat(); majEnrich();
+
+/* ── PWA : hors ligne + installation sur l'écran d'accueil ── */
+/* Le fichier reste ouvrable tel quel (file://) : on ne s'enregistre qu'en HTTP(S). */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+</script>
+</body>
+</html>
