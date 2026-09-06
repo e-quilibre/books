@@ -8,7 +8,16 @@ anonyme, remis à zéro vers 9h heure française).
 
 Après coup : python3 generer-livres-html.py pour reporter dans l'app.
 """
-import json, time, urllib.request
+import json, os, time, urllib.request
+
+# Clé d'API : fichier cle-google-books.txt (dans .gitignore) ou variable
+# d'environnement GOOGLE_BOOKS_KEY. Sans clé, le quota anonyme partagé de
+# Google est presque toujours épuisé — voir CONTEXTE.md.
+CLE = os.environ.get("GOOGLE_BOOKS_KEY", "")
+if not CLE and os.path.exists("cle-google-books.txt"):
+    CLE = open("cle-google-books.txt").read().strip()
+if not CLE:
+    print("Aucune clé trouvée (cle-google-books.txt ou GOOGLE_BOOKS_KEY) — tentative sans clé, échec probable.")
 
 d = json.load(open("livres.json"))
 faits = sans = 0
@@ -16,6 +25,8 @@ for l in d["livres"]:
     if not l.get("isbn") or l.get("r") or l.get("re"):
         continue
     url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{l['isbn']}&country=FR"
+    if CLE:
+        url += f"&key={CLE}"
     try:
         with urllib.request.urlopen(url) as r:
             rep = json.load(r)

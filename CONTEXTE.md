@@ -113,16 +113,22 @@ double saisie des données).
 Sources de fiches, dans l'ordre :
 
 1. **Google Books** — fiches les plus complètes sur le fonds francophone
-   professionnel, mais quota journalier anonyme par IP (~1000 requêtes,
-   remis à zéro vers 9h heure française). Sert aussi à l'enrichissement en lot.
+   professionnel. **Sans clé d'API, inutilisable en pratique** : le quota
+   anonyme est un pool partagé entre utilisateurs, constaté épuisé en
+   permanence (429), pas seulement lié à notre IP. Une clé gratuite
+   (console Google Cloud, Books API, 1000 req/jour) règle le problème ;
+   elle vit dans `cle-google-books.txt`, exclu du dépôt. Sert aussi à
+   l'enrichissement en lot.
 2. **Open Library** — sans clé ni quota strict, CORS ouvert, mais fiches
    parfois incomplètes (auteur manquant) et fonds FR pro mal couvert. Utilisée
    uniquement en correspondance exacte par ISBN (repli de « Retrouver la
    fiche », et couvertures à l'affichage) : sa recherche par titre a été
    testée et disqualifiée — 1 résultat pertinent sur 3, des faux positifs.
-3. **BnF (SRU)** — piste non exploitée : excellente couverture FR, mais XML
-   MARC à parser ; candidate pour un futur script côté ordinateur, pas pour
-   le navigateur.
+3. **BnF (SRU)** — testée le 6 septembre 2026 : répond sans clé ni quota
+   apparent, notices exactes par ISBN (schéma Dublin Core, XML simple),
+   excellente pour **valider titre/auteur/éditeur/année** — mais pas de
+   résumé dans les notices. Candidate pour un futur script de validation
+   bibliographique, pas pour les résumés.
 
 ## Décisions prises, et pourquoi
 

@@ -3,3 +3,6 @@
 # Fichier d'échange : export « Exporter mes notes » de l'outil (ISBN, notes,
 # corrections). Données personnelles + étape de travail — jamais dans le dépôt.
 biblio-notes.json
+
+# Clé d'API Google Books — personnelle, jamais dans le dépôt.
+cle-google-books.txt
