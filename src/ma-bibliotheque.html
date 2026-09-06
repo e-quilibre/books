@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ma bibliothèque</title>
-<meta name="theme-color" content="#F1F3EF">
+<meta name="theme-color" content="#f7faf5">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,189 +12,263 @@
 <meta name="apple-mobile-web-app-title" content="Bibliothèque">
 <link rel="apple-touch-icon" href="images/placeholders/icone-180.png">
 <style>
+/* ══ Bibliothèque Sereine — voir docs/design/zen/DESIGN.md ══
+   Papier vélin, sauge, EB Garamond + Plus Jakarta Sans (auto-hébergées,
+   condition du hors-ligne). Tranches colorées conservées en illustration. */
+@font-face{
+  font-family:"EB Garamond";
+  src:url("fonts/eb-garamond.woff2") format("woff2");
+  font-weight:400 500;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"EB Garamond";
+  src:url("fonts/eb-garamond-italique.woff2") format("woff2");
+  font-weight:400;font-style:italic;font-display:swap;
+}
+@font-face{
+  font-family:"Plus Jakarta Sans";
+  src:url("fonts/jakarta.woff2") format("woff2");
+  font-weight:400 700;font-style:normal;font-display:swap;
+}
 :root{
-  --papier:#F1F3EF;
-  --carte:#FBFCFA;
-  --encre:#171A18;
-  --gris:#6C716C;
-  --ligne:#DEE1DA;
-  --oui:#1E6B4A;
+  --fond:#f7faf5;         /* toile de fond, lin clair */
+  --carte:#ffffff;        /* cartes */
+  --doux:#f1f4f0;         /* bandeaux en léger retrait */
+  --creux:#ecefea;        /* champs de saisie, fonds inactifs */
+  --creux-fort:#e6e9e4;   /* rail des onglets */
+  --encre:#191c1a;
+  --encre-2:#414844;      /* métadonnées */
+  --encre-3:#727974;      /* légendes, placeholders */
+  --contour:#c1c8c3;
+  --vert:#325346;         /* eucalyptus profond — titres, actif */
+  --vert-2:#466558;       /* sauge — accents secondaires */
+  --vert-pale:#dce9e1;    /* fonds teintés (verdict positif) */
   --alerte:#9A5B12;
-  --r:3px;
+  --oui:#2d4d40;
+  --serif:"EB Garamond",Georgia,"Iowan Old Style",serif;
+  --sans:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:12px;
+  --ombre:0 1px 3px rgba(45,49,46,.05),0 4px 14px -4px rgba(45,49,46,.06);
+  --ombre-2:0 2px 6px -1px rgba(45,49,46,.04),0 8px 24px -4px rgba(45,49,46,.09);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--papier);color:var(--encre);
-  font:400 16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  margin:0;background:var(--fond);color:var(--encre);
+  font:400 16px/1.6 var(--sans);
   padding-bottom:4rem;
 }
 .wrap{max-width:52rem;margin:0 auto;padding:0 1rem}
 
 /* ── en-tête + recherche ───────────────────────────── */
 header{
-  position:sticky;top:0;z-index:20;background:var(--papier);
-  border-bottom:1px solid var(--ligne);padding-top:.9rem;
+  position:sticky;top:0;z-index:20;
+  background:rgba(247,250,245,.88);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 1px 8px rgba(0,0,0,.03);
+  padding-top:1rem;padding-bottom:.15rem;
 }
 h1{
-  font:400 1.05rem/1.2 Georgia,"Iowan Old Style","Times New Roman",serif;
-  margin:0 0 .1rem;letter-spacing:.01em;
+  font:500 1.35rem/1.2 var(--serif);color:var(--vert);
+  margin:0 0 .1rem;letter-spacing:-.01em;
 }
-.compte{font-size:.78rem;color:var(--gris);margin:0 0 .7rem}
-.champ{position:relative;margin-bottom:.55rem}
+.compte{
+  font:500 .68rem/1.4 var(--sans);color:var(--encre-3);
+  text-transform:uppercase;letter-spacing:.06em;margin:0 0 .8rem;
+}
+.champ{position:relative;margin-bottom:.7rem}
+.champ .loupe{
+  position:absolute;left:.95rem;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;color:var(--vert);pointer-events:none;
+}
 #q{
-  width:100%;padding:.72rem 2.2rem .72rem .8rem;
-  border:1px solid var(--encre);border-radius:var(--r);
+  width:100%;height:48px;padding:0 2.6rem 0 2.7rem;
+  border:1.5px solid transparent;border-radius:999px;
   background:var(--carte);color:var(--encre);
-  font:400 1.05rem/1.3 Georgia,"Iowan Old Style",serif;
+  font:400 .95rem/1.3 var(--sans);
+  box-shadow:var(--ombre);transition:box-shadow .2s ease,border-color .2s ease;
 }
-#q::placeholder{color:#9CA19B;font-style:italic}
-#q:focus{outline:2px solid var(--encre);outline-offset:1px}
+#q::placeholder{color:var(--encre-3)}
+#q::-webkit-search-cancel-button{-webkit-appearance:none} /* la croix native doublonne #vider */
+#q:focus{outline:none;border-color:var(--vert);box-shadow:var(--ombre-2)}
 #vider{
-  position:absolute;right:.35rem;top:50%;transform:translateY(-50%);
-  border:0;background:none;color:var(--gris);font-size:1.3rem;
-  cursor:pointer;padding:.2rem .4rem;line-height:1;display:none;
+  position:absolute;right:.55rem;top:50%;transform:translateY(-50%);
+  border:0;background:none;color:var(--encre-3);font-size:1.25rem;
+  cursor:pointer;padding:.3rem .55rem;line-height:1;display:none;border-radius:999px;
 }
+#vider:hover{background:var(--creux);color:var(--encre)}
 
-/* ── tranche de bibliothèque ───────────────────────── */
+/* ── tranche de bibliothèque — l'illustration ──────── */
 .tranches{
-  display:flex;gap:1px;height:26px;margin-bottom:.55rem;
-  border-radius:2px;overflow:hidden;cursor:pointer;
+  display:flex;gap:1px;height:30px;margin-bottom:.7rem;
+  border-radius:8px;overflow:hidden;cursor:pointer;
+  box-shadow:var(--ombre);
 }
-.tranche{flex:1 1 auto;min-width:1px;opacity:.85;transition:opacity .12s}
-.tranche.off{opacity:.16}
+.tranche{flex:1 1 auto;min-width:1px;opacity:.9;transition:opacity .15s ease}
+.tranche.off{opacity:.15}
 
 /* ── filtres ───────────────────────────────────────── */
-.chips{display:flex;gap:.3rem;overflow-x:auto;padding-bottom:.7rem;scrollbar-width:none}
+.chips{display:flex;gap:.35rem;overflow-x:auto;padding:.1rem .1rem .8rem;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
 .chip{
-  flex:0 0 auto;border:1px solid var(--ligne);background:var(--carte);
-  color:var(--gris);border-radius:99px;padding:.28rem .6rem;
-  font-size:.76rem;cursor:pointer;white-space:nowrap;
+  flex:0 0 auto;border:0;background:var(--carte);
+  color:var(--encre-2);border-radius:999px;padding:.34rem .75rem;
+  font:600 .72rem/1.3 var(--sans);letter-spacing:.02em;
+  cursor:pointer;white-space:nowrap;box-shadow:var(--ombre);
+  transition:background .2s ease,color .2s ease;
 }
-.chip[aria-pressed="true"]{background:var(--encre);color:var(--papier);border-color:var(--encre)}
-.chip .pastille{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.35rem;vertical-align:1px}
+.chip:hover{background:var(--creux)}
+.chip[aria-pressed="true"]{background:var(--vert);color:#fff}
+.chip .pastille{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:.4rem;vertical-align:1px}
 
-/* ── onglets ───────────────────────────────────────── */
-.onglets{display:flex;gap:1.1rem;border-bottom:1px solid var(--ligne);margin:.2rem 0 1rem}
-.onglet{
-  border:0;background:none;padding:.5rem 0;cursor:pointer;
-  font-size:.85rem;color:var(--gris);border-bottom:2px solid transparent;margin-bottom:-1px;
+/* ── onglets — commutateur en pilules ──────────────── */
+.onglets{
+  display:inline-flex;gap:2px;margin:.15rem 0 1.1rem;
+  background:var(--creux-fort);border-radius:999px;padding:3px;
 }
-.onglet[aria-selected="true"]{color:var(--encre);border-bottom-color:var(--encre)}
+.onglet{
+  border:0;background:none;padding:.4rem 1rem;cursor:pointer;border-radius:999px;
+  font:600 .76rem/1.3 var(--sans);color:var(--encre-2);
+  transition:background .2s ease,color .2s ease;
+}
+.onglet[aria-selected="true"]{background:var(--carte);color:var(--vert);box-shadow:var(--ombre)}
 
 /* ── verdict anti-doublon ──────────────────────────── */
 .verdict{
   display:none;align-items:baseline;gap:.5rem;
-  padding:.65rem .8rem;border-radius:var(--r);margin-bottom:1rem;
-  font-size:.9rem;border-left:3px solid;
+  padding:.8rem 1rem;border-radius:var(--r);margin-bottom:1rem;
+  font-size:.9rem;
 }
-.verdict.oui{display:flex;background:#E7F0E9;border-color:var(--oui);color:var(--oui)}
-.verdict.non{display:flex;background:#F6EEE2;border-color:var(--alerte);color:var(--alerte)}
+.verdict.oui{display:flex;background:var(--vert-pale);color:var(--oui)}
+.verdict.non{display:flex;background:#f3ecdd;color:var(--alerte)}
 .verdict b{font-weight:600}
 
 /* ── liste ─────────────────────────────────────────── */
-.groupe{font-size:.72rem;color:var(--gris);margin:1.4rem 0 .5rem;
-  padding-bottom:.25rem;border-bottom:1px solid var(--ligne)}
-.groupe:first-child{margin-top:0}
-.livre{
-  background:var(--carte);border:1px solid var(--ligne);border-radius:var(--r);
-  margin-bottom:.4rem;overflow:hidden;
+.groupe{
+  font:500 1.15rem/1.3 var(--serif);color:var(--vert);
+  margin:1.8rem 0 .7rem;letter-spacing:-.005em;
 }
+.groupe:first-child{margin-top:.2rem}
+.livre{
+  background:var(--carte);border:0;border-radius:var(--r);
+  margin-bottom:.6rem;overflow:hidden;box-shadow:var(--ombre);
+  transition:box-shadow .2s ease;
+}
+.livre.ouvert{box-shadow:var(--ombre-2)}
 .tete{
-  display:flex;gap:.65rem;align-items:flex-start;width:100%;
-  padding:.7rem .8rem;border:0;background:none;text-align:left;cursor:pointer;
+  display:flex;gap:.75rem;align-items:flex-start;width:100%;
+  padding:.85rem .9rem;border:0;background:none;text-align:left;cursor:pointer;
   font:inherit;color:inherit;
 }
-.tete:focus-visible{outline:2px solid var(--encre);outline-offset:-2px}
-.marque{flex:0 0 4px;align-self:stretch;border-radius:2px;min-height:2.2rem}
+.tete:focus-visible{outline:2px solid var(--vert);outline-offset:-2px;border-radius:var(--r)}
+.marque{flex:0 0 4px;align-self:stretch;border-radius:999px;min-height:2.2rem}
 .txt{flex:1 1 auto;min-width:0}
 .titre{
-  font:400 1rem/1.3 Georgia,"Iowan Old Style",serif;margin:0 0 .1rem;
+  font:500 1.08rem/1.35 var(--serif);color:var(--vert);margin:0 0 .1rem;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
 }
 .livre.ouvert .titre{display:block;-webkit-line-clamp:unset} /* carte ouverte : titre entier */
-.auteur{font-size:.8rem;color:var(--gris);margin:0}
-.meta{font-size:.72rem;color:var(--gris);margin-top:.3rem}
+.auteur{font:500 .78rem/1.4 var(--sans);color:var(--encre-2);margin:0}
+.meta{font-size:.7rem;color:var(--encre-3);margin-top:.3rem}
 .doute{color:var(--alerte)}
 /* couverture */
 .couv{
-  flex:0 0 40px;height:58px;border-radius:2px;overflow:hidden;
-  background:var(--papier);border:1px solid var(--ligne);
+  flex:0 0 42px;height:60px;border-radius:6px;overflow:hidden;
+  background:var(--creux);box-shadow:var(--ombre);
   display:flex;align-items:center;justify-content:center;
   position:relative;
 }
 .couv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.couv span{font:400 .95rem Georgia,serif;color:#fff;width:100%;height:100%;
+.couv span{font:500 1rem var(--serif);color:#fff;width:100%;height:100%;
   display:flex;align-items:center;justify-content:center}
 .couv.grande{flex:0 0 96px;height:140px;margin-bottom:.5rem}
 
-.detail{display:none;padding:0 .8rem .85rem 1.9rem;border-top:1px solid var(--ligne)}
+.detail{display:none;padding:0 .9rem 1rem 2rem;border-top:1px solid var(--creux)}
 .livre.ouvert .detail{display:block}
-.detail h3{font-size:.72rem;color:var(--gris);font-weight:500;margin:.75rem 0 .35rem}
-.detail ul{margin:0;padding-left:1rem}
-.detail li{font-size:.88rem;margin-bottom:.25rem}
-.note{
-  width:100%;margin-top:.3rem;padding:.45rem .55rem;border:1px solid var(--ligne);
-  border-radius:var(--r);background:var(--papier);font:inherit;font-size:.85rem;
-  resize:vertical;min-height:2.6rem;color:inherit;
+.detail h3{
+  font:600 .66rem/1.4 var(--sans);color:var(--vert-2);
+  text-transform:uppercase;letter-spacing:.07em;margin:1rem 0 .4rem;
 }
-.resume{font-size:.88rem;line-height:1.55;margin:.15rem 0 0;max-width:62ch}
-.resume.editeur{color:var(--gris)}
+.detail ul{
+  margin:0;padding:.55rem .8rem .55rem 1.7rem;
+  background:var(--doux);border-radius:8px;
+}
+.detail li{font:italic 400 .95rem/1.5 var(--serif);margin:.15rem 0}
+.note{
+  width:100%;margin-top:.3rem;padding:.55rem .7rem;border:1.5px solid transparent;
+  border-radius:8px;background:var(--creux);font:400 .85rem/1.5 var(--sans);
+  resize:vertical;min-height:2.6rem;color:inherit;transition:background .2s ease,border-color .2s ease;
+}
+.resume{
+  font:italic 400 .98rem/1.6 var(--serif);margin:.15rem 0 0;max-width:62ch;
+  border-left:2px solid rgba(70,101,88,.45);padding-left:.8rem;
+}
+.resume.editeur{font:400 .85rem/1.55 var(--sans);color:var(--encre-2)}
 .isbn{
-  display:flex;gap:.4rem;align-items:center;margin-top:.3rem;flex-wrap:wrap;
+  display:flex;gap:.45rem;align-items:center;margin-top:.3rem;flex-wrap:wrap;
 }
 .isbn input{
-  flex:0 1 15ch;padding:.35rem .5rem;border:1px solid var(--ligne);
-  border-radius:var(--r);background:var(--papier);color:inherit;
-  font:inherit;font-size:.85rem;font-variant-numeric:tabular-nums;
+  flex:0 1 15ch;padding:.4rem .6rem;border:1.5px solid transparent;
+  border-radius:8px;background:var(--creux);color:inherit;
+  font:400 .85rem/1.4 var(--sans);font-variant-numeric:tabular-nums;
+  transition:background .2s ease,border-color .2s ease;
 }
-.isbn a{color:var(--gris);font-size:.75rem}
-.actions{margin-top:.6rem;display:flex;gap:.4rem;flex-wrap:wrap}
+.isbn a{color:var(--encre-3);font-size:.75rem}
+.actions{margin-top:.7rem;display:flex;gap:.45rem;flex-wrap:wrap}
 
 /* enrichissement */
 .champlong{
-  width:100%;max-width:34rem;margin-bottom:.3rem;padding:.42rem .55rem;
-  border:1px solid var(--ligne);border-radius:var(--r);background:var(--papier);
-  color:inherit;font:inherit;font-size:.88rem;
+  width:100%;max-width:34rem;margin-bottom:.35rem;padding:.45rem .65rem;
+  border:1.5px solid transparent;border-radius:8px;background:var(--creux);
+  color:inherit;font:400 .88rem/1.5 var(--sans);
+  transition:background .2s ease,border-color .2s ease;
 }
-.champlong:focus,.isbn input:focus,.note:focus{outline:2px solid var(--encre);outline-offset:1px}
-.lookup{font-size:.82rem;margin:.4rem 0 0;line-height:1.5;display:none}
+.champlong:focus,.isbn input:focus,.note:focus{
+  outline:none;background:var(--carte);border-color:var(--vert);
+}
+.lookup{font-size:.82rem;margin:.45rem 0 0;line-height:1.55;display:none}
 .lookup.actif{display:block}
 .lookup.ok{color:var(--oui)}
 .lookup.ko{color:var(--alerte)}
-.lookup button{margin-top:.35rem}
+.lookup button{margin-top:.4rem}
 
 .enrich{
-  border:1px solid var(--ligne);background:var(--carte);border-radius:var(--r);
-  padding:.7rem .8rem;margin-bottom:1rem;font-size:.85rem;
+  border:0;background:var(--doux);border-radius:var(--r);
+  padding:.85rem 1rem;margin-bottom:1.1rem;font-size:.85rem;
 }
-.enrich p{margin:0 0 .5rem;color:var(--gris);line-height:1.5}
-.jauge{height:4px;background:var(--ligne);border-radius:2px;overflow:hidden;margin:.5rem 0;display:none}
+.enrich p{margin:0 0 .55rem;color:var(--encre-2);line-height:1.55}
+.jauge{height:4px;background:var(--creux-fort);border-radius:999px;overflow:hidden;margin:.5rem 0;display:none}
 .jauge.actif{display:block}
-.jauge i{display:block;height:100%;background:var(--oui);width:0}
+.jauge i{display:block;height:100%;background:var(--vert-2);width:0}
 .mini{
-  border:1px solid var(--ligne);background:var(--papier);color:var(--gris);
-  border-radius:99px;padding:.25rem .6rem;font-size:.74rem;cursor:pointer;
+  border:1px solid var(--contour);background:transparent;color:var(--encre-2);
+  border-radius:999px;padding:.32rem .8rem;cursor:pointer;
+  font:600 .72rem/1.3 var(--sans);letter-spacing:.02em;
+  transition:background .2s ease,color .2s ease;
 }
-.mini[aria-pressed="true"]{background:var(--oui);border-color:var(--oui);color:#fff}
+.mini:hover{background:var(--creux)}
+.mini[aria-pressed="true"]{background:var(--vert);border-color:var(--vert);color:#fff}
 
 /* ── questions ─────────────────────────────────────── */
 .qitem{
   display:block;width:100%;text-align:left;background:var(--carte);
-  border:1px solid var(--ligne);border-radius:var(--r);
-  padding:.6rem .75rem;margin-bottom:.35rem;cursor:pointer;font:inherit;color:inherit;
+  border:0;border-radius:var(--r);box-shadow:var(--ombre);
+  padding:.75rem .9rem;margin-bottom:.5rem;cursor:pointer;font:inherit;color:inherit;
+  transition:box-shadow .2s ease;
 }
-.qtexte{font:400 .95rem/1.35 Georgia,"Iowan Old Style",serif}
+.qitem:hover{box-shadow:var(--ombre-2)}
+.qtexte{font:italic 400 1rem/1.45 var(--serif);color:var(--encre)}
 .qsource{
-  font-size:.75rem;color:var(--gris);margin-top:.2rem;
+  font:500 .72rem/1.4 var(--sans);color:var(--encre-3);margin-top:.25rem;
   display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 
-.vide{color:var(--gris);font-size:.9rem;padding:1.5rem 0;line-height:1.6}
-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--ligne);
-  font-size:.75rem;color:var(--gris);line-height:1.7}
-footer button{margin-right:.4rem}
+.vide{color:var(--encre-2);font-size:.9rem;padding:1.5rem 0;line-height:1.65}
+footer{
+  margin-top:2.5rem;padding:1.1rem 1rem;background:var(--doux);border-radius:var(--r);
+  font-size:.75rem;color:var(--encre-2);line-height:1.7;
+}
+footer button{margin-right:.45rem}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -205,6 +279,7 @@ footer button{margin-right:.4rem}
   <h1>Ma bibliothèque</h1>
   <p class="compte" id="compte"></p>
   <div class="champ">
+    <svg class="loupe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
     <input id="q" type="search" autocomplete="off" placeholder="Un titre, un auteur, ou une question…">
     <button id="vider" aria-label="Effacer la recherche">×</button>
   </div>

@@ -4,10 +4,13 @@
    est servi depuis le cache. Les requêtes vers Google Books ne sont pas
    interceptées : elles exigent une connexion, par nature. */
 
-const CACHE = "biblio-pwa-v2"; /* v2 : restructuration src/ + images/ */
+const CACHE = "biblio-pwa-v3"; /* v3 : design Bibliothèque Sereine, polices locales */
 const FICHIERS = [
   "ma-bibliotheque.html",
   "manifest.webmanifest",
+  "fonts/eb-garamond.woff2",
+  "fonts/eb-garamond-italique.woff2",
+  "fonts/jakarta.woff2",
   "images/placeholders/icone-180.png",
   "images/placeholders/icone-192.png",
   "images/placeholders/icone-512.png"
