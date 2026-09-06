@@ -14,8 +14,10 @@ d'importance :
 
 - 168 livres inventoriés sur 4 étagères
 - 274 questions rédigées (« à consulter quand tu te demandes… »)
-- 143 résumés rédigés — 25 livres sans résumé, en attente des résumés
-  éditeur (`recuperer-resumes-editeur.py`, tributaire du quota Google Books)
+- 143 résumés rédigés + 7 résumés éditeur (`re`) récupérés par ISBN le
+  6 septembre — reste **18 livres sans résumé** : leurs fiches Google Books
+  existent mais sans description (éditeurs français absents de la base).
+  Pour eux : rédiger après lecture, ou recopier la 4e de couverture.
 - **0 titre non vérifié** : les 27 titres douteux ont tous été confirmés
   livre en main le 5 septembre 2026, avec leurs titres complets d'éditeur
 - 30 ISBN renseignés (saisis livre en main, clés de contrôle validées)
