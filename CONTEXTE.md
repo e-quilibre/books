@@ -101,8 +101,16 @@ fusion : le fichier JSON édité sur l'ordinateur, et l'app sur le téléphone
 (vignettes, carte, enrichissement) : les ISBN du JSON seront actifs dès la
 régénération du bloc `LIVRES`.
 
+Pour les ISBN manquants, `chercher-isbn.py` interroge Google Books par
+titre+auteur (recherche floue), écrit des propositions avec verdict
+concordant/douteux dans `propositions-isbn.json` (hors dépôt, à relire —
+attention notamment aux éditions française vs anglaise), et
+`--appliquer` reporte les propositions retenues dans `livres.json`,
+marquées `isbnAuto: 1` : provenance « fiche concordante », à distinguer
+des ISBN relevés livre en main.
+
 Règle de provenance : **seuls les ISBN relevés livre en main entrent dans
-`livres.json`.** Ceux trouvés par l'enrichissement en lot (recherche floue
+`livres.json` sans marque `isbnAuto`.** Ceux trouvés par l'enrichissement en lot (recherche floue
 titre+auteur) sont marqués `isbnAuto` dans le localStorage et signalés dans
 la carte ; ils suffisent pour afficher une couverture mais restent hors de
 l'inventaire tant qu'ils ne sont pas confirmés — le risque étant l'autre
